@@ -46,9 +46,16 @@ export interface SeoContent {
 
 export interface SiteContent {
   name: string;
+  cvUrl: string;
   role: string;
+  heroKicker: string;
   headline: string;
   intro: string;
+  heroBody: string[];
+  assistantDisclaimer: string;
+  assistantPrompts: string[];
+  assistantPlaceholder: string;
+  assistantButtonLabel: string;
   location: string;
   availability: string;
   email: string;
@@ -62,17 +69,33 @@ export interface SiteContent {
 
 export const siteContent: SiteContent = {
   name: "Mania Totomi",
-  role: "Product Designer + Frontend Engineer",
-  headline: "I build expressive, conversion-focused websites for founders and brands.",
+  cvUrl: "#",
+  role: "Lead Product Designer",
+  heroKicker: "Hey, I’m Mania!",
+  headline: "Lead Product Designer building scalable B2B SaaS & AI experiences",
   intro:
-    "From concept to production, I merge interaction design and engineering to ship digital experiences that feel premium and perform in the real world.",
+    "I design and scale complex SaaS products, from foundational systems to AI-powered workflows.",
+  heroBody: [
+    "Currently Lead Designer at Pollfish, while collaborating on selected freelance product initiatives.",
+  ],
+  assistantDisclaimer:
+    "This assistant is a personal experiment. It can answer questions about my experience, process and work but it can make mistakes.",
+  assistantPrompts: [
+    "Find balance between empathy and constraints",
+    "How do use AI in your work?",
+    "How do you work with engineers and PMs?",
+  ],
+  assistantPlaceholder:
+    "Type a question about my design approach or experience…",
+  assistantButtonLabel: "Ask AI",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
   email: "hello@ilanlevy.dev",
   nav: [
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "Pollfish", href: "#projects" },
+    { label: "TILD", href: "#projects" },
+    { label: "CtrlEat", href: "#projects" },
+    { label: "Minddy", href: "#projects" },
   ],
   socialLinks: [
     { label: "GitHub", href: "https://github.com" },

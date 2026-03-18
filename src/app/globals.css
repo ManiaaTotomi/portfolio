@@ -72,6 +72,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.font-figtree {
+  font-family:
+    "Figtree", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-aeonik {
+  font-family:
+    "Aeonik TRIAL", "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.font-dm {
+  font-family:
+    "DM Sans", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-ibm {
+  font-family:
+    "IBM Plex Sans", "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
 ::selection {
   background: rgb(14 122 115 / 24%);
   color: var(--color-text);
