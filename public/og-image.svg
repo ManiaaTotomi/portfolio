@@ -1,0 +1,17 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1110" y2="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF6E8"/>
+      <stop offset="1" stop-color="#D8ECE7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="26" fill="#102C33"/>
+  <rect x="42" y="42" width="1116" height="546" rx="24" fill="url(#bg)"/>
+  <circle cx="1020" cy="150" r="90" fill="#F2B560" fill-opacity="0.56"/>
+  <rect x="112" y="128" width="460" height="24" rx="12" fill="#0E7A73" fill-opacity="0.38"/>
+  <text x="112" y="280" fill="#132E35" font-family="Arial, sans-serif" font-size="78" font-weight="700">Ilan Levy</text>
+  <text x="112" y="338" fill="#234850" font-family="Arial, sans-serif" font-size="40" font-weight="500">Product Designer + Frontend Engineer</text>
+  <text x="112" y="420" fill="#1F3F47" font-family="Arial, sans-serif" font-size="32" font-weight="500">Bold visual systems. Fast, production-ready builds.</text>
+  <rect x="112" y="468" width="250" height="60" rx="30" fill="#0E7A73"/>
+  <text x="156" y="507" fill="#F6FFFD" font-family="Arial, sans-serif" font-size="28" font-weight="700">View Portfolio</text>
+</svg>

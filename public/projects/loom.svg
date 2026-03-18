@@ -1,0 +1,19 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="loom-bg" x1="1200" y1="40" x2="210" y2="690" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2B560"/>
+      <stop offset="1" stop-color="#B9DCD4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" rx="32" fill="#102D31"/>
+  <rect x="84" y="84" width="1032" height="582" rx="30" fill="url(#loom-bg)"/>
+  <rect x="154" y="154" width="892" height="82" rx="20" fill="#FDF9F0" fill-opacity="0.78"/>
+  <rect x="154" y="278" width="276" height="326" rx="20" fill="#FDF9F0" fill-opacity="0.85"/>
+  <rect x="454" y="278" width="276" height="326" rx="20" fill="#FDF9F0" fill-opacity="0.72"/>
+  <rect x="754" y="278" width="292" height="326" rx="20" fill="#FDF9F0" fill-opacity="0.6"/>
+  <rect x="184" y="186" width="360" height="18" rx="9" fill="#0E7A73" fill-opacity="0.44"/>
+  <rect x="184" y="318" width="208" height="16" rx="8" fill="#16444A" fill-opacity="0.36"/>
+  <rect x="484" y="318" width="208" height="16" rx="8" fill="#16444A" fill-opacity="0.34"/>
+  <rect x="784" y="318" width="208" height="16" rx="8" fill="#16444A" fill-opacity="0.28"/>
+  <text x="172" y="578" fill="#15363D" font-family="Arial, sans-serif" font-size="60" font-weight="700">Loom Analytics</text>
+</svg>
