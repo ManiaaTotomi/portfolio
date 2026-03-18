@@ -74,7 +74,8 @@ body {
 
 .font-figtree {
   font-family:
-    "Figtree", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    var(--font-figtree), "Avenir Next", "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif;
 }
 
 .font-aeonik {
