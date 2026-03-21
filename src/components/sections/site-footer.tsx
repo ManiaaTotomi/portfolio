@@ -7,9 +7,9 @@ interface SiteFooterProps {
 
 export function SiteFooter({ content }: SiteFooterProps) {
   return (
-    <footer className="border-t border-border/80 bg-surface/70 py-8">
+    <footer className="border-t border-white/10 bg-[#1a1a1a] py-8">
       <Container className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-muted">
+        <p className="font-figtree text-sm text-[#a8a8a8]">
           © {new Date().getFullYear()} {content.name}. Built with Next.js and
           Tailwind CSS.
         </p>
@@ -17,7 +17,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
           {content.socialLinks.map((link) => (
             <li key={link.label}>
               <a
-                className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm text-text transition-colors hover:border-accent/50 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35"
+                className="font-figtree rounded-full border border-white/16 bg-white/[0.03] px-3 py-1.5 text-sm text-[#ececec] transition-colors hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                 href={link.href}
                 rel="noreferrer"
                 target="_blank"

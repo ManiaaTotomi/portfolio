@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
+import { Figtree, Roboto } from "next/font/google";
 import { siteContent } from "@/content/site";
 import "./globals.css";
 
@@ -9,6 +9,11 @@ const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +57,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${figtree.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${figtree.variable} ${roboto.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">
         <a className="skip-link" href="#main-content">
           Skip to main content

@@ -7,16 +7,16 @@
   --font-space-mono:
     "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 
-  --color-canvas: #f4f2ec;
-  --color-surface: #fffdf7;
-  --color-surface-alt: #e8e6dc;
-  --color-text: #172429;
-  --color-muted: #5d6c71;
-  --color-accent: #0e7a73;
-  --color-accent-strong: #0a625c;
-  --color-accent-soft: #d7efea;
-  --color-border: #c2cec9;
-  --color-highlight: #f2b560;
+  --color-canvas: #1a1a1a;
+  --color-surface: #212121;
+  --color-surface-alt: #2a2a2a;
+  --color-text: #f3f3f3;
+  --color-muted: #a3a3a3;
+  --color-accent: #d336ee;
+  --color-accent-strong: #e37bf2;
+  --color-accent-soft: #3b2940;
+  --color-border: #3a3a3a;
+  --color-highlight: #d336ee;
 
   --space-section: clamp(3.5rem, 8vw, 6.25rem);
   --text-hero: clamp(2.35rem, 7vw, 5rem);
@@ -64,9 +64,9 @@ body {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 12% 14%, rgb(14 122 115 / 12%), transparent 36%),
-    radial-gradient(circle at 84% 16%, rgb(242 181 96 / 14%), transparent 42%),
-    linear-gradient(180deg, #f9f7f0 0%, #f4f2ec 55%, #f1eee5 100%);
+    radial-gradient(circle at 18% 8%, rgb(211 54 238 / 12%), transparent 34%),
+    radial-gradient(circle at 86% 10%, rgb(94 84 255 / 9%), transparent 38%),
+    linear-gradient(180deg, #1b1b1b 0%, #1a1a1a 58%, #191919 100%);
   color: var(--color-text);
   font-family: var(--font-sora), sans-serif;
   text-rendering: optimizeLegibility;
@@ -93,9 +93,15 @@ body {
     "IBM Plex Sans", "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
+.font-roboto {
+  font-family:
+    var(--font-roboto), "Roboto", "Helvetica Neue", "Segoe UI", Arial,
+    sans-serif;
+}
+
 ::selection {
-  background: rgb(14 122 115 / 24%);
-  color: var(--color-text);
+  background: rgb(211 54 238 / 32%);
+  color: #fff;
 }
 
 .skip-link {

@@ -98,48 +98,48 @@ export function HeroSection({ content }: HeroSectionProps) {
   return (
     <header className="relative bg-[#1a1a1a]" id="top">
       <div className="w-full border-b border-white/10">
-        <div className="mx-auto w-full max-w-[1600px] border-x border-white/10">
-          <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5 sm:px-8 sm:py-6 lg:px-[50px] lg:py-[30px]">
-            <Link
-              className="font-figtree text-base font-bold text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
-              href="#top"
-            >
-              {content.name}
-            </Link>
+        <div className="flex items-center justify-between border-b border-white/[0.06] px-[50px] py-[30px]">
+          <Link
+            className="font-figtree text-base font-bold text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
+            href="#top"
+          >
+            {content.name}
+          </Link>
 
-            <nav
-              aria-label="Featured projects"
-              className="hidden items-center gap-[140px] lg:flex"
-            >
-              {content.nav.map((item, index) => (
-                <a
-                  className="font-figtree inline-flex items-center gap-[10px] text-sm font-normal text-[#c1c1c1] transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                  href={item.href}
-                  key={`${item.label}-${item.href}`}
-                >
-                  {item.label}
-                  {index === 0 && <ChevronDownIcon />}
-                </a>
-              ))}
-            </nav>
+          <nav
+            aria-label="Featured projects"
+            className="hidden items-center gap-[140px] lg:flex"
+          >
+            {content.nav.map((item, index) => (
+              <a
+                className="font-figtree inline-flex items-center gap-[10px] text-sm font-normal text-[#c1c1c1] transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                href={item.href}
+                key={`${item.label}-${item.href}`}
+              >
+                {item.label}
+                {index === 0 && <ChevronDownIcon />}
+              </a>
+            ))}
+          </nav>
 
-            <div className="flex items-center justify-end gap-6 sm:gap-8">
-              <a
-                className="font-figtree text-base font-bold tracking-[0.02em] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                href={content.cvUrl}
-              >
-                CV
-              </a>
-              <a
-                aria-label={`Email ${content.name}`}
-                className="inline-flex h-10 w-10 items-center justify-center text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                href={`mailto:${content.email}`}
-              >
-                <MailIcon />
-              </a>
-            </div>
+          <div className="flex items-center justify-end gap-6 sm:gap-8">
+            <a
+              className="font-figtree text-base font-bold tracking-[0.02em] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              href={content.cvUrl}
+            >
+              CV
+            </a>
+            <a
+              aria-label={`Email ${content.name}`}
+              className="inline-flex h-10 w-10 items-center justify-center text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              href={`mailto:${content.email}`}
+            >
+              <MailIcon />
+            </a>
           </div>
+        </div>
 
+        <div className="mx-auto w-full max-w-[1600px]">
           <div className="relative grid lg:min-h-[945px] lg:grid-cols-[minmax(0,1fr)_548px]">
             <div
               className="pointer-events-none absolute left-[70%] top-[79%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(211,54,238,1)_0%,rgba(211,54,238,0.76)_24%,rgba(211,54,238,0.42)_52%,rgba(211,54,238,0.16)_68%,rgba(211,54,238,0)_84%)] lg:left-[calc(100%-274px)]"
@@ -151,15 +151,15 @@ export function HeroSection({ content }: HeroSectionProps) {
               }}
             />
 
-            <div className="relative z-10 flex items-center px-5 py-14 sm:px-10 sm:py-18 lg:px-[min(22vw,350px)] lg:py-0">
-            <Reveal className="max-w-[598px]">
+            <div className="relative z-10 flex items-center px-5 py-14 sm:px-10 sm:py-18 lg:py-0 lg:pl-[min(22vw,350px)] lg:pr-[72px] xl:pl-[347px] xl:pr-[80px]">
+            <Reveal className="max-w-[580px]">
               <p className="font-aeonik text-[26px] font-semibold leading-[1.5] text-[#808080] sm:text-[28px] sm:leading-[57px]">
                 {content.heroKicker}
               </p>
-              <h1 className="font-aeonik mt-[15px] text-[34px] font-semibold leading-[1.2] text-white sm:text-[40px] lg:text-[44px] lg:leading-[58px]">
+              <h1 className="font-aeonik mt-[15px] max-w-[580px] text-[34px] font-semibold leading-[1.2] text-white sm:text-[40px] lg:text-[44px] lg:leading-[58px]">
                 {content.headline}
               </h1>
-              <div className="mt-[26px] max-w-[519px] space-y-[18px]">
+              <div className="mt-[26px] max-w-[580px] space-y-[18px]">
                 <p className="font-figtree text-[17px] font-light leading-[1.6] text-white sm:text-[18px] sm:leading-[29px]">
                   {content.intro}
                 </p>
