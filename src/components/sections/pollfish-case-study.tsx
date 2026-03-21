@@ -96,7 +96,7 @@ function PollfishFeatureCard({
     >
       <div className="flex flex-col justify-end gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pb-[56px] lg:pl-[96px] lg:pr-0 lg:pt-14">
         <div className="w-full lg:w-[355px]">
-          <h3 className="font-aeonik text-[42px] font-semibold leading-[0.98] text-[#222] lg:text-[52px]">
+          <h3 className="font-aeonik text-[42px] font-semibold leading-[0.98] text-[#222] lg:text-[48px]">
             {entry.title}
           </h3>
 
@@ -145,7 +145,7 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
 
       <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[430px_1fr] lg:gap-[80px] lg:px-[96px]">
         <div className="self-center space-y-8 lg:w-[355px]">
-          <h3 className="font-aeonik text-[44px] font-semibold leading-[1.04] text-white sm:text-[52px] sm:leading-[55px]">
+          <h3 className="font-aeonik text-[42px] font-semibold leading-[0.98] text-white lg:text-[48px]">
             AI Builder
           </h3>
 

@@ -23,6 +23,7 @@ const AI_INSIGHTS_DESCRIPTION = [
   "Designed an AI-powered workspace that combines conversational guidance with live operational feeds, helping teams detect risks and act early.",
   "Connected project updates, progress tracking, and cost signals into one collaborative view to support faster, better-informed decisions.",
 ] as const;
+const AS_BUILT_IMAGE_SRC = "/images/tild-asbuilt-v2.png";
 
 function ProjectDivider() {
   return (
@@ -76,45 +77,79 @@ function TildFeatureCard({
   description,
   imageSrc,
   imageAlt,
+  imageWidth,
+  imageHeight,
+  theme = "asBuilt",
 }: {
   title: string;
   description: readonly string[];
   imageSrc: string;
   imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+  theme?: "asBuilt" | "aiInsights";
 }) {
-  return (
-    <article className="relative overflow-hidden rounded-[20px] border border-white/[0.12] bg-[rgba(40,40,40,0.35)]">
-      <div className="pointer-events-none absolute -left-[220px] top-[110px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
-      <div className="pointer-events-none absolute -right-[260px] bottom-[-260px] h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
+  const isAiInsights = theme === "aiInsights";
 
-      <div className="relative grid lg:grid-cols-[1fr_1.25fr]">
-        <div className="flex flex-col justify-end gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pb-[56px] lg:pl-[96px] lg:pr-0 lg:pt-14">
-          <div className="w-full lg:w-[355px]">
-            <h3 className="font-aeonik text-[42px] font-semibold leading-[1.02] text-white lg:text-[52px] lg:leading-[57px]">
-              {title}
-            </h3>
-            <div className="mt-8 space-y-4">
-              {description.map((paragraph) => (
-                <p
-                  className="font-figtree text-[16px] leading-[1.5] text-white lg:text-[18px] lg:leading-[27px]"
-                  key={paragraph}
-                >
-                  {paragraph}
-                </p>
-              ))}
+  return (
+    <article
+      className={`relative overflow-hidden rounded-[20px] border border-white/[0.12] ${
+        isAiInsights
+          ? "bg-[linear-gradient(140deg,#09090b_0%,#0d0d10_48%,#121216_100%)]"
+          : "bg-[rgba(40,40,40,0.35)]"
+      }`}
+    >
+      {isAiInsights ? (
+        <>
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(95deg,rgba(10,10,12,0)_0%,rgba(10,10,12,0)_52%,rgba(198,167,84,0.05)_70%,rgba(156,57,52,0.065)_86%,rgba(63,112,53,0.07)_100%)] opacity-65" />
+          <div className="pointer-events-none absolute inset-[-22%] bg-[radial-gradient(110%_100%_at_112%_20%,rgba(198,167,84,0.16)_0%,rgba(198,167,84,0.095)_22%,rgba(156,57,52,0.12)_48%,rgba(63,112,53,0.13)_72%,rgba(63,112,53,0)_100%)] blur-[84px]" />
+        </>
+      ) : (
+        <>
+          <div className="pointer-events-none absolute -left-[220px] top-[110px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
+          <div className="pointer-events-none absolute -right-[260px] bottom-[-260px] h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
+        </>
+      )}
+
+      <div className="relative px-6 sm:px-10 lg:px-[53px]">
+        <div className="grid items-center gap-12 py-[82px] lg:grid-cols-[1fr_1.25fr]">
+          <div className="flex flex-col justify-center lg:pl-[43px]">
+            <div className="w-full lg:max-w-[355px]">
+              <h3 className="font-aeonik text-[42px] font-semibold leading-[1.02] text-white lg:text-[48px] lg:leading-[57px]">
+                {title}
+              </h3>
+              <div className="mt-8 space-y-4">
+                {description.map((paragraph) => (
+                  <p
+                    className={`font-figtree text-[16px] leading-[1.5] lg:text-[18px] lg:leading-[27px] ${
+                      isAiInsights ? "text-[#d6dbe4]" : "text-white"
+                    }`}
+                    key={paragraph}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="relative min-h-[330px] overflow-hidden px-5 py-8 sm:px-8 sm:py-12 lg:min-h-[676px] lg:px-[53px] lg:py-[82px]">
-          <div className="relative h-full min-h-[255px] w-full lg:min-h-[510px]">
-            <Image
-              alt={imageAlt}
-              fill
-              className="object-contain"
-              sizes="(min-width: 1280px) 760px, (min-width: 1024px) 60vw, 95vw"
-              src={imageSrc}
-            />
+          <div className="w-full">
+            <div className="mx-auto w-full max-w-[760px]">
+              <div className="relative overflow-visible">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-[6%] bottom-[-8%] top-[18%] z-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.34)_0%,rgba(0,0,0,0.2)_45%,rgba(0,0,0,0)_78%)] blur-[18px]"
+                />
+                <Image
+                  alt={imageAlt}
+                  className="relative z-10 h-auto w-full object-contain"
+                  height={imageHeight}
+                  sizes="(min-width: 1280px) 760px, (min-width: 1024px) 60vw, 95vw"
+                  src={imageSrc}
+                  width={imageWidth}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -136,14 +171,19 @@ export function TildCaseStudySection({ study }: TildCaseStudySectionProps) {
           <TildFeatureCard
             description={AS_BUILT_DESCRIPTION}
             imageAlt="Tild as-built plan workspace"
-            imageSrc="/images/tild-asbuilt.png"
+            imageHeight={835}
+            imageSrc={AS_BUILT_IMAGE_SRC}
+            imageWidth={1440}
             title="As Built Plan"
           />
 
           <TildFeatureCard
             description={AI_INSIGHTS_DESCRIPTION}
             imageAlt="Tild AI insights and live updates interface"
+            imageHeight={942}
             imageSrc="/images/tild-ai.png"
+            imageWidth={1440}
+            theme="aiInsights"
             title="AI insights & Live updates"
           />
         </div>
