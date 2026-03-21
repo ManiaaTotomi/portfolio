@@ -438,7 +438,7 @@ function EntryBlock({ entry, delayMs }: { entry: CaseStudyEntry; delayMs: number
 
 export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
   return (
-    <main className="bg-[#1a1a1a]" id="main-content">
+    <main className="bg-[#040404]" id="main-content">
       {caseStudies.map((study, studyIndex) => {
         if (study.id === "pollfish") {
           return <PollfishCaseStudySection key={study.id} study={study} />;

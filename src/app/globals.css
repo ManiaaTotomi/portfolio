@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 :root {
+  --hero-splash-scale: 1.52;
+  --hero-splash-top: -201px;
+  --hero-splash-x: -33px;
+  --hero-splash-opacity: 0.3;
+
   --font-sora:
     "Avenir Next", "Optima", "Segoe UI", "Trebuchet MS", "Helvetica Neue",
     sans-serif;

@@ -7,7 +7,7 @@ interface SiteFooterProps {
 
 export function SiteFooter({ content }: SiteFooterProps) {
   return (
-    <footer className="border-t border-white/10 bg-[#1a1a1a] py-8">
+    <footer className="border-t border-white/10 bg-[#040404] py-8">
       <Container className="flex flex-wrap items-center justify-between gap-4">
         <p className="font-figtree text-sm text-[#a8a8a8]">
           © {new Date().getFullYear()} {content.name}. Built with Next.js and

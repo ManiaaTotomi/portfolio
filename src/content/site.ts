@@ -113,7 +113,7 @@ export const siteContent: SiteContent = {
   cvUrl: "#",
   role: "Lead Product Designer",
   heroKicker: "Hey, I’m Mania!",
-  headline: "Lead Product Designer building scalable B2B SaaS & AI experiences",
+  headline: "Product Designer building scalable B2B SaaS & AI experiences",
   intro:
     "I design and scale complex SaaS products, from foundational systems to AI-powered workflows.",
   heroBody: [
@@ -128,7 +128,7 @@ export const siteContent: SiteContent = {
   ],
   assistantPlaceholder:
     "Type a question about my design approach or experience…",
-  assistantButtonLabel: "Ask AI",
+  assistantButtonLabel: "Ask Me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
   email: "hello@ilanlevy.dev",
@@ -280,8 +280,8 @@ export const siteContent: SiteContent = {
           tag: "Pollfish",
           title: "Questionnaire Builder",
           paragraphs: [
-            "The AI Builder brings natural-language survey creation directly into Pollfish’s core workflow. Users can generate, refine, and restructure questionnaires using AI, including support for complex research methods and advanced survey logic.",
-            "I led the UX strategy and interaction design to ensure AI enhanced, rather than disrupted, complex survey logic and professional research standards.",
+            "The Questionnaire Builder is the core of Pollfish’s survey creation workflow, allowing users to design, structure, and manage surveys with support for complex logic and advanced configuration.",
+            "I lead the design of the experience, structuring how questions, logic, and settings are created and managed within the builder. The focus is on making complex functionality easier to use, without limiting flexibility for advanced research needs.",
           ],
           details: [
             {
@@ -327,8 +327,8 @@ export const siteContent: SiteContent = {
           tag: "Pollfish",
           title: "Multiple Audiences",
           paragraphs: [
-            "The AI Builder brings natural-language survey creation directly into Pollfish’s core workflow. Users can generate, refine, and restructure questionnaires using AI, including support for complex research methods and advanced survey logic.",
-            "I led the UX strategy and interaction design to ensure AI enhanced, rather than disrupted, complex survey logic and professional research standards.",
+            "The Questionnaire Builder is the core of Pollfish’s survey creation workflow, allowing users to design, structure, and manage surveys with support for complex logic and advanced configuration.",
+            "I lead the design of the experience, structuring how questions, logic, and settings are created and managed within the builder. The focus is on making complex functionality easier to use, without limiting flexibility for advanced research needs.",
           ],
           details: [
             {

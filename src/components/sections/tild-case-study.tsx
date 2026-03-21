@@ -1,141 +1,153 @@
-import type {
-  CaseStudy,
-  CaseStudyDetailGroup,
-  CaseStudyEntry,
-} from "@/content/site";
 import Image from "next/image";
+import type { CaseStudy } from "@/content/site";
 
 interface TildCaseStudySectionProps {
   study: CaseStudy;
 }
 
-function TildDetailsColumn({ details }: { details: CaseStudyDetailGroup[] }) {
-  return (
-    <div className="space-y-6">
-      {details.map((group) => (
-        <div className="space-y-0.5" key={group.title}>
-          <p className="font-figtree text-[14px] font-bold leading-[22px] text-[#bbbbbb]">
-            {group.title}
-          </p>
-          <div className="space-y-0.5">
-            {group.items.map((item) => (
-              <p
-                className="font-figtree text-[14px] font-medium leading-[22px] text-[#bbbbbb]"
-                key={item}
-              >
-                {item}
-              </p>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+const TILD_INTRO_TITLE = "Construction collaboration platform";
+const TILD_INTRO_DESCRIPTION =
+  "Tild is a construction collaboration platform that helps teams manage tasks, properties, and contractors. I’m designing the product from an early stage, structuring core workflows and how key entities interact. The focus is on bringing clarity to fragmented processes while maintaining flexibility.";
+const TILD_INTRO_DETAILS = [
+  "Founding Designer",
+  "System Structure",
+  "Product Foundations",
+] as const;
 
-function TildIntro({ entry }: { entry: CaseStudyEntry }) {
+const AS_BUILT_DESCRIPTION = [
+  "Bridging spatial context and task management, enabling teams to navigate work directly through the construction plan.",
+  "Structured how spaces, tasks, and updates connect, making project information easier to access, track, and manage.",
+] as const;
+
+const AI_INSIGHTS_DESCRIPTION = [
+  "Designed an AI-powered workspace that combines conversational guidance with live operational feeds, helping teams detect risks and act early.",
+  "Connected project updates, progress tracking, and cost signals into one collaborative view to support faster, better-informed decisions.",
+] as const;
+
+function ProjectDivider() {
   return (
-    <div className="space-y-4">
-      {entry.paragraphs.map((paragraph) => (
-        <p
-          className="font-figtree text-[18px] font-normal leading-[27px] text-[#e5e5e5]"
-          key={paragraph}
-        >
-          {paragraph}
+    <div className="flex h-[40px] w-full items-center">
+      <div className="h-px flex-1 bg-white/10" />
+      <div className="mx-8 inline-flex items-center gap-3">
+        <span className="h-[7px] w-[7px] rounded-full bg-[#0CFF31]" />
+        <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#0CFF31]">
+          TILD
         </p>
-      ))}
+      </div>
+      <div className="h-px flex-1 bg-white/10" />
     </div>
   );
 }
 
-function TildInProgressIndicator() {
+function TildIntro() {
   return (
-    <p className="font-figtree inline-flex items-center rounded-[5px] text-[16px] font-bold leading-normal text-[#e5e5e5]">
-      In progress
-    </p>
-  );
-}
+    <div className="mx-auto flex w-full max-w-[710px] flex-col items-center gap-8 text-center">
+      <p className="font-figtree text-[18px] italic leading-[22px] text-[rgba(194,194,194,0.4)]">
+        In progress
+      </p>
 
-function TildTextBlock({ entry }: { entry: CaseStudyEntry }) {
-  return (
-    <div className="mx-auto w-full max-w-[1600px] px-5 py-14 sm:px-8 lg:px-14 xl:px-[347px] xl:py-[120px]">
-      <div className="space-y-[30px]">
-        <div className="space-y-[5px]">
-          <h2 className="font-aeonik text-[44px] font-bold leading-normal text-[#dddddd]">
-            {entry.title}
-          </h2>
-          {entry.subtitle && (
-            <p className="font-aeonik w-full max-w-[580px] text-[44px] font-semibold leading-[49px] text-[#6d6d6d]">
-              {entry.subtitle}
+      <div className="space-y-6">
+        <p className="font-aeonik text-[34px] font-semibold leading-[1.12] text-[rgba(194,194,194,0.4)] sm:text-[42px] sm:leading-[45px]">
+          {TILD_INTRO_TITLE}
+        </p>
+        <p className="font-aeonik text-[18px] leading-[1.5] text-[#b5b5b5] sm:text-[20px] sm:leading-[35px]">
+          {TILD_INTRO_DESCRIPTION}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:gap-x-8">
+        {TILD_INTRO_DETAILS.map((item, index) => (
+          <div className="flex items-center gap-6 sm:gap-8" key={item}>
+            <p className="font-figtree text-[15px] font-medium text-[#6d6c6c] sm:text-[16px]">
+              {item}
             </p>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12 xl:gap-[142px]">
-          <div className="md:min-w-[400px] md:max-w-[580px] md:flex-1">
-            <div className="space-y-12">
-              <TildIntro entry={entry} />
-              <TildInProgressIndicator />
-            </div>
+            {index < TILD_INTRO_DETAILS.length - 1 && (
+              <span className="h-[2px] w-[2px] rounded-full bg-[#6d6c6c]" />
+            )}
           </div>
-          <div className="hidden md:block md:w-[185px] md:flex-none">
-            <TildDetailsColumn details={entry.details} />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function BuildPlanPreview() {
-  return (
-    <div className="relative aspect-[2048/1363] w-full overflow-hidden">
-      <Image
-        alt="Tild build plan interface"
-        className="object-cover"
-        fill
-        priority={false}
-        sizes="(min-width: 1280px) 1400px, 100vw"
-        src="/images/as-built.png"
-      />
-    </div>
-  );
-}
-
-function TildVisualBlock({
-  imageLabel,
+function TildFeatureCard({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
 }: {
-  imageLabel?: string;
+  title: string;
+  description: readonly string[];
+  imageSrc: string;
+  imageAlt: string;
 }) {
   return (
-    <div className="w-full py-14 sm:py-16 xl:py-[80px]">
-      <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-14 xl:px-[100px]">
-        <div className="space-y-[21.75px]">
-          <div className="flex items-center gap-[20.16px]">
-            <p className="font-ibm text-[14px] font-medium uppercase leading-normal text-white">
-              {imageLabel ?? "build plan"}
-            </p>
-            <div className="h-px flex-1 bg-[rgba(159,155,155,0.5)]" />
-          </div>
+    <article className="relative overflow-hidden rounded-[20px] border border-white/[0.12] bg-[rgba(40,40,40,0.35)]">
+      <div className="pointer-events-none absolute -left-[220px] top-[110px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
+      <div className="pointer-events-none absolute -right-[260px] bottom-[-260px] h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(39,188,89,0.22)_0%,rgba(39,188,89,0.08)_42%,rgba(39,188,89,0)_72%)]" />
 
-          <BuildPlanPreview />
+      <div className="relative grid lg:grid-cols-[1fr_1.25fr]">
+        <div className="flex flex-col justify-end gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pb-[56px] lg:pl-[96px] lg:pr-0 lg:pt-14">
+          <div className="w-full lg:w-[355px]">
+            <h3 className="font-aeonik text-[42px] font-semibold leading-[1.02] text-white lg:text-[52px] lg:leading-[57px]">
+              {title}
+            </h3>
+            <div className="mt-8 space-y-4">
+              {description.map((paragraph) => (
+                <p
+                  className="font-figtree text-[16px] leading-[1.5] text-white lg:text-[18px] lg:leading-[27px]"
+                  key={paragraph}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative min-h-[330px] overflow-hidden px-5 py-8 sm:px-8 sm:py-12 lg:min-h-[676px] lg:px-[53px] lg:py-[82px]">
+          <div className="relative h-full min-h-[255px] w-full lg:min-h-[510px]">
+            <Image
+              alt={imageAlt}
+              fill
+              className="object-contain"
+              sizes="(min-width: 1280px) 760px, (min-width: 1024px) 60vw, 95vw"
+              src={imageSrc}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export function TildCaseStudySection({ study }: TildCaseStudySectionProps) {
-  const [entry] = study.entries;
-
-  if (!entry) {
-    return null;
-  }
-
   return (
-    <section className="border-t border-white/10 bg-[#1a1a1a]" id={study.id}>
-      <TildTextBlock entry={entry} />
-      <TildVisualBlock imageLabel={entry.imageLabel} />
+    <section className="relative bg-[#040404]" id={study.id}>
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+        <ProjectDivider />
+
+        <div className="py-[120px]">
+          <TildIntro />
+        </div>
+
+        <div className="space-y-12 lg:space-y-[100px]">
+          <TildFeatureCard
+            description={AS_BUILT_DESCRIPTION}
+            imageAlt="Tild as-built plan workspace"
+            imageSrc="/images/tild-asbuilt.png"
+            title="As Built Plan"
+          />
+
+          <TildFeatureCard
+            description={AI_INSIGHTS_DESCRIPTION}
+            imageAlt="Tild AI insights and live updates interface"
+            imageSrc="/images/tild-ai.png"
+            title="AI insights & Live updates"
+          />
+        </div>
+      </div>
     </section>
   );
 }
