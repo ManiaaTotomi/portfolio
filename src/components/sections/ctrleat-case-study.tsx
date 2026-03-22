@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CaseStudy } from "@/content/site";
+import { CtrlEatScreensMotionGrid } from "@/components/sections/ctrleat-screens-motion-grid";
 
 interface CtrlEatCaseStudySectionProps {
   study: CaseStudy;
@@ -56,25 +57,31 @@ const ICONS = [
 
 const MOBILE_SCREENS = [
   {
-    src: "/images/Ctrleat/screens/choose-nutrition.png",
+    src: "/images/Ctrleat/screens/choose-nutrition-v2.png",
     alt: "CtrlEat choose nutrition preference screen",
     desktopOffset: "lg:mt-3",
-    height: 753,
-    width: 398,
+    height: 1399,
+    width: 703,
+    isShowcase: true,
+    splashTone: "purpleGreen",
   },
   {
-    src: "/images/Ctrleat/screens/Next.png",
+    src: "/images/Ctrleat/screens/Next-v2.png",
     alt: "CtrlEat onboarding welcome screen",
-    desktopOffset: "lg:-mt-6",
-    height: 750,
-    width: 398,
+    desktopOffset: "lg:pt-[140px]",
+    height: 1400,
+    width: 706,
+    isShowcase: true,
+    splashTone: "greenGold",
   },
   {
-    src: "/images/Ctrleat/screens/First-screen.png",
+    src: "/images/Ctrleat/screens/First-screen-v2.png",
     alt: "CtrlEat featured restaurants screen",
     desktopOffset: "lg:mt-5",
-    height: 750,
-    width: 398,
+    height: 1399,
+    width: 703,
+    isShowcase: true,
+    splashTone: "cyanRose",
   },
 ] as const;
 
@@ -82,7 +89,7 @@ function ProjectDivider() {
   return (
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
-      <div className="mx-8 inline-flex items-center gap-4 bg-[#0c0c0c] px-9 py-[10px]">
+      <div className="inline-flex items-center gap-4 px-8 py-[10px]">
         <span className="h-[7px] w-[7px] rounded-full bg-[#31f7ff]" />
         <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
       </div>
@@ -150,20 +157,7 @@ export function CtrlEatCaseStudySection({ study }: CtrlEatCaseStudySectionProps)
           ))}
         </div>
 
-        <div className="relative mx-auto mt-28 flex w-full max-w-[1319px] flex-wrap items-start justify-center gap-x-8 gap-y-10 lg:mt-44 lg:flex-nowrap lg:justify-between lg:gap-[69px]">
-          {MOBILE_SCREENS.map((screen) => (
-            <div className={screen.desktopOffset} key={screen.src}>
-              <Image
-                alt={screen.alt}
-                className="h-auto w-[295px] sm:w-[330px] lg:w-[392px]"
-                height={screen.height}
-                sizes="(min-width: 1280px) 392px, (min-width: 768px) 40vw, 85vw"
-                src={screen.src}
-                width={screen.width}
-              />
-            </div>
-          ))}
-        </div>
+        <CtrlEatScreensMotionGrid screens={MOBILE_SCREENS} />
       </div>
     </section>
   );

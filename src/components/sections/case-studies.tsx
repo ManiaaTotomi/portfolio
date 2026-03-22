@@ -1,4 +1,6 @@
 import type { CaseStudy, CaseStudyEntry, CaseStudyShowcase } from "@/content/site";
+import { CtrlEatCaseStudySection } from "@/components/sections/ctrleat-case-study";
+import { MinddyCaseStudySection } from "@/components/sections/minddy-case-study";
 import { Reveal } from "@/components/reveal";
 import { PollfishCaseStudySection } from "@/components/sections/pollfish-case-study";
 import { TildCaseStudySection } from "@/components/sections/tild-case-study";
@@ -231,55 +233,6 @@ function renderTild(showcase: CaseStudyShowcase) {
   );
 }
 
-function renderCtrleat(showcase: CaseStudyShowcase) {
-  const list = showcase.listItems ?? [];
-  return (
-    <div className="grid gap-4 md:grid-cols-3">
-      <div className="rounded-[18px] border border-white/[0.12] bg-[linear-gradient(180deg,#302522_0%,#201a19_100%)] p-5">
-        <p className="font-aeonik text-xl font-semibold text-white">{showcase.title}</p>
-        <p className="font-figtree mt-3 text-[13px] leading-[1.45] text-[#e0d7d3]">{showcase.subtitle}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {showcase.chips?.map((chip) => (
-            <span
-              className="font-figtree rounded-full border border-white/20 px-3 py-1 text-[12px] text-white"
-              key={chip}
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="rounded-[18px] border border-white/[0.12] bg-[linear-gradient(180deg,#272730_0%,#1e1f24_100%)] p-5">
-        <p className="font-figtree text-sm font-semibold text-white">Featured-Restaurants</p>
-        <ul className="mt-4 space-y-2.5">
-          {list.slice(0, 4).map((item) => (
-            <li className="font-ibm text-[13px] text-[#d7d7e2]" key={item}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="rounded-[18px] border border-white/[0.12] bg-[linear-gradient(180deg,#223029_0%,#1a2420_100%)] p-5">
-        <p className="font-figtree text-sm font-semibold text-white">Local context</p>
-        {showcase.secondaryList?.map((item) => (
-          <p className="font-ibm mt-3 text-[13px] text-[#c9d8cf]" key={item}>
-            {item}
-          </p>
-        ))}
-        <ul className="mt-4 space-y-2.5">
-          {list.slice(4).map((item) => (
-            <li className="font-ibm text-[13px] text-[#d1ddd5]" key={item}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
 function renderMinddy(showcase: CaseStudyShowcase) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
@@ -348,9 +301,6 @@ function Showcase({
   }
   if (showcase.type === "tild") {
     content = renderTild(showcase);
-  }
-  if (showcase.type === "ctrleat") {
-    content = renderCtrleat(showcase);
   }
   if (showcase.type === "minddy") {
     content = renderMinddy(showcase);
@@ -445,6 +395,12 @@ export function CaseStudiesSection({ caseStudies }: CaseStudiesSectionProps) {
         }
         if (study.id === "tild") {
           return <TildCaseStudySection key={study.id} study={study} />;
+        }
+        if (study.id === "ctrleat") {
+          return <CtrlEatCaseStudySection key={study.id} study={study} />;
+        }
+        if (study.id === "minddy") {
+          return <MinddyCaseStudySection key={study.id} study={study} />;
         }
 
         return (

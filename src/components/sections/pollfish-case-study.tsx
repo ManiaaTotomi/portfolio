@@ -39,7 +39,7 @@ function ProjectDivider() {
   return (
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
-      <div className="mx-8 inline-flex items-center gap-3">
+      <div className="inline-flex items-center gap-4 px-8 py-[10px]">
         <span className="h-[7px] w-[7px] rounded-full bg-[#f70eff]" />
         <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#f70eff]">
           Pollfish
@@ -193,50 +193,14 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
           </div>
 
           <div className="absolute right-0 top-0 w-[52%] overflow-hidden rounded-[13px] bg-white shadow-[0_4px_22px_rgba(59,35,111,0.2)] lg:w-[404px]">
-            <div className="h-[40px] bg-[linear-gradient(90deg,#131126_0%,#5b1f78_42%,#c32fd8_100%)] px-4">
-              <p className="font-roboto pt-[11px] text-[12px] font-medium text-white">
-                Welcome to AI Builder
-              </p>
-            </div>
-            <div className="space-y-3 px-3 py-3 lg:px-[14px]">
-              <div className="grid grid-cols-3 gap-1.5">
-                {["Translate survey", "Set tone", "Rephrase"].map((chip) => (
-                  <div
-                    className="rounded-[4px] border border-[#ececf3] bg-[#f7f8fb] px-2 py-1 text-center"
-                    key={chip}
-                  >
-                    <p className="font-roboto text-[10px] text-[#323945] lg:text-[12px]">{chip}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="rounded-[4px] bg-[#231f3c] px-3 py-2">
-                <p className="font-roboto text-[10px] text-white lg:text-[12px]">
-                  Help me find the right price for my product
-                </p>
-              </div>
-
-              <div className="rounded-[4px] bg-[#f5f5fb] px-3 py-3">
-                <p className="font-roboto text-[10px] leading-[1.45] text-[#323945] lg:text-[12px] lg:leading-[1.42]">
-                  I’m reviewing your request to find the right price and will provide
-                  helpful options as soon as possible.
-                </p>
-                <p className="font-roboto mt-2 text-[10px] leading-[1.45] text-[#323945] lg:text-[12px] lg:leading-[1.42]">
-                  I have added a comprehensive set of questions to your survey, focusing
-                  on pricing strategy and customer perception of value.
-                </p>
-                <p className="font-roboto mt-2 text-[10px] leading-[1.45] text-[#323945] lg:text-[12px] lg:leading-[1.42]">
-                  This includes a Van Westendorp pricing analysis, willingness-to-pay
-                  questions, and open-ended prompts to gather detailed feedback.
-                </p>
-              </div>
-
-              <div className="rounded-[4px] border border-[#ebebed] px-3 py-2">
-                <p className="font-roboto text-[10px] text-[#6f7789] lg:text-[12px]">
-                  Create or improve your survey with AI...
-                </p>
-              </div>
-            </div>
+            <Image
+              alt="AI Builder chat interface"
+              className="h-auto w-full object-cover"
+              height={1648}
+              sizes="(min-width: 1024px) 404px, 52vw"
+              src="/images/AI-builder/mobile-screen/AI-chat.png"
+              width={908}
+            />
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export function HeroSection({ content }: HeroSectionProps) {
 
   return (
     <header className="relative overflow-visible bg-[#040404]" id="top">
-      <div className="relative z-10 mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 py-[30px] min-[900px]:px-[50px]">
+      <div className="relative z-10 mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 pb-[30px] pt-[44px] min-[900px]:px-[50px]">
         <Link
           className="font-figtree text-[16px] font-bold tracking-[0.64px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
           href="#top"
@@ -105,11 +105,8 @@ export function HeroSection({ content }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[899px] flex-col items-center px-5 pb-[220px] pt-[140px] text-center sm:px-8 lg:pt-[260px]">
-        <p className="font-aeonik h-[23px] text-[18px] uppercase tracking-[1.44px] text-[rgba(255,255,255,0.5)]">
-          ASK ABOUT ME
-        </p>
-        <h1 className="font-aeonik mt-[38px] max-w-[899px] text-[40px] leading-[1.1] text-white sm:text-[52px] lg:text-[64px] lg:leading-[73px]">
+      <div className="relative z-10 mx-auto flex w-full max-w-[899px] flex-col items-center px-5 pb-[250px] pt-[160px] text-center sm:px-8 lg:pb-[280px] lg:pt-[290px]">
+        <h1 className="font-aeonik max-w-[899px] text-[40px] leading-[1.1] text-white sm:text-[52px] lg:text-[64px] lg:leading-[73px]">
           How does Mania bridge <span className="text-[rgba(255,255,255,0.6)]">design </span>
           <span className="text-[rgba(255,255,255,0.5)]">& engineering?|</span>
         </h1>
@@ -136,7 +133,7 @@ export function HeroSection({ content }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-[16px] w-full max-w-[1720px] px-0 pb-[72px] sm:mt-[20px] sm:pb-[84px]">
+      <div className="relative z-10 mx-auto mt-[16px] w-full max-w-[1720px] px-0 pb-[124px] sm:mt-[20px] sm:pb-[140px]">
         <HeroImageStrip />
       </div>
     </header>

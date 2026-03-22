@@ -64,6 +64,8 @@ html,
 body {
   min-height: 100%;
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -143,6 +145,11 @@ body {
   animation: reveal-up 720ms var(--ease-emphasis) forwards;
 }
 
+.hero-strip-marquee {
+  animation: hero-strip-marquee 86s linear infinite;
+  will-change: transform;
+}
+
 input,
 textarea {
   font: inherit;
@@ -159,6 +166,15 @@ textarea {
   }
 }
 
+@keyframes hero-strip-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -172,5 +188,9 @@ textarea {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-strip-marquee {
+    animation: none;
   }
 }

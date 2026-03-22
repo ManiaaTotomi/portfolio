@@ -1,33 +1,60 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { SiteContent } from "@/content/site";
-import { Container } from "@/components/primitives/container";
 
 interface SiteFooterProps {
   content: SiteContent;
 }
 
+const FOOTER_CLOSURE_TEXT =
+  "I’ve spent the last few years designing products that deal with complexity. Sometimes visible, sometimes not. If you’re working on something like that, feel free to reach out.";
+const FOOTER_EMAIL = "mania.totomi@gmail.com";
+
 export function SiteFooter({ content }: SiteFooterProps) {
   return (
-    <footer className="border-t border-white/10 bg-[#040404] py-8">
-      <Container className="flex flex-wrap items-center justify-between gap-4">
-        <p className="font-figtree text-sm text-[#a8a8a8]">
-          © {new Date().getFullYear()} {content.name}. Built with Next.js and
-          Tailwind CSS.
-        </p>
-        <ul className="flex flex-wrap gap-2">
-          {content.socialLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                className="font-figtree rounded-full border border-white/16 bg-white/[0.03] px-3 py-1.5 text-sm text-[#ececec] transition-colors hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                href={link.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </Container>
+    <footer className="bg-[#040404]">
+      <div className="mx-auto w-full max-w-[1600px] border-t border-white/10 px-5 pb-[50px] pt-[120px] sm:px-8 lg:px-[72px]">
+        <div className="flex flex-col items-center gap-[120px]">
+          <div className="flex flex-col items-center gap-8">
+            <p className="font-figtree w-full max-w-[672px] text-center text-[20px] font-bold leading-[1.7] text-[#666666] sm:text-[24px] sm:leading-[42px]">
+              {FOOTER_CLOSURE_TEXT}
+            </p>
+
+            <a
+              aria-label={`Email ${content.name}`}
+              className="font-aeonik text-center text-[16px] leading-6 tracking-[1.28px] !text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              href={`mailto:${FOOTER_EMAIL}`}
+            >
+              {FOOTER_EMAIL}
+            </a>
+
+            <div className="relative h-[33.95px] w-[33.123px]">
+              <Image
+                alt={`${content.name} portrait`}
+                className="absolute left-[1.52px] top-[3.37px] h-[29.685px] w-[29.685px] rotate-[0.36deg] rounded-[14.749px] object-cover"
+                height={600}
+                src="/images/footer-avatar.png"
+                width={600}
+              />
+              <Image
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute inset-0 h-full w-full"
+                height={35}
+                src="/images/footer-photo-frame.svg"
+                width={35}
+              />
+            </div>
+          </div>
+
+          <Link
+            className="font-aeonik text-center text-[12px] tracking-[0.6px] text-[#666666] transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+            href="#top"
+          >
+            back to the top
+          </Link>
+        </div>
+      </div>
     </footer>
   );
 }

@@ -29,7 +29,7 @@ function ProjectDivider() {
   return (
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
-      <div className="mx-8 inline-flex items-center gap-3">
+      <div className="inline-flex items-center gap-4 px-8 py-[10px]">
         <span className="h-[7px] w-[7px] rounded-full bg-[#0CFF31]" />
         <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#0CFF31]">
           TILD

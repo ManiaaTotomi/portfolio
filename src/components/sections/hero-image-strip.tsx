@@ -126,29 +126,37 @@ export function HeroImageStrip() {
 
   return (
     <>
-      <section aria-label="Featured project previews" className="w-full">
-        <div className="overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto flex min-w-max items-end gap-[48px] px-4 sm:px-8 lg:px-10">
-            {STRIP_ITEMS.map((item, index) => (
-              <button
-                className={cn(
-                  "group relative shrink-0 overflow-hidden transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b55cb5]",
-                  SIZE_CLASS[item.size],
-                )}
-                key={item.id}
-                onClick={() => setActiveIndex(index)}
-                type="button"
-              >
-                <Image
-                  alt={item.alt}
-                  className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-focus-visible:grayscale-0"
-                  fill
-                  sizes="(min-width: 1280px) 170px, (min-width: 640px) 148px, 132px"
-                  src={item.thumbSrc}
-                />
-              </button>
-            ))}
-          </div>
+      <section
+        aria-label="Featured project previews"
+        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden"
+      >
+        <div className="hero-strip-marquee flex w-max items-start">
+          {[0, 1].map((loop) => (
+            <div
+              className="flex shrink-0 items-start gap-[58px] pr-[58px] sm:gap-[64px] sm:pr-[64px] lg:gap-[72px] lg:pr-[72px]"
+              key={`loop-${loop}`}
+            >
+              {STRIP_ITEMS.map((item, index) => (
+                <button
+                  className={cn(
+                    "group relative shrink-0 overflow-hidden transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b55cb5]",
+                    SIZE_CLASS[item.size],
+                  )}
+                  key={`${item.id}-${loop}`}
+                  onClick={() => setActiveIndex(index)}
+                  type="button"
+                >
+                  <Image
+                    alt={item.alt}
+                    className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-focus-visible:grayscale-0"
+                    fill
+                    sizes="(min-width: 1280px) 170px, (min-width: 640px) 148px, 132px"
+                    src={item.thumbSrc}
+                  />
+                </button>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
 
