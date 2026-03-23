@@ -128,7 +128,7 @@ export const siteContent: SiteContent = {
   ],
   assistantPlaceholder:
     "Type a question about my design approach or experience…",
-  assistantButtonLabel: "Ask Me",
+  assistantButtonLabel: "Ask me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
   email: "hello@ilanlevy.dev",
