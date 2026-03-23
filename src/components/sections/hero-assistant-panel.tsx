@@ -299,7 +299,7 @@ export function HeroAssistantPanel({
                     {messages.map((message) =>
                       message.role === "user" ? (
                         <div className="flex w-full justify-end" key={message.id}>
-                          <div className="max-w-[68%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[18px] leading-[23px] text-white">
+                          <div className="max-w-[68%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[18px] leading-[28px] text-white">
                             {message.text}
                           </div>
                         </div>
@@ -308,9 +308,9 @@ export function HeroAssistantPanel({
                           className="flex w-full justify-start pr-[100px] sm:pr-[160px]"
                           key={message.id}
                         >
-                          <div className="w-full rounded-[12px] border border-[rgba(255,255,255,0.1)] bg-[#1A021A] px-4 py-3 text-[18px] leading-[23px] text-white">
+                          <p className="w-full px-1 py-1 text-[18px] leading-[28px] text-white/75">
                             {message.text}
-                          </div>
+                          </p>
                         </div>
                       ),
                     )}

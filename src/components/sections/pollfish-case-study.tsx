@@ -162,7 +162,7 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
 
           <a
             className="font-figtree inline-flex items-center gap-3 text-[16px] font-bold text-white transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-            href="#"
+            href="/pollfish/ai-builder"
           >
             View case study
             <ArrowRightIcon />
