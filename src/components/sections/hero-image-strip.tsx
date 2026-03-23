@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 type StripSize = "wide" | "portrait" | "phone" | "phoneLarge";
@@ -100,11 +100,130 @@ const SIZE_CLASS: Record<StripSize, string> = {
 
 export function HeroImageStrip() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const stripRef = useRef<HTMLElement | null>(null);
+  const pointerXRef = useRef<number | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const dockActiveRef = useRef(false);
+  const reducedMotionRef = useRef(false);
 
   const activeItem = useMemo(
     () => (activeIndex === null ? null : STRIP_ITEMS[activeIndex]),
     [activeIndex],
   );
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => {
+      reducedMotionRef.current = motionQuery.matches;
+    };
+
+    syncMotionPreference();
+    motionQuery.addEventListener("change", syncMotionPreference);
+
+    return () => {
+      motionQuery.removeEventListener("change", syncMotionPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    function resetDockStyles() {
+      const stripNode = stripRef.current;
+      if (!stripNode) {
+        return;
+      }
+
+      const dockItems = stripNode.querySelectorAll<HTMLElement>(
+        "[data-dock-item='true']",
+      );
+
+      dockItems.forEach((item) => {
+        item.style.setProperty("--dock-scale", "1");
+        item.style.setProperty("--dock-lift", "0px");
+        item.style.zIndex = "1";
+      });
+    }
+
+    function tick() {
+      const stripNode = stripRef.current;
+      const pointerX = pointerXRef.current;
+
+      if (
+        !dockActiveRef.current ||
+        !stripNode ||
+        pointerX === null ||
+        reducedMotionRef.current
+      ) {
+        resetDockStyles();
+        rafIdRef.current = null;
+        return;
+      }
+
+      const dockItems = stripNode.querySelectorAll<HTMLElement>(
+        "[data-dock-item='true']",
+      );
+      const influenceRadius = 210;
+      const maxScaleGain = 0.24;
+      const maxLift = 9;
+
+      dockItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const distance = Math.abs(pointerX - centerX);
+        const normalized = Math.max(0, 1 - distance / influenceRadius);
+        const eased = normalized * normalized * (3 - 2 * normalized);
+        const scale = 1 + eased * maxScaleGain;
+        const lift = -eased * maxLift;
+
+        item.style.setProperty("--dock-scale", scale.toFixed(3));
+        item.style.setProperty("--dock-lift", `${lift.toFixed(2)}px`);
+        item.style.zIndex = String(1 + Math.round(eased * 20));
+      });
+
+      rafIdRef.current = window.requestAnimationFrame(tick);
+    }
+
+    function startDock() {
+      if (rafIdRef.current !== null) {
+        return;
+      }
+
+      rafIdRef.current = window.requestAnimationFrame(tick);
+    }
+
+    function onPointerMove(event: PointerEvent) {
+      pointerXRef.current = event.clientX;
+      dockActiveRef.current = true;
+      startDock();
+    }
+
+    function onPointerLeave() {
+      dockActiveRef.current = false;
+      pointerXRef.current = null;
+      if (rafIdRef.current !== null) {
+        window.cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      resetDockStyles();
+    }
+
+    const stripNode = stripRef.current;
+    if (!stripNode) {
+      return;
+    }
+
+    stripNode.addEventListener("pointermove", onPointerMove);
+    stripNode.addEventListener("pointerleave", onPointerLeave);
+
+    return () => {
+      stripNode.removeEventListener("pointermove", onPointerMove);
+      stripNode.removeEventListener("pointerleave", onPointerLeave);
+      if (rafIdRef.current !== null) {
+        window.cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      resetDockStyles();
+    };
+  }, []);
 
   useEffect(() => {
     if (activeItem === null) {
@@ -128,7 +247,8 @@ export function HeroImageStrip() {
     <>
       <section
         aria-label="Featured project previews"
-        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden"
+        className="relative left-1/2 z-[12] w-screen -translate-x-1/2 overflow-visible"
+        ref={stripRef}
       >
         <div className="hero-strip-marquee flex w-max items-start">
           {[0, 1].map((loop) => (
@@ -139,9 +259,10 @@ export function HeroImageStrip() {
               {STRIP_ITEMS.map((item, index) => (
                 <button
                   className={cn(
-                    "group relative shrink-0 overflow-hidden transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b55cb5]",
+                    "hero-dock-item group relative shrink-0 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b55cb5]",
                     SIZE_CLASS[item.size],
                   )}
+                  data-dock-item="true"
                   key={`${item.id}-${loop}`}
                   onClick={() => setActiveIndex(index)}
                   type="button"
