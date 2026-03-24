@@ -50,6 +50,8 @@ export function AiBuilderInternalHeaderSection({
           />
         </div>
       </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.18]" />
     </header>
   );
 }
