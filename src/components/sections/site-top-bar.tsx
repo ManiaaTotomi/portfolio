@@ -17,7 +17,7 @@ interface PollfishMenuItem {
 
 const POLLFISH_MENU_ITEMS: PollfishMenuItem[] = [
   { label: "AI Builder", href: "/pollfish/ai-builder" },
-  { label: "Questionnaire Builder", href: "/#pollfish-questionnaire-builder" },
+  { label: "Questionnaire Builder", href: "/pollfish/questionnaire-builder" },
   { label: "AI Report", href: "/#pollfish-ai-report" },
 ];
 

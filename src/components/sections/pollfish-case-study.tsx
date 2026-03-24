@@ -81,11 +81,13 @@ function PollfishIntro() {
 
 function PollfishFeatureCard({
   entry,
+  href = "#",
   id,
   gradient,
   imageSrc,
 }: {
   entry: CaseStudyEntry;
+  href?: string;
   id: string;
   gradient: string;
   imageSrc: string;
@@ -112,13 +114,13 @@ function PollfishFeatureCard({
             ))}
           </div>
 
-          <a
+          <Link
             className="font-figtree mt-8 inline-flex items-center gap-3 text-[16px] font-bold text-[#222] transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#222]/35"
-            href="#"
+            href={href}
           >
-            View case study
+            {entry.ctaLabel ?? "View case study"}
             <ArrowRightIcon />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -256,6 +258,7 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
           <PollfishFeatureCard
             entry={questionnaireEntry}
             gradient="bg-[linear-gradient(128deg,#eff4f9_12%,#e7ebf4_49%,#e9d4f3_100%)]"
+            href="/pollfish/questionnaire-builder"
             id="pollfish-questionnaire-builder"
             imageSrc="/images/pollfish-questionnaire.png"
           />
