@@ -271,6 +271,7 @@ export function HeroImageStrip() {
                     alt={item.alt}
                     className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-focus-visible:grayscale-0"
                     fill
+                    quality={58}
                     sizes="(min-width: 1280px) 170px, (min-width: 640px) 148px, 132px"
                     src={item.thumbSrc}
                   />

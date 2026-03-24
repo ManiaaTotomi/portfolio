@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 interface RevealProps {
@@ -11,7 +11,6 @@ interface RevealProps {
 
 export function Reveal({ className, delayMs = 0, children }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -19,14 +18,23 @@ export function Reveal({ className, delayMs = 0, children }: RevealProps) {
       return;
     }
 
+    const rect = node.getBoundingClientRect();
+    const isNearViewport = rect.top <= window.innerHeight * 1.25;
+    if (isNearViewport) {
+      return;
+    }
+
+    node.classList.add("is-hidden");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          node.classList.remove("is-hidden");
+          node.classList.add("is-visible");
           observer.disconnect();
         }
       },
-      { threshold: 0.2, rootMargin: "0px 0px -12% 0px" },
+      { threshold: 0, rootMargin: "0px 0px 18% 0px" },
     );
 
     observer.observe(node);
@@ -35,7 +43,7 @@ export function Reveal({ className, delayMs = 0, children }: RevealProps) {
 
   return (
     <div
-      className={cn("reveal", visible && "is-visible", className)}
+      className={cn("reveal", className)}
       ref={ref}
       style={{ animationDelay: `${delayMs}ms` }}
     >

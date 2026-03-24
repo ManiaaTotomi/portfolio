@@ -137,12 +137,18 @@ body {
 }
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.is-hidden {
   opacity: 0;
   transform: translateY(18px);
 }
 
 .reveal.is-visible {
   animation: reveal-up 720ms var(--ease-emphasis) forwards;
+  will-change: opacity, transform;
 }
 
 .hero-strip-marquee {

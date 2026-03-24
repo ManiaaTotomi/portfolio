@@ -45,6 +45,87 @@ const EXECUTION_STEPS = [
   "Facilitated fast feedback loops to accelerate decision-making",
 ] as const;
 
+const VISUAL_EXPLORATION_SECTION_TITLE = "Visual Exploration";
+const VISUAL_EXPLORATION_TITLE = "Exploration";
+const VISUAL_EXPLORATION_PARAGRAPHS = [
+  "I led the end-to-end design direction for the AI Builder, from early problem framing through execution and refinement.",
+  "I translated workshop outcomes into clear design principles, guiding exploration across interaction models, visual identity, and system behavior. I drove rapid iteration cycles, presenting work regularly to stakeholders, incorporating feedback, and refining solutions as constraints became clearer.",
+] as const;
+
+const ALIGN_INTENT_TITLE = "Align intent with constraints";
+const ALIGN_INTENT_PARAGRAPHS = [
+  "Throughout the process, I worked closely with engineering and the data team to ensure feasibility, validate AI capabilities, and align design intent with response-time and technical constraints.",
+  "The interface itself went through multiple iterations. I explored different color palettes (green, magenta, dark, gradients), various layouts, and different ways to structure the welcome experience. Each iteration was presented to the broader team, product, engineering, and business stakeholders, gathering feedback that shaped the next round of designs.",
+  "The back-and-forth was constant, but it ensured we were building something that worked for users and aligned with business goals.",
+] as const;
+
+const VISUAL_IDENTITY_TITLE = "Visual identity & branding";
+const VISUAL_IDENTITY_PARAGRAPHS = [
+  "Through this process, the design evolved from a simple chat panel to a task-oriented system with the \"What do you want to do today?\" framework. Working with the support team's insights about common survey types, we shifted from general topic categories to specific use case cards.",
+  "I designed all the iconography and visual elements to create a cohesive AI brand within Pollfish. The purple/magenta color palette distinguishes AI features while complementing the main Pollfish blue. Each of the eight icons (for survey types and AI actions) follows the same visual language, simple, recognizable, and clearly connected to the AI brand.",
+  "I even designed a subtle animation for the gradient header bar, creating specs for the development team that showed how I wanted it to move smoothly rather than remain static. These details mattered, they make AI feel premium and intentional, not tacked on.",
+] as const;
+
+const POSITIONING_AI_TITLE = "Positioning AI as a tool, not a chatbot";
+const FIRST_DECISIONS_TITLE = "First desicions";
+const FIRST_DECISIONS_PARAGRAPHS = [
+  "My first decision was placement. A floating bottom-right button felt like a support chatbot and conflicted with our existing help chat. I needed AI to feel like a creation tool, not assistance.",
+  "I explored placing \"Ask AI\" next to \"Add question.\" It worked well in the empty state and remains available at the bottom of the survey - close to where users actively build.",
+  "However, as surveys grow longer, that placement alone isn't sufficient. To ensure consistent access, I also introduced a persistent entry point in the top-right corner alongside preview and versioning controls.",
+  "This multi-entry approach keeps AI contextual during creation, while also making it globally accessible - reinforcing that it's a core tool, not an afterthought.",
+] as const;
+const EXPLORING_CTA_CAPTION = "Exploring CTA placements";
+const ACTIVE_QUESTIONNAIRE_CAPTION = "Final placement in an active questionnaire";
+const EMPTY_QUESTIONNAIRE_CAPTION = "Final placement in an empty questionnaire";
+const MAKING_GUIDED_TITLE = "Making AI feel guided, not over-whelming";
+const MAKING_GUIDED_PARAGRAPHS = [
+  "Using the insights from our support team about common survey types, I designed specific starting points: \"Create a survey,\" \"Brand feedback,\" \"Product feedback,\" \"The right pricing,\" \"Conjoint analysis,\" and \"Max Diff analysis.\"",
+  "This gave users a clear place to begin while still allowing free-form requests through the text input below. The \"What do you want to do today?\" framing made AI feel helpful rather than intimidating.",
+] as const;
+const ADAPTING_TITLE = "Adapting to context";
+const ADAPTING_PARAGRAPH_PREFIX = "The AI interface changes ";
+const ADAPTING_PARAGRAPH_EMPHASIS =
+  "based on whether you're starting fresh or editing an existing survey";
+const ADAPTING_PARAGRAPH_SUFFIX =
+  '. In an empty state, it offers creation tasks. When a survey already exists, different options appear: "Translate survey," "Set tone," "Rephrase."';
+const ADAPTING_PARAGRAPH_SECONDARY =
+  "This contextual awareness makes AI feel like a true collaborator that understands where you are in the process.";
+
+const PROGRESSIVE_DISCLOSURE_TITLE = "Progressive disclosure";
+const PROGRESSIVE_DISCLOSURE_PARAGRAPHS = [
+  "I wanted to give users control without overwhelming them. When someone selects an option like \"Translate survey,\" a follow-up appears with language choices rather than showing everything at once.",
+  "This contextual awareness makes AI feel like a true collaborator that understands where you are in the process.",
+] as const;
+
+const QUESTION_ASSISTANCE_TITLE = "Question & answer level assistance";
+const QUESTION_ASSISTANCE_PARAGRAPHS = [
+  "Beyond the main AI Builder interface, I designed AI assistance at the micro level for every individual question and answer. Users can click an AI icon next to any question or answer to access options like \"Generate answers,\" \"Rephrase,\" \"Set tone,\" or \"Translate.\"",
+] as const;
+
+const IMPACT_TITLE = "Business & personal impact";
+const IMPACT_ROWS = [
+  {
+    title: "Results",
+    paragraphs: [
+      "The redesigned AI Builder has seen strong adoption, with the majority of Pollfish users now using it, especially first-time users who rely on AI to create their research from scratch. Support tickets related to question quality have decreased, and direct communication around survey structure has been significantly reduced.",
+      "More importantly, AI has become part of the natural workflow. Users don't just generate a survey and move on, they collaborate with AI throughout the process, from initial creation to final refinements.",
+    ],
+  },
+  {
+    title: "What I learnt",
+    paragraphs: [
+      "This project reinforced that designing AI features isn't about showcasing technical capability, it's about defining where AI adds real value. Even the most powerful tool is ineffective if users don't know where to start or how to use it.",
+      "Working under constraints, tight timelines, no formal user research, and multiple stakeholder needs, taught me to be resourceful. Collaborating closely with the support team to understand user patterns proved just as valuable as formal research, and in many cases allowed for faster iteration.",
+    ],
+  },
+  {
+    title: "What I would change",
+    paragraphs: [
+      "If I were to approach this again, I would push harder for early user testing, even through informal sessions. While internal feedback helped shape a strong product, direct input from users earlier in the process would have accelerated our learning.",
+    ],
+  },
+] as const;
+
 const PAIN_GLOW_DEFAULTS = {
   intensity: 1,
   spread: 1,
@@ -151,7 +232,7 @@ function ExecutionStepCell({
         aria-hidden="true"
         className="h-[30px] w-[30px]"
         height={30}
-        src="/images/AI-builder/icons/pain-point.svg"
+        src="/images/AI-builder/icons/execution-point.svg"
         width={30}
       />
       <p className="font-figtree text-[16px] leading-[1.75] text-[#f1f1f1]">{text}</p>
@@ -323,7 +404,7 @@ export function AiBuilderApproachSections() {
       <section className="relative bg-[#181818] pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div
-            className="relative overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border border-white/[0.05] bg-white/[0.02] px-6 py-12 shadow-[0_4px_84px_rgba(82,62,35,0.1)] sm:px-10 lg:px-[88px] lg:py-[88px]"
+            className="relative overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.05] bg-white/[0.02] px-6 py-12 shadow-[0_4px_84px_rgba(82,62,35,0.1)] sm:px-10 lg:px-[88px] lg:py-[88px]"
             ref={painCardRef}
           >
             <div
@@ -443,7 +524,7 @@ export function AiBuilderApproachSections() {
             )}
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.18]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.1]" />
       </section>
 
       <section className="bg-[#181818] pb-0 pt-[120px]">
@@ -506,17 +587,17 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[120px]">
+      <section className="relative bg-[#181818] pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[75px]">
           <div
-            className="relative overflow-hidden rounded-[20px] border border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
+            className="relative overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
             ref={executionCardRef}
           >
             <div
               className="pointer-events-none absolute -left-[320px] -top-[292px] h-[711px] w-[711px] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0,145,96,var(--execution-glow-a1,0.44)) 0%, rgba(0,145,96,var(--execution-glow-a2,0.2)) 38%, rgba(0,145,96,var(--execution-glow-a3,0.08)) 56%, rgba(0,145,96,0) 76%)",
+                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.2)) 38%, rgba(0,170,112,var(--execution-glow-a3,0.08)) 56%, rgba(0,170,112,0) 76%)",
                 filter: "blur(var(--execution-glow-blur,28px))",
                 transform:
                   "translate3d(var(--execution-glow-1-x,0px), var(--execution-glow-1-y,0px), 0) scale(var(--execution-glow-scale,1))",
@@ -526,7 +607,7 @@ export function AiBuilderApproachSections() {
               className="pointer-events-none absolute -bottom-[318px] -right-[338px] h-[711px] w-[711px] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0,145,96,var(--execution-glow-a1,0.44)) 0%, rgba(0,145,96,var(--execution-glow-a2,0.2)) 38%, rgba(0,145,96,var(--execution-glow-a3,0.08)) 56%, rgba(0,145,96,0) 76%)",
+                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.2)) 38%, rgba(0,170,112,var(--execution-glow-a3,0.08)) 56%, rgba(0,170,112,0) 76%)",
                 filter: "blur(var(--execution-glow-blur,28px))",
                 transform:
                   "translate3d(var(--execution-glow-2-x,0px), var(--execution-glow-2-y,0px), 0) scale(var(--execution-glow-scale,1))",
@@ -535,11 +616,11 @@ export function AiBuilderApproachSections() {
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(17,17,17,0.55)_62%,rgba(17,17,17,1)_100%)]" />
 
             <div className="relative z-10">
-              <div className="w-full max-w-[681px]">
-                <h3 className="font-figtree text-[40px] font-bold leading-[1.08] text-[#e7e7e7] sm:text-[52px]">
+              <div className="w-full max-w-[681px] space-y-6">
+                <h3 className="font-figtree text-[40px] font-bold leading-[1.12] text-[#e7e7e7]">
                   {EXECUTION_TITLE}
                 </h3>
-                <p className="mt-6 font-figtree text-[20px] leading-[30px] text-[#f1f1f1]">
+                <p className="font-figtree text-[20px] leading-[30px] text-[#f1f1f1]">
                   {EXECUTION_COPY}
                 </p>
               </div>
@@ -715,6 +796,324 @@ export function AiBuilderApproachSections() {
                 </label>
               </div>
             )}
+          </div>
+        </div>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.1]" />
+      </section>
+
+      <section className="bg-[#181818] pb-[120px] pt-[120px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
+          <div className="mx-auto w-full max-w-[986px]">
+            <h3 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[52px]">
+              {VISUAL_EXPLORATION_SECTION_TITLE}
+            </h3>
+            <div className="mt-14 grid gap-5 sm:mt-20 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
+                {VISUAL_EXPLORATION_TITLE}
+              </p>
+              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+                {VISUAL_EXPLORATION_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="mx-auto mt-20 w-full max-w-[842px] space-y-6">
+              <div className="overflow-hidden rounded-[13px] border border-white/[0.08]">
+                <Image
+                  alt="AI button visual exploration states"
+                  className="block h-auto w-full"
+                  height={222}
+                  quality={60}
+                  sizes="(min-width: 1024px) 842px, 100vw"
+                  src="/images/AI-builder/images/ai-buttons.png"
+                  width={1684}
+                />
+              </div>
+              <div className="overflow-hidden rounded-[13px] border border-white/[0.08]">
+                <Image
+                  alt="AI iconography visual exploration states"
+                  className="block h-auto w-full"
+                  height={222}
+                  quality={60}
+                  sizes="(min-width: 1024px) 842px, 100vw"
+                  src="/images/AI-builder/images/ai-logos.png"
+                  width={1684}
+                />
+              </div>
+            </div>
+
+            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
+                {ALIGN_INTENT_TITLE}
+              </p>
+              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+                {ALIGN_INTENT_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#181818] pb-[120px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[75px]">
+          <div className="mx-auto w-full max-w-[1449px] overflow-hidden rounded-[20px] border border-white/[0.08]">
+            <Image
+              alt="Evolution of AI Builder panel concepts"
+              className="block h-auto w-full"
+              height={1188}
+              quality={60}
+              sizes="(min-width: 1536px) 1449px, (min-width: 1024px) calc(100vw - 150px), 100vw"
+              src="/images/AI-builder/images/panel-exploring.png"
+              width={3014}
+            />
+          </div>
+
+          <div className="mx-auto mt-[120px] w-full max-w-[845px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[85px]">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
+                {VISUAL_IDENTITY_TITLE}
+              </p>
+              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+                {VISUAL_IDENTITY_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-[120px] w-full max-w-[866px]">
+            <div className="relative overflow-hidden rounded-[20px] border border-white/[0.09] bg-[#1b1b1d] px-6 py-8 sm:px-8 sm:py-12">
+              <div className="pointer-events-none absolute left-[6%] top-[20%] h-[280px] w-[280px] rounded-full bg-[#d830d0]/25 blur-[74px]" />
+              <div className="pointer-events-none absolute right-[12%] top-[8%] h-[240px] w-[240px] rounded-full bg-[#6938ff]/25 blur-[74px]" />
+              <div className="pointer-events-none absolute inset-x-[26%] top-0 h-[160px] rounded-full bg-[#be2eff]/20 blur-[64px]" />
+              <div className="relative mx-auto w-full max-w-[508px]">
+                <Image
+                  alt="Refined AI Builder interface with branded actions and capability cards"
+                  className="block h-auto w-full rounded-[10px]"
+                  height={1047}
+                  quality={60}
+                  sizes="(min-width: 1024px) 508px, 100vw"
+                  src="/images/AI-builder/images/builder-elements.png"
+                  width={1016}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#181818] pb-[120px] pt-[40px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
+          <div className="mx-auto w-full max-w-[982px]">
+            <h3 className="font-figtree text-[44px] font-semibold leading-[1.1] text-white sm:text-[52px]">
+              {POSITIONING_AI_TITLE}
+            </h3>
+
+            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
+                {FIRST_DECISIONS_TITLE}
+              </p>
+              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+                {FIRST_DECISIONS_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-20 w-full max-w-[1454px] rounded-[20px] border border-white/[0.08] bg-[#1a1a1a] p-4 sm:p-8 lg:p-10">
+            <p className="font-ibm text-[11px] font-medium uppercase tracking-[0.05em] text-[#959595] sm:text-[14px]">
+              {EXPLORING_CTA_CAPTION}
+            </p>
+            <div className="mt-5 overflow-hidden rounded-[16px] border border-white/[0.08]">
+              <Image
+                alt="Exploring different AI call-to-action placements in the questionnaire builder"
+                className="block h-auto w-full"
+                height={654}
+                quality={60}
+                sizes="(min-width: 1536px) 1272px, (min-width: 1024px) calc(100vw - 168px), 100vw"
+                src="/images/AI-builder/images/cta-placements.png"
+                width={2593}
+              />
+            </div>
+
+            <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
+              <div>
+                <p className="font-ibm text-[11px] font-medium uppercase tracking-[0.05em] text-[#959595] sm:text-[14px]">
+                  {ACTIVE_QUESTIONNAIRE_CAPTION}
+                </p>
+                <div className="mt-4 overflow-hidden rounded-[16px] border border-white/[0.08]">
+                  <Image
+                    alt="AI placement in an active questionnaire with existing questions"
+                    className="block h-auto w-full"
+                    height={957}
+                    quality={60}
+                    sizes="(min-width: 1280px) 600px, 100vw"
+                    src="/images/AI-builder/images/final-plc-1.png"
+                    width={1252}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p className="font-ibm text-[11px] font-medium uppercase tracking-[0.05em] text-[#959595] sm:text-[14px]">
+                  {EMPTY_QUESTIONNAIRE_CAPTION}
+                </p>
+                <div className="mt-4 overflow-hidden rounded-[16px] border border-white/[0.08]">
+                  <Image
+                    alt="AI placement in an empty questionnaire state"
+                    className="block h-auto w-full"
+                    height={1110}
+                    quality={60}
+                    sizes="(min-width: 1280px) 600px, 100vw"
+                    src="/images/AI-builder/images/final-plc-2.png"
+                    width={1406}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#181818] pb-[80px] pt-[80px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
+          <div className="mx-auto w-full max-w-[986px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-[#dcdcdc]">
+                {MAKING_GUIDED_TITLE}
+              </p>
+              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#dcdcdc]">
+                {MAKING_GUIDED_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[8px] border border-white/[0.08]">
+            <Image
+              alt="AI Builder panel with guided survey creation options"
+              className="block h-auto w-full"
+              height={1573}
+              quality={60}
+              sizes="(min-width: 1536px) 1298px, (min-width: 1024px) calc(100vw - 168px), 100vw"
+              src="/images/AI-builder/images/Questionnaire-ai.png"
+              width={2519}
+            />
+          </div>
+
+          <div className="mx-auto mt-20 w-full max-w-[986px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+                {ADAPTING_TITLE}
+              </p>
+              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-white">
+                <p>
+                  <span>{ADAPTING_PARAGRAPH_PREFIX}</span>
+                  <span className="font-bold">{ADAPTING_PARAGRAPH_EMPHASIS}</span>
+                  <span>{ADAPTING_PARAGRAPH_SUFFIX}</span>
+                </p>
+                <p>{ADAPTING_PARAGRAPH_SECONDARY}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[8px] border border-white/[0.08]">
+            <Image
+              alt="AI Builder adapting options to an existing questionnaire context"
+              className="block h-auto w-full"
+              height={2079}
+              quality={60}
+              sizes="(min-width: 1536px) 1298px, (min-width: 1024px) calc(100vw - 168px), 100vw"
+              src="/images/AI-builder/images/questions.png"
+              width={3200}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#181818] pb-[120px] pt-[80px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
+          <div className="mx-auto w-full max-w-[986px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+                {PROGRESSIVE_DISCLOSURE_TITLE}
+              </p>
+              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+                {PROGRESSIVE_DISCLOSURE_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[14px] border border-white/[0.06] bg-[#222222] p-5 sm:p-8">
+            <Image
+              alt="Progressive disclosure states for AI actions"
+              className="block h-auto w-full"
+              height={384}
+              quality={60}
+              sizes="(min-width: 1280px) 1002px, 100vw"
+              src="/images/AI-builder/images/quick-actions.png"
+              width={2004}
+            />
+          </div>
+
+          <div className="mx-auto mt-[120px] w-full max-w-[986px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+                {QUESTION_ASSISTANCE_TITLE}
+              </p>
+              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+                {QUESTION_ASSISTANCE_PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[20px] border border-white/[0.06] bg-[#222222] p-5 sm:p-10">
+            <Image
+              alt="Question and answer level AI assistance options"
+              className="mx-auto block h-auto w-full max-w-[702px]"
+              height={1299}
+              quality={60}
+              sizes="(min-width: 1280px) 702px, 100vw"
+              src="/images/AI-builder/images/quick-actions-q.png"
+              width={2212}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#181818] pb-[160px] pt-[120px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
+          <div className="relative left-1/2 mb-[120px] w-screen -translate-x-1/2">
+            <div className="h-px w-full bg-white/[0.1]" />
+          </div>
+          <div className="mx-auto w-full max-w-[986px]">
+            <h3 className="font-aeonik text-[40px] font-bold leading-[1.2] text-white sm:text-[50px] sm:leading-[1]">
+              {IMPACT_TITLE}
+            </h3>
+
+            <div className="mt-20 space-y-10">
+              {IMPACT_ROWS.map((row) => (
+                <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]" key={row.title}>
+                  <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+                    {row.title}
+                  </p>
+                  <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+                    {row.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

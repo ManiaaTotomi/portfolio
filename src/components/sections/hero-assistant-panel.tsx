@@ -121,14 +121,21 @@ export function HeroAssistantPanel({
   assistantDisclaimer,
 }: HeroAssistantPanelProps) {
   const placeholderText = "Ask your question about my work or experience...";
+  const topInputId = useId();
+  const overlayInputId = useId();
   const [inputValue, setInputValue] = useState("");
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [overlayGlow, setOverlayGlow] = useState<OverlayGlowConfig>(
     DEFAULT_OVERLAY_GLOW,
   );
+  const topInputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
+
+  useEffect(() => {
+    topInputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     if (!isOverlayOpen) {
@@ -223,18 +230,23 @@ export function HeroAssistantPanel({
             onSubmit={handleSubmit}
           >
             {!inputValue && (
-              <p className="font-figtree pointer-events-none absolute left-[22px] top-1/2 -translate-y-1/2 text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:text-[18px]">
+              <label
+                className="font-figtree absolute left-[22px] top-1/2 -translate-y-1/2 cursor-text text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:text-[18px]"
+                htmlFor={topInputId}
+              >
                 <span aria-hidden className="hero-input-caret">
                   |
                 </span>
                 {placeholderText}
-              </p>
+              </label>
             )}
             <input
               aria-label="Ask a question"
               className={`font-figtree h-full w-full rounded-[9999px] bg-transparent pl-[22px] pr-[170px] text-[14px] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:pl-[35px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
+              id={topInputId}
               onChange={(event) => setInputValue(event.currentTarget.value)}
               placeholder=""
+              ref={topInputRef}
               type="text"
               value={inputValue}
             />
@@ -249,7 +261,7 @@ export function HeroAssistantPanel({
 
       {isOverlayOpen && (
         <div className="fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)]">
-          <div className="absolute inset-[32px] overflow-hidden rounded-[28px] border border-white/10 bg-[#040404] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+          <div className="absolute inset-y-[32px] inset-x-8 overflow-hidden rounded-[28px] border border-white/10 bg-[#330C33] shadow-[0_30px_80px_rgba(0,0,0,0.45)] lg:inset-x-[88px]">
             <div className="pointer-events-none absolute inset-0">
               <div
                 className="absolute left-1/2 top-1/2 h-[793px] w-[838px] -translate-x-1/2 -translate-y-1/2"
@@ -269,13 +281,13 @@ export function HeroAssistantPanel({
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `radial-gradient(circle at 50% ${overlayGlow.glowY}%, rgba(255,14,255,${overlayGlow.glowOpacity}) 0%, rgba(255,14,255,${(overlayGlow.glowOpacity * 0.68).toFixed(3)}) 30%, rgba(4,4,4,0) 65%)`,
+                  background: `radial-gradient(circle at 50% ${overlayGlow.glowY}%, rgba(255,14,255,${overlayGlow.glowOpacity}) 0%, rgba(255,14,255,${(overlayGlow.glowOpacity * 0.68).toFixed(3)}) 30%, rgba(51,12,51,0) 65%)`,
                 }}
               />
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `linear-gradient(180deg, rgba(4,4,4,${overlayGlow.darkTop}) 0%, rgba(4,4,4,${overlayGlow.darkBottom}) 100%)`,
+                  background: `linear-gradient(180deg, rgba(51,12,51,${overlayGlow.darkTop}) 0%, rgba(51,12,51,${overlayGlow.darkBottom}) 100%)`,
                 }}
               />
             </div>
@@ -324,17 +336,21 @@ export function HeroAssistantPanel({
                   onSubmit={handleSubmit}
                 >
                   {!inputValue && (
-                    <p className="font-figtree pointer-events-none absolute left-[25px] top-1/2 -translate-y-1/2 text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:text-[18px]">
+                    <label
+                      className="font-figtree absolute left-[25px] top-1/2 -translate-y-1/2 cursor-text text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:text-[18px]"
+                      htmlFor={overlayInputId}
+                    >
                       <span aria-hidden className="hero-input-caret">
                         |
                       </span>
                       {placeholderText}
-                    </p>
+                    </label>
                   )}
                   <input
                     aria-label="Ask another question"
                     autoFocus
                     className={`font-figtree h-full w-full rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[14px] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                    id={overlayInputId}
                     onChange={(event) => setInputValue(event.currentTarget.value)}
                     placeholder=""
                     type="text"

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import type { CaseStudy, CaseStudyEntry } from "@/content/site";
 
@@ -140,8 +141,8 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
   return (
     <article className="relative min-h-[760px] py-8 lg:py-[86px]" id="pollfish-ai-builder">
       <div className="pointer-events-none absolute -inset-x-[14%] -inset-y-[34%] bg-[radial-gradient(42%_48%_at_46%_52%,rgba(215,39,189,0.66)_0%,rgba(215,39,189,0.26)_34%,rgba(215,39,189,0)_78%)]" />
-      <div className="pointer-events-none absolute -left-[260px] bottom-[-330px] h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(58,36,146,0.72)_0%,rgba(58,36,146,0.28)_44%,rgba(58,36,146,0)_78%)] blur-[110px]" />
-      <div className="pointer-events-none absolute right-[-220px] top-[-220px] h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(173,30,175,0.58)_0%,rgba(173,30,175,0.22)_46%,rgba(173,30,175,0)_80%)] blur-[115px]" />
+      <div className="pointer-events-none absolute -left-[260px] bottom-[-330px] h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(58,36,146,0.72)_0%,rgba(58,36,146,0.28)_44%,rgba(58,36,146,0)_78%)] blur-[72px]" />
+      <div className="pointer-events-none absolute right-[-220px] top-[-220px] h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(173,30,175,0.58)_0%,rgba(173,30,175,0.22)_46%,rgba(173,30,175,0)_80%)] blur-[76px]" />
 
       <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[430px_1fr] lg:gap-[80px] lg:px-[96px]">
         <div className="self-center space-y-8 lg:w-[355px]">
@@ -160,13 +161,13 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
             ))}
           </div>
 
-          <a
+          <Link
             className="font-figtree inline-flex items-center gap-3 text-[16px] font-bold text-white transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             href="/pollfish/ai-builder"
           >
             View case study
             <ArrowRightIcon />
-          </a>
+          </Link>
         </div>
 
         <div className="relative min-h-[420px] lg:min-h-[730px]">
@@ -197,6 +198,7 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
               alt="AI Builder chat interface"
               className="h-auto w-full object-cover"
               height={1648}
+              quality={60}
               sizes="(min-width: 1024px) 404px, 52vw"
               src="/images/AI-builder/mobile-screen/AI-chat.png"
               width={908}
@@ -240,7 +242,7 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
           opacity: "var(--hero-splash-opacity, 0.3)",
         }}
       >
-        <div className="h-full w-full rounded-full bg-[radial-gradient(circle,rgba(255,14,255,0.38)_0%,rgba(255,14,255,0.2)_34%,rgba(255,14,255,0.08)_62%,rgba(255,14,255,0)_84%)] blur-[76px]" />
+        <div className="h-full w-full rounded-full bg-[radial-gradient(circle,rgba(255,14,255,0.38)_0%,rgba(255,14,255,0.2)_34%,rgba(255,14,255,0.08)_62%,rgba(255,14,255,0)_84%)] blur-[56px]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
