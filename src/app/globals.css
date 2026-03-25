@@ -261,6 +261,63 @@ textarea {
   }
 }
 
+@keyframes questionnaire-click-wave {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.45);
+  }
+  20% {
+    opacity: 0.84;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  65% {
+    opacity: 0.38;
+    transform: translate(-50%, -50%) scale(1.45);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.3);
+  }
+}
+
+@keyframes questionnaire-click-wave-echo {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  28% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.86);
+  }
+  70% {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.05);
+  }
+}
+
+@keyframes questionnaire-click-core {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  65% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.75);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

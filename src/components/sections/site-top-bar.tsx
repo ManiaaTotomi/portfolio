@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 interface SiteTopBarProps {
   content: Pick<SiteContent, "name" | "cvUrl" | "email" | "nav">;
   anchorBasePath?: string;
+  mode?: "home" | "case-study";
   className?: string;
 }
 
@@ -19,6 +20,11 @@ const POLLFISH_MENU_ITEMS: PollfishMenuItem[] = [
   { label: "Questionnaire Builder", href: "/pollfish/questionnaire-builder" },
   { label: "AI Builder", href: "/pollfish/ai-builder" },
 ];
+
+const INTERNAL_CASE_STUDY_NAV_ITEMS: PollfishMenuItem[] = [
+  { label: "Questionnaire Builder", href: "/pollfish/questionnaire-builder" },
+  { label: "AI Builder", href: "/pollfish/ai-builder" },
+] as const;
 
 function ChevronDownIcon() {
   return (
@@ -86,6 +92,7 @@ function resolveNavHref(href: string, anchorBasePath: string) {
 export function SiteTopBar({
   content,
   anchorBasePath = "",
+  mode = "home",
   className,
 }: SiteTopBarProps) {
   const [isPollfishMenuOpen, setIsPollfishMenuOpen] = useState(false);
@@ -142,78 +149,90 @@ export function SiteTopBar({
       </a>
 
       <nav
-        aria-label="Featured projects"
+        aria-label={mode === "case-study" ? "Case study pages" : "Featured projects"}
         className="hidden items-center gap-[clamp(34px,7vw,140px)] min-[900px]:flex"
       >
-        {content.nav.map((item) => {
-          if (item.label !== "Pollfish") {
-            return (
-              <a
-                className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                href={resolveNavHref(item.href, anchorBasePath)}
-                key={`${item.label}-${item.href}`}
-              >
-                {item.label}
-              </a>
-            );
-          }
-
-          return (
-            <div
-              className="relative flex items-center gap-2"
+        {mode === "case-study" &&
+          INTERNAL_CASE_STUDY_NAV_ITEMS.map((item) => (
+            <a
+              className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              href={item.href}
               key={`${item.label}-${item.href}`}
-              ref={pollfishMenuRef}
             >
-              <a
-                className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                href={resolveNavHref(item.href, anchorBasePath)}
-              >
-                {item.label}
-              </a>
+              {item.label}
+            </a>
+          ))}
 
-              <button
-                aria-controls={`pollfish-menu-${pollfishMenuId}`}
-                aria-expanded={isPollfishMenuOpen}
-                aria-label="Toggle Pollfish menu"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-full text-white/92 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                onClick={() => setIsPollfishMenuOpen((prev) => !prev)}
-                type="button"
-              >
-                <span
-                  className={cn(
-                    "transition-transform duration-200",
-                    isPollfishMenuOpen && "rotate-180",
-                  )}
+        {mode === "home" &&
+          content.nav.map((item) => {
+            if (item.label !== "Pollfish") {
+              return (
+                <a
+                  className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                  href={resolveNavHref(item.href, anchorBasePath)}
+                  key={`${item.label}-${item.href}`}
                 >
-                  <ChevronDownIcon />
-                </span>
-              </button>
+                  {item.label}
+                </a>
+              );
+            }
 
+            return (
               <div
-                className={cn(
-                  "absolute left-0 top-full z-[80] mt-3 w-[230px] rounded-[14px] border border-white/10 bg-[#111111]/72 p-2 shadow-[0_14px_45px_rgba(0,0,0,0.45)] backdrop-blur-[9px] transition duration-200",
-                  isPollfishMenuOpen
-                    ? "pointer-events-auto translate-y-0 opacity-100"
-                    : "pointer-events-none -translate-y-1 opacity-0",
-                )}
-                id={`pollfish-menu-${pollfishMenuId}`}
-                role="menu"
+                className="relative flex items-center gap-2"
+                key={`${item.label}-${item.href}`}
+                ref={pollfishMenuRef}
               >
-                {POLLFISH_MENU_ITEMS.map((menuItem) => (
-                  <a
-                    className="font-figtree block rounded-[10px] px-3 py-2.5 text-[16px] text-white/82 transition-colors hover:bg-[rgba(155,38,146,0.28)] hover:text-[#f8e6f7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-                    href={menuItem.href}
-                    key={menuItem.label}
-                    onClick={() => setIsPollfishMenuOpen(false)}
-                    role="menuitem"
+                <a
+                  className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                  href={resolveNavHref(item.href, anchorBasePath)}
+                >
+                  {item.label}
+                </a>
+
+                <button
+                  aria-controls={`pollfish-menu-${pollfishMenuId}`}
+                  aria-expanded={isPollfishMenuOpen}
+                  aria-label="Toggle Pollfish menu"
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-full text-white/92 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                  onClick={() => setIsPollfishMenuOpen((prev) => !prev)}
+                  type="button"
+                >
+                  <span
+                    className={cn(
+                      "transition-transform duration-200",
+                      isPollfishMenuOpen && "rotate-180",
+                    )}
                   >
-                    {menuItem.label}
-                  </a>
-                ))}
+                    <ChevronDownIcon />
+                  </span>
+                </button>
+
+                <div
+                  className={cn(
+                    "absolute left-0 top-full z-[80] mt-3 w-[230px] rounded-[14px] border border-white/10 bg-[#111111]/72 p-2 shadow-[0_14px_45px_rgba(0,0,0,0.45)] backdrop-blur-[9px] transition duration-200",
+                    isPollfishMenuOpen
+                      ? "pointer-events-auto translate-y-0 opacity-100"
+                      : "pointer-events-none -translate-y-1 opacity-0",
+                  )}
+                  id={`pollfish-menu-${pollfishMenuId}`}
+                  role="menu"
+                >
+                  {POLLFISH_MENU_ITEMS.map((menuItem) => (
+                    <a
+                      className="font-figtree block rounded-[10px] px-3 py-2.5 text-[16px] text-white/82 transition-colors hover:bg-[rgba(155,38,146,0.28)] hover:text-[#f8e6f7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                      href={menuItem.href}
+                      key={menuItem.label}
+                      onClick={() => setIsPollfishMenuOpen(false)}
+                      role="menuitem"
+                    >
+                      {menuItem.label}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </nav>
 
       <div className="flex h-[14px] items-center justify-end gap-[clamp(18px,2.2vw,32px)]">

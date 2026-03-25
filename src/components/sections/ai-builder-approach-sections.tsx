@@ -226,7 +226,7 @@ function ExecutionStepCell({
   text: string;
 }) {
   return (
-    <div className={`flex min-h-[194px] flex-col gap-4 p-8 ${className ?? ""}`}>
+    <div className={`flex min-h-[194px] flex-col gap-4 bg-[#0e1113] p-8 ${className ?? ""}`}>
       <Image
         alt=""
         aria-hidden="true"
@@ -337,15 +337,6 @@ export function AiBuilderApproachSections() {
     });
   }
 
-  function getExecutionStepBorders(index: number) {
-    const isLast = index === EXECUTION_STEPS.length - 1;
-    const mobileBorder = isLast ? "" : "border-b border-white/[0.07]";
-    const desktopBottom = index < 3 ? "lg:border-b lg:border-white/[0.07]" : "lg:border-b-0";
-    const desktopRight = index % 3 !== 2 ? "lg:border-r lg:border-white/[0.07]" : "lg:border-r-0";
-
-    return `${mobileBorder} ${desktopBottom} ${desktopRight}`;
-  }
-
   useEffect(() => {
     applyGlowVars(painGlow);
     saveStoredState(PAIN_GLOW_STORAGE_KEY, painGlow);
@@ -364,8 +355,8 @@ export function AiBuilderApproachSections() {
     <>
       <section className="bg-[#181818]">
         <div className="mx-auto w-full max-w-[1600px] px-5 pb-[132px] pt-[132px] sm:px-8 lg:px-[84px]">
-          <div className="mx-auto grid w-full max-w-[1100px] gap-14 lg:grid-cols-[400px_1fr] lg:gap-[112px]">
-            <div className="w-full max-w-[400px] space-y-8 pt-12 text-left sm:pt-16 lg:pt-[148px]">
+          <div className="mx-auto grid w-full max-w-[1100px] gap-14 lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-10 xl:grid-cols-[400px_1fr] xl:gap-[112px]">
+            <div className="w-full max-w-[400px] space-y-8 pt-12 text-left sm:pt-16 lg:pt-20 xl:pt-[148px]">
               <h2 className="w-full font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
                 {FIRST_APPROACH_TITLE}
               </h2>
@@ -415,7 +406,7 @@ export function AiBuilderApproachSections() {
               }}
             />
 
-            <div className="mx-auto grid w-full max-w-[1100px] gap-10 lg:grid-cols-[400px_1fr] lg:items-center lg:gap-[112px]">
+            <div className="mx-auto grid w-full max-w-[1100px] gap-10 lg:grid-cols-[minmax(280px,360px)_1fr] lg:items-center lg:gap-10 xl:grid-cols-[400px_1fr] xl:gap-[112px]">
               <div className="w-full max-w-[400px] space-y-6 text-left">
                 <h3 className="w-full font-aeonik text-[48px] font-semibold leading-[55px] text-white">
                   {PAIN_POINTS_TITLE}
@@ -524,18 +515,17 @@ export function AiBuilderApproachSections() {
             )}
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.1]" />
       </section>
 
       <section className="bg-[#181818] pb-0 pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
-          <div className="mx-auto w-full max-w-[986px] text-white">
+          <div className="mx-auto w-full max-w-[1100px] text-white">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
               {NEW_APPROACH_TITLE}
             </h3>
 
             <div className="mt-14 flex flex-col gap-14 sm:mt-20 sm:gap-[56px]">
-              <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+              <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-10 lg:gap-[125px]">
                 <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                   {NEW_APPROACH_OPPORTUNITY_TITLE}
                 </p>
@@ -544,7 +534,7 @@ export function AiBuilderApproachSections() {
                 </p>
               </div>
 
-              <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+              <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-10 lg:gap-[125px]">
                 <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                   {NEW_APPROACH_ROLE_TITLE}
                 </p>
@@ -590,27 +580,27 @@ export function AiBuilderApproachSections() {
       <section className="relative bg-[#181818] pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[75px]">
           <div
-            className="relative overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
+            className="relative isolate overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
             ref={executionCardRef}
           >
             <div
               className="pointer-events-none absolute -left-[320px] -top-[292px] h-[711px] w-[711px] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.2)) 38%, rgba(0,170,112,var(--execution-glow-a3,0.08)) 56%, rgba(0,170,112,0) 76%)",
-                filter: "blur(var(--execution-glow-blur,28px))",
+                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.24)) 28%, rgba(0,170,112,var(--execution-glow-a3,0.12)) 48%, rgba(0,170,112,0.04) 64%, rgba(0,170,112,0) 82%)",
                 transform:
-                  "translate3d(var(--execution-glow-1-x,0px), var(--execution-glow-1-y,0px), 0) scale(var(--execution-glow-scale,1))",
+                  "translate(var(--execution-glow-1-x,0px), var(--execution-glow-1-y,0px)) scale(var(--execution-glow-scale,1))",
+                opacity: 0.96,
               }}
             />
             <div
               className="pointer-events-none absolute -bottom-[318px] -right-[338px] h-[711px] w-[711px] rounded-full"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.2)) 38%, rgba(0,170,112,var(--execution-glow-a3,0.08)) 56%, rgba(0,170,112,0) 76%)",
-                filter: "blur(var(--execution-glow-blur,28px))",
+                  "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.24)) 28%, rgba(0,170,112,var(--execution-glow-a3,0.12)) 48%, rgba(0,170,112,0.04) 64%, rgba(0,170,112,0) 82%)",
                 transform:
-                  "translate3d(var(--execution-glow-2-x,0px), var(--execution-glow-2-y,0px), 0) scale(var(--execution-glow-scale,1))",
+                  "translate(var(--execution-glow-2-x,0px), var(--execution-glow-2-y,0px)) scale(var(--execution-glow-scale,1))",
+                opacity: 0.96,
               }}
             />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(17,17,17,0.55)_62%,rgba(17,17,17,1)_100%)]" />
@@ -625,11 +615,10 @@ export function AiBuilderApproachSections() {
                 </p>
               </div>
 
-              <div className="mt-10 w-full overflow-hidden rounded-[20px] border border-white/[0.07]">
-                <div className="grid grid-cols-1 lg:grid-cols-3">
-                  {EXECUTION_STEPS.map((step, index) => (
+              <div className="mt-10 w-full overflow-hidden rounded-[20px] border border-white/[0.07] bg-[#0e1113]/40">
+                <div className="grid grid-cols-1 lg:mx-auto lg:w-[min(100%,981px)] lg:grid-cols-3">
+                  {EXECUTION_STEPS.map((step) => (
                     <ExecutionStepCell
-                      className={getExecutionStepBorders(index)}
                       key={step}
                       text={step}
                     />
@@ -798,16 +787,15 @@ export function AiBuilderApproachSections() {
             )}
           </div>
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/[0.1]" />
       </section>
 
       <section className="bg-[#181818] pb-[120px] pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
-          <div className="mx-auto w-full max-w-[986px]">
+          <div className="mx-auto w-full max-w-[1100px]">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
               {VISUAL_EXPLORATION_SECTION_TITLE}
             </h3>
-            <div className="mt-14 grid gap-5 sm:mt-20 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+            <div className="mt-14 grid gap-5 sm:mt-20 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {VISUAL_EXPLORATION_TITLE}
               </p>
@@ -843,7 +831,7 @@ export function AiBuilderApproachSections() {
               </div>
             </div>
 
-            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {ALIGN_INTENT_TITLE}
               </p>
@@ -871,8 +859,8 @@ export function AiBuilderApproachSections() {
             />
           </div>
 
-          <div className="mx-auto mt-[120px] w-full max-w-[845px]">
-            <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[85px]">
+          <div className="mx-auto mt-[120px] w-full max-w-[1100px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-8 lg:gap-[85px]">
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {VISUAL_IDENTITY_TITLE}
               </p>
@@ -907,12 +895,12 @@ export function AiBuilderApproachSections() {
 
       <section className="bg-[#181818] pb-[120px] pt-[40px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
-          <div className="mx-auto w-full max-w-[982px]">
+          <div className="mx-auto w-full max-w-[1100px]">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
               {POSITIONING_AI_TITLE}
             </h3>
 
-            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
+            <div className="mt-20 grid gap-5 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {FIRST_DECISIONS_TITLE}
               </p>
@@ -981,8 +969,8 @@ export function AiBuilderApproachSections() {
 
       <section className="bg-[#181818] pb-[80px] pt-[80px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
-          <div className="mx-auto w-full max-w-[986px]">
-            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+          <div className="mx-auto w-full max-w-[1100px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-[#dcdcdc]">
                 {MAKING_GUIDED_TITLE}
               </p>
@@ -1006,8 +994,8 @@ export function AiBuilderApproachSections() {
             />
           </div>
 
-          <div className="mx-auto mt-20 w-full max-w-[986px]">
-            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+          <div className="mx-auto mt-20 w-full max-w-[1100px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {ADAPTING_TITLE}
               </p>
@@ -1038,8 +1026,8 @@ export function AiBuilderApproachSections() {
 
       <section className="bg-[#181818] pb-[120px] pt-[80px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
-          <div className="mx-auto w-full max-w-[986px]">
-            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+          <div className="mx-auto w-full max-w-[1100px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {PROGRESSIVE_DISCLOSURE_TITLE}
               </p>
@@ -1063,8 +1051,8 @@ export function AiBuilderApproachSections() {
             />
           </div>
 
-          <div className="mx-auto mt-[120px] w-full max-w-[986px]">
-            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]">
+          <div className="mx-auto mt-[120px] w-full max-w-[1100px]">
+            <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {QUESTION_ASSISTANCE_TITLE}
               </p>
@@ -1092,17 +1080,17 @@ export function AiBuilderApproachSections() {
 
       <section className="bg-[#181818] pb-[160px] pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
-          <div className="relative left-1/2 mb-[120px] w-screen -translate-x-1/2">
+          <div className="relative left-1/2 mb-[120px] w-dvw -translate-x-1/2">
             <div className="h-px w-full bg-white/[0.1]" />
           </div>
-          <div className="mx-auto w-full max-w-[986px]">
+          <div className="mx-auto w-full max-w-[1100px]">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
               {IMPACT_TITLE}
             </h3>
 
             <div className="mt-20 space-y-10">
               {IMPACT_ROWS.map((row) => (
-                <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-[125px]" key={row.title}>
+                <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]" key={row.title}>
                   <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                     {row.title}
                   </p>
