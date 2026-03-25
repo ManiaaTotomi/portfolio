@@ -90,7 +90,12 @@ function ProjectDivider() {
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
       <div className="inline-flex items-center gap-4 px-8 py-[10px]">
-        <span className="h-[7px] w-[7px] rounded-full bg-[#31f7ff]" />
+        <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-[#31f7ff]">
+          <span
+            aria-hidden="true"
+            className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(49,247,255,0.42)_0%,rgba(49,247,255,0)_72%)]"
+          />
+        </span>
         <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
       </div>
       <div className="h-px flex-1 bg-white/10" />
@@ -102,10 +107,10 @@ function CtrlEatIntro() {
   return (
     <div className="mx-auto flex w-full max-w-[848px] flex-col items-center gap-8 text-center">
       <div className="space-y-6">
-        <p className="font-aeonik text-[34px] font-semibold leading-[1.12] text-[rgba(194,194,194,0.4)] sm:text-[42px] sm:leading-[45px]">
+        <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {CTRLEAT_INTRO_TITLE}
         </p>
-        <p className="font-aeonik text-[18px] leading-[1.6] text-[#b5b5b5] sm:text-[20px] sm:leading-[35px]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d6]">
           {CTRLEAT_INTRO_DESCRIPTION}
         </p>
       </div>
@@ -117,7 +122,12 @@ function CtrlEatIntro() {
               {item}
             </p>
             {index < CTRLEAT_INTRO_DETAILS.length - 1 && (
-              <span className="h-[2px] w-[2px] rounded-full bg-[#737373]" />
+              <span className="relative inline-flex h-[2px] w-[2px] rounded-full bg-[#737373]">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(115,115,115,0.45)_0%,rgba(115,115,115,0)_72%)]"
+                />
+              </span>
             )}
           </div>
         ))}

@@ -16,9 +16,8 @@ interface PollfishMenuItem {
 }
 
 const POLLFISH_MENU_ITEMS: PollfishMenuItem[] = [
-  { label: "AI Builder", href: "/pollfish/ai-builder" },
   { label: "Questionnaire Builder", href: "/pollfish/questionnaire-builder" },
-  { label: "AI Report", href: "/#pollfish-ai-report" },
+  { label: "AI Builder", href: "/pollfish/ai-builder" },
 ];
 
 function ChevronDownIcon() {
@@ -150,7 +149,7 @@ export function SiteTopBar({
           if (item.label !== "Pollfish") {
             return (
               <a
-                className="font-figtree inline-flex items-center gap-[10px] text-[16px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                 href={resolveNavHref(item.href, anchorBasePath)}
                 key={`${item.label}-${item.href}`}
               >
@@ -166,7 +165,7 @@ export function SiteTopBar({
               ref={pollfishMenuRef}
             >
               <a
-                className="font-figtree inline-flex items-center gap-[10px] text-[16px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                 href={resolveNavHref(item.href, anchorBasePath)}
               >
                 {item.label}
@@ -192,7 +191,7 @@ export function SiteTopBar({
 
               <div
                 className={cn(
-                  "absolute left-0 top-full z-[80] mt-3 w-[230px] rounded-[14px] border border-white/15 bg-[#111111]/95 p-2 shadow-[0_14px_45px_rgba(0,0,0,0.45)] backdrop-blur-[9px] transition duration-200",
+                  "absolute left-0 top-full z-[80] mt-3 w-[230px] rounded-[14px] border border-white/10 bg-[#111111]/72 p-2 shadow-[0_14px_45px_rgba(0,0,0,0.45)] backdrop-blur-[9px] transition duration-200",
                   isPollfishMenuOpen
                     ? "pointer-events-auto translate-y-0 opacity-100"
                     : "pointer-events-none -translate-y-1 opacity-0",
@@ -202,7 +201,7 @@ export function SiteTopBar({
               >
                 {POLLFISH_MENU_ITEMS.map((menuItem) => (
                   <a
-                    className="font-figtree block rounded-[10px] px-3 py-2.5 text-[14px] text-white/82 transition-colors hover:bg-[rgba(155,38,146,0.28)] hover:text-[#f8e6f7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                    className="font-figtree block rounded-[10px] px-3 py-2.5 text-[16px] text-white/82 transition-colors hover:bg-[rgba(155,38,146,0.28)] hover:text-[#f8e6f7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                     href={menuItem.href}
                     key={menuItem.label}
                     onClick={() => setIsPollfishMenuOpen(false)}

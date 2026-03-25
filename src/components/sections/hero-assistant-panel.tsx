@@ -27,12 +27,45 @@ const DEFAULT_OVERLAY_GLOW: OverlayGlowConfig = {
   glowSpread: 1,
   glowY: 65,
 };
+const OVERLAY_KNOBS_VISIBLE_STORAGE_KEY = "home:overlay-chat:knobs-visible";
 
 type ChatMessage = {
   id: string;
   role: "user" | "assistant";
   text: string;
 };
+
+function loadStoredVisibility(key: string, fallback: boolean) {
+  if (typeof window === "undefined") {
+    return fallback;
+  }
+
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || typeof parsed.value !== "boolean") {
+      return fallback;
+    }
+
+    return parsed.value;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStoredVisibility(key: string, value: boolean) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(key, JSON.stringify({ value }));
+  } catch {}
+}
 
 function buildAssistantReply(question: string) {
   const lowerQuestion = question.toLowerCase();
@@ -129,6 +162,9 @@ export function HeroAssistantPanel({
   const [overlayGlow, setOverlayGlow] = useState<OverlayGlowConfig>(
     DEFAULT_OVERLAY_GLOW,
   );
+  const [overlayKnobsVisible, setOverlayKnobsVisible] = useState<boolean>(() =>
+    loadStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, true),
+  );
   const topInputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
@@ -182,6 +218,10 @@ export function HeroAssistantPanel({
 
     container.scrollTop = container.scrollHeight;
   }, [isOverlayOpen, messages]);
+
+  useEffect(() => {
+    saveStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, overlayKnobsVisible);
+  }, [overlayKnobsVisible]);
 
   function submitQuestion(question: string) {
     const trimmedQuestion = question.trim();
@@ -365,7 +405,7 @@ export function HeroAssistantPanel({
               </div>
             </div>
 
-            {showTuner && (
+            {showTuner && overlayKnobsVisible && (
               <div className="font-figtree absolute bottom-4 right-4 z-[240] w-[310px] rounded-xl border border-white/20 bg-[#0a0a0a]/95 p-4 text-white shadow-[0_16px_45px_rgba(0,0,0,0.45)] backdrop-blur-sm">
                 <p className="text-sm font-semibold tracking-[0.04em]">
                   Overlay Tuner
@@ -496,6 +536,15 @@ export function HeroAssistantPanel({
                   Reset Overlay Defaults
                 </button>
               </div>
+            )}
+            {showTuner && (
+              <button
+                className="font-figtree absolute left-4 top-4 z-[250] rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95"
+                onClick={() => setOverlayKnobsVisible((current) => !current)}
+                type="button"
+              >
+                {overlayKnobsVisible ? "Hide knobs" : "Show knobs"}
+              </button>
             )}
           </div>
         </div>

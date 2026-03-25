@@ -50,7 +50,7 @@
   --radius-pill: var(--radius-pill);
   --shadow-soft: var(--shadow-soft);
   --shadow-lift: var(--shadow-lift);
-  --font-sans: var(--font-sora);
+  --font-sans: var(--font-figtree);
   --font-mono: var(--font-space-mono);
 }
 
@@ -75,8 +75,20 @@ body {
     radial-gradient(circle at 86% 10%, rgb(94 84 255 / 9%), transparent 38%),
     linear-gradient(180deg, #1b1b1b 0%, #1a1a1a 58%, #191919 100%);
   color: var(--color-text);
-  font-family: var(--font-sora), sans-serif;
+  font-family:
+    var(--font-figtree), "Avenir Next", "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    "Aeonik TRIAL", "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 .font-figtree {

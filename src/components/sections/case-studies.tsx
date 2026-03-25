@@ -341,18 +341,18 @@ function EntryBlock({ entry, delayMs }: { entry: CaseStudyEntry; delayMs: number
               {entry.tag}
             </p>
           )}
-          <h2 className="font-aeonik mt-2 text-[38px] font-semibold leading-[1.1] text-white sm:text-[44px] lg:text-[52px]">
+          <h2 className="font-aeonik mt-2 text-[48px] font-semibold leading-[55px] text-white">
             {entry.title}
           </h2>
           {entry.subtitle && (
-            <p className="font-aeonik mt-2 max-w-[640px] text-[26px] font-semibold leading-[1.2] text-[#d6d6d6] sm:text-[31px]">
+            <p className="font-figtree mt-2 max-w-[640px] text-[26px] font-semibold leading-[1.2] text-[#d6d6d6] sm:text-[31px]">
               {entry.subtitle}
             </p>
           )}
           <div className="mt-8 space-y-5">
             {entry.paragraphs.map((paragraph) => (
               <p
-                className="font-figtree text-[17px] leading-[1.55] text-[#c4c4c4] sm:text-[18px]"
+                className="max-w-[70ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]"
                 key={paragraph}
               >
                 {paragraph}

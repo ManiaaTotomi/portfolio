@@ -41,7 +41,12 @@ function ProjectDivider() {
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
       <div className="inline-flex items-center gap-4 px-8 py-[10px]">
-        <span className="h-[7px] w-[7px] rounded-full bg-[#f70eff]" />
+        <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-[#f70eff]">
+          <span
+            aria-hidden="true"
+            className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(247,14,255,0.48)_0%,rgba(247,14,255,0)_72%)]"
+          />
+        </span>
         <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#f70eff]">
           Pollfish
         </p>
@@ -55,10 +60,10 @@ function PollfishIntro() {
   return (
     <div className="mx-auto flex w-full max-w-[710px] flex-col items-center gap-8 text-center">
       <div className="space-y-6">
-        <p className="font-aeonik text-[34px] font-semibold leading-[1.12] text-[rgba(194,194,194,0.4)] sm:text-[42px] sm:leading-[45px]">
+        <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {POLLFISH_INTRO_TITLE}
         </p>
-        <p className="font-aeonik text-[18px] leading-[1.5] text-[#ededed] sm:text-[20px] sm:leading-[35px]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
           {POLLFISH_INTRO_DESCRIPTION}
         </p>
       </div>
@@ -70,7 +75,12 @@ function PollfishIntro() {
               {item}
             </p>
             {index < POLLFISH_INTRO_DETAILS.length - 1 && (
-              <span className="h-[2px] w-[2px] rounded-full bg-[#6d6c6c]" />
+              <span className="relative inline-flex h-[2px] w-[2px] rounded-full bg-[#6d6c6c]">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(109,108,108,0.45)_0%,rgba(109,108,108,0)_72%)]"
+                />
+              </span>
             )}
           </div>
         ))}
@@ -98,15 +108,15 @@ function PollfishFeatureCard({
       id={id}
     >
       <div className="flex flex-col justify-end gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pb-[56px] lg:pl-[96px] lg:pr-0 lg:pt-14">
-        <div className="w-full lg:w-[355px]">
-          <h3 className="font-aeonik text-[42px] font-semibold leading-[0.98] text-[#222] lg:text-[48px]">
+        <div className="w-full lg:w-[400px]">
+          <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#222]">
             {entry.title}
           </h3>
 
           <div className="mt-8 space-y-3">
             {entry.paragraphs.slice(0, 2).map((paragraph) => (
               <p
-                className="font-figtree text-[16px] leading-[1.5] text-[#222] lg:text-[18px] lg:leading-[27px]"
+                className="max-w-[70ch] font-figtree text-[20px] leading-[32px] text-[#222]"
                 key={paragraph}
               >
                 {paragraph}
@@ -146,16 +156,16 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
       <div className="pointer-events-none absolute -left-[260px] bottom-[-330px] h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(58,36,146,0.72)_0%,rgba(58,36,146,0.28)_44%,rgba(58,36,146,0)_78%)] blur-[72px]" />
       <div className="pointer-events-none absolute right-[-220px] top-[-220px] h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(173,30,175,0.58)_0%,rgba(173,30,175,0.22)_46%,rgba(173,30,175,0)_80%)] blur-[76px]" />
 
-      <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[430px_1fr] lg:gap-[80px] lg:px-[96px]">
-        <div className="self-center space-y-8 lg:w-[355px]">
-          <h3 className="font-aeonik text-[42px] font-semibold leading-[0.98] text-white lg:text-[48px]">
+      <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[470px_1fr] lg:gap-[80px] lg:px-[96px]">
+        <div className="self-center space-y-8 lg:w-[400px]">
+          <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
             AI Builder
           </h3>
 
           <div className="space-y-3">
             {entry.paragraphs.slice(0, 2).map((paragraph) => (
               <p
-                className="font-figtree text-[17px] leading-[1.45] text-white sm:text-[18px] sm:leading-[27px]"
+                className="max-w-[70ch] font-figtree text-[20px] leading-[32px] text-[#f1f1f1]"
                 key={paragraph}
               >
                 {paragraph}

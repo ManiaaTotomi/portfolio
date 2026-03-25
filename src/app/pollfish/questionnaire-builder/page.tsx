@@ -40,7 +40,7 @@ export default function QuestionnaireBuilderCaseStudyPage() {
                 {QUESTIONNAIRE_TITLE}
               </h1>
 
-              <p className="font-figtree mt-7 text-[20px] leading-[30px] text-[#dbd6df]">
+              <p className="mx-auto mt-7 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#e7e3eb]">
                 {QUESTIONNAIRE_DESCRIPTION}
               </p>
 
@@ -51,7 +51,12 @@ export default function QuestionnaireBuilderCaseStudyPage() {
                       {chip}
                     </span>
                     {index < QUESTIONNAIRE_CHIPS.length - 1 && (
-                      <span className="h-[3px] w-[3px] rounded-full bg-[#c2c2c2]" />
+                      <span className="relative inline-flex h-[3px] w-[3px] rounded-full bg-[#c2c2c2]">
+                        <span
+                          aria-hidden="true"
+                          className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(194,194,194,0.42)_0%,rgba(194,194,194,0)_72%)]"
+                        />
+                      </span>
                     )}
                   </div>
                 ))}
@@ -77,7 +82,7 @@ export default function QuestionnaireBuilderCaseStudyPage() {
         <section className="bg-[#181818] pb-[160px] pt-[120px]">
           <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
             <div className="mx-auto w-full max-w-[986px]">
-              <h2 className="font-aeonik text-[40px] font-bold leading-[1.2] text-white sm:text-[50px] sm:leading-[1]">
+              <h2 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
                 Case Study Snapshot
               </h2>
 
@@ -90,7 +95,7 @@ export default function QuestionnaireBuilderCaseStudyPage() {
                     <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                       {detail.title}
                     </p>
-                    <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+                    <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                       {detail.items.map((item) => (
                         <p key={item}>{item}</p>
                       ))}

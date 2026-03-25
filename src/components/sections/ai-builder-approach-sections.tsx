@@ -213,7 +213,7 @@ function PainPointCell({ text }: { text: string }) {
       <span className="relative h-[10px] w-[10px] rounded-full bg-[#f2ab47]">
         <span className="absolute -inset-2 rounded-full bg-[radial-gradient(circle,rgba(242,171,71,0.5)_0%,rgba(242,171,71,0)_72%)]" />
       </span>
-      <p className="font-figtree text-[16px] leading-[1.56] text-white">{text}</p>
+      <p className="font-figtree text-[20px] leading-[32px] text-white">{text}</p>
     </div>
   );
 }
@@ -235,7 +235,7 @@ function ExecutionStepCell({
         src="/images/AI-builder/icons/execution-point.svg"
         width={30}
       />
-      <p className="font-figtree text-[16px] leading-[1.75] text-[#f1f1f1]">{text}</p>
+      <p className="font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">{text}</p>
     </div>
   );
 }
@@ -364,12 +364,12 @@ export function AiBuilderApproachSections() {
     <>
       <section className="bg-[#181818]">
         <div className="mx-auto w-full max-w-[1600px] px-5 pb-[132px] pt-[132px] sm:px-8 lg:px-[84px]">
-          <div className="mx-auto grid w-full max-w-[1029px] gap-14 lg:grid-cols-[355px_562px] lg:gap-[112px]">
-            <div className="w-full max-w-[355px] space-y-8 pt-12 text-left sm:pt-16 lg:pt-[148px]">
-              <h2 className="w-full font-aeonik text-[44px] font-semibold leading-[1.02] text-[rgba(194,194,194,0.4)] sm:text-[52px] sm:leading-[55px]">
+          <div className="mx-auto grid w-full max-w-[1100px] gap-14 lg:grid-cols-[400px_1fr] lg:gap-[112px]">
+            <div className="w-full max-w-[400px] space-y-8 pt-12 text-left sm:pt-16 lg:pt-[148px]">
+              <h2 className="w-full font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
                 {FIRST_APPROACH_TITLE}
               </h2>
-              <p className="w-full font-figtree text-[18px] leading-[27px] text-white">
+              <p className="w-full font-figtree text-[20px] leading-[32px] text-white">
                 {FIRST_APPROACH_COPY}
               </p>
             </div>
@@ -415,12 +415,12 @@ export function AiBuilderApproachSections() {
               }}
             />
 
-            <div className="mx-auto grid w-full max-w-[1029px] gap-10 lg:grid-cols-[355px_1fr] lg:items-center lg:gap-[112px]">
-              <div className="w-full max-w-[355px] space-y-6 text-left">
-                <h3 className="w-full font-figtree text-[40px] font-bold leading-[1.12] text-white">
+            <div className="mx-auto grid w-full max-w-[1100px] gap-10 lg:grid-cols-[400px_1fr] lg:items-center lg:gap-[112px]">
+              <div className="w-full max-w-[400px] space-y-6 text-left">
+                <h3 className="w-full font-aeonik text-[48px] font-semibold leading-[55px] text-white">
                   {PAIN_POINTS_TITLE}
                 </h3>
-                <p className="w-full font-figtree text-[20px] leading-[31px] text-[#f6f6f6]">
+                <p className="w-full font-figtree text-[20px] leading-[32px] text-[#f6f6f6]">
                   {PAIN_POINTS_COPY}
                 </p>
               </div>
@@ -530,7 +530,7 @@ export function AiBuilderApproachSections() {
       <section className="bg-[#181818] pb-0 pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px] text-white">
-            <h3 className="font-figtree text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[52px]">
+            <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
               {NEW_APPROACH_TITLE}
             </h3>
 
@@ -539,7 +539,7 @@ export function AiBuilderApproachSections() {
                 <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                   {NEW_APPROACH_OPPORTUNITY_TITLE}
                 </p>
-                <p className="font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+                <p className="font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                   {NEW_APPROACH_OPPORTUNITY_COPY}
                 </p>
               </div>
@@ -548,7 +548,7 @@ export function AiBuilderApproachSections() {
                 <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                   {NEW_APPROACH_ROLE_TITLE}
                 </p>
-                <div className="font-figtree space-y-6 text-[18px] leading-[28px] text-[#f5f5f5]">
+                <div className="font-figtree space-y-6 text-[20px] leading-[32px] text-[#f5f5f5]">
                   <p>{NEW_APPROACH_ROLE_COPY}</p>
                   <div className="space-y-4">
                     <p>Together, we:</p>
@@ -617,10 +617,10 @@ export function AiBuilderApproachSections() {
 
             <div className="relative z-10">
               <div className="w-full max-w-[681px] space-y-6">
-                <h3 className="font-figtree text-[40px] font-bold leading-[1.12] text-[#e7e7e7]">
+                <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
                   {EXECUTION_TITLE}
                 </h3>
-                <p className="font-figtree text-[20px] leading-[30px] text-[#f1f1f1]">
+                <p className="font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
                   {EXECUTION_COPY}
                 </p>
               </div>
@@ -804,14 +804,14 @@ export function AiBuilderApproachSections() {
       <section className="bg-[#181818] pb-[120px] pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px]">
-            <h3 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[52px]">
+            <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
               {VISUAL_EXPLORATION_SECTION_TITLE}
             </h3>
             <div className="mt-14 grid gap-5 sm:mt-20 sm:gap-8 md:grid-cols-[133px_1fr] md:gap-[125px]">
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {VISUAL_EXPLORATION_TITLE}
               </p>
-              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+              <div className="space-y-6 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {VISUAL_EXPLORATION_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -847,7 +847,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {ALIGN_INTENT_TITLE}
               </p>
-              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+              <div className="space-y-6 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {ALIGN_INTENT_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -876,7 +876,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {VISUAL_IDENTITY_TITLE}
               </p>
-              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+              <div className="space-y-6 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {VISUAL_IDENTITY_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -908,7 +908,7 @@ export function AiBuilderApproachSections() {
       <section className="bg-[#181818] pb-[120px] pt-[40px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[982px]">
-            <h3 className="font-figtree text-[44px] font-semibold leading-[1.1] text-white sm:text-[52px]">
+            <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
               {POSITIONING_AI_TITLE}
             </h3>
 
@@ -916,7 +916,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {FIRST_DECISIONS_TITLE}
               </p>
-              <div className="space-y-6 font-figtree text-[18px] leading-[28px] text-[#f5f5f5]">
+              <div className="space-y-6 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {FIRST_DECISIONS_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -986,7 +986,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-[#dcdcdc]">
                 {MAKING_GUIDED_TITLE}
               </p>
-              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#dcdcdc]">
+              <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#dcdcdc]">
                 {MAKING_GUIDED_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -1011,7 +1011,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {ADAPTING_TITLE}
               </p>
-              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-white">
+              <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-white">
                 <p>
                   <span>{ADAPTING_PARAGRAPH_PREFIX}</span>
                   <span className="font-bold">{ADAPTING_PARAGRAPH_EMPHASIS}</span>
@@ -1043,7 +1043,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {PROGRESSIVE_DISCLOSURE_TITLE}
               </p>
-              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+              <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {PROGRESSIVE_DISCLOSURE_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -1068,7 +1068,7 @@ export function AiBuilderApproachSections() {
               <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                 {QUESTION_ASSISTANCE_TITLE}
               </p>
-              <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+              <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                 {QUESTION_ASSISTANCE_PARAGRAPHS.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -1096,7 +1096,7 @@ export function AiBuilderApproachSections() {
             <div className="h-px w-full bg-white/[0.1]" />
           </div>
           <div className="mx-auto w-full max-w-[986px]">
-            <h3 className="font-aeonik text-[40px] font-bold leading-[1.2] text-white sm:text-[50px] sm:leading-[1]">
+            <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
               {IMPACT_TITLE}
             </h3>
 
@@ -1106,7 +1106,7 @@ export function AiBuilderApproachSections() {
                   <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
                     {row.title}
                   </p>
-                  <div className="space-y-3 font-figtree text-[20px] leading-[30px] text-[#f5f5f5]">
+                  <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
                     {row.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}

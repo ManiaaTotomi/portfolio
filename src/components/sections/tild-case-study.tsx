@@ -30,7 +30,12 @@ function ProjectDivider() {
     <div className="flex h-[40px] w-full items-center">
       <div className="h-px flex-1 bg-white/10" />
       <div className="inline-flex items-center gap-4 px-8 py-[10px]">
-        <span className="h-[7px] w-[7px] rounded-full bg-[#0CFF31]" />
+        <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-[#0CFF31]">
+          <span
+            aria-hidden="true"
+            className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(12,255,49,0.42)_0%,rgba(12,255,49,0)_72%)]"
+          />
+        </span>
         <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#0CFF31]">
           TILD
         </p>
@@ -48,10 +53,10 @@ function TildIntro() {
       </p>
 
       <div className="space-y-6">
-        <p className="font-aeonik text-[34px] font-semibold leading-[1.12] text-[rgba(194,194,194,0.4)] sm:text-[42px] sm:leading-[45px]">
+        <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {TILD_INTRO_TITLE}
         </p>
-        <p className="font-aeonik text-[18px] leading-[1.5] text-[#b5b5b5] sm:text-[20px] sm:leading-[35px]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d6]">
           {TILD_INTRO_DESCRIPTION}
         </p>
       </div>
@@ -63,7 +68,12 @@ function TildIntro() {
               {item}
             </p>
             {index < TILD_INTRO_DETAILS.length - 1 && (
-              <span className="h-[2px] w-[2px] rounded-full bg-[#6d6c6c]" />
+              <span className="relative inline-flex h-[2px] w-[2px] rounded-full bg-[#6d6c6c]">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(109,108,108,0.45)_0%,rgba(109,108,108,0)_72%)]"
+                />
+              </span>
             )}
           </div>
         ))}
@@ -114,14 +124,14 @@ function TildFeatureCard({
       <div className="relative px-6 sm:px-10 lg:px-[53px]">
         <div className="grid items-center gap-12 py-[82px] lg:grid-cols-[1fr_1.25fr]">
           <div className="flex flex-col justify-center lg:pl-[43px]">
-            <div className="w-full lg:max-w-[355px]">
-              <h3 className="font-aeonik text-[42px] font-semibold leading-[1.02] text-white lg:text-[48px] lg:leading-[57px]">
+            <div className="w-full lg:max-w-[400px]">
+              <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
                 {title}
               </h3>
               <div className="mt-8 space-y-4">
                 {description.map((paragraph) => (
                   <p
-                    className={`font-figtree text-[16px] leading-[1.5] lg:text-[18px] lg:leading-[27px] ${
+                    className={`font-figtree text-[20px] leading-[32px] ${
                       isAiInsights ? "text-[#d6dbe4]" : "text-white"
                     }`}
                     key={paragraph}

@@ -28,10 +28,10 @@ export function AiBuilderInternalHeaderSection({
             {TITLE}
           </h1>
 
-          <p className="font-figtree mt-7 text-[20px] leading-[1.5] text-[#dbd6df]">
+          <p className="mx-auto mt-7 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#e7e3eb]">
             {INTRO}
           </p>
-          <p className="font-figtree mt-5 text-[20px] leading-[1.55] text-[#d1ccd6]">
+          <p className="mx-auto mt-5 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#dfdae4]">
             {DETAILS}
           </p>
         </div>

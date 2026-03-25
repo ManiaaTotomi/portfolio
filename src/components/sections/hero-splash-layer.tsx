@@ -16,6 +16,39 @@ const DEFAULT_SPLASH: SplashConfig = {
   x: -33,
   opacity: 0.3,
 };
+const SPLASH_KNOBS_VISIBLE_STORAGE_KEY = "home:hero-splash:knobs-visible";
+
+function loadStoredVisibility(key: string, fallback: boolean) {
+  if (typeof window === "undefined") {
+    return fallback;
+  }
+
+  try {
+    const raw = window.localStorage.getItem(key);
+    if (!raw) {
+      return fallback;
+    }
+
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || typeof parsed.value !== "boolean") {
+      return fallback;
+    }
+
+    return parsed.value;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStoredVisibility(key: string, value: boolean) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(key, JSON.stringify({ value }));
+  } catch {}
+}
 
 const StaticFigmaSplash = memo(function StaticFigmaSplash() {
   return (
@@ -47,6 +80,9 @@ const StaticFigmaSplash = memo(function StaticFigmaSplash() {
 export function HeroSplashLayer() {
   const [config, setConfig] = useState<SplashConfig>(DEFAULT_SPLASH);
   const showTuner = process.env.NODE_ENV !== "production";
+  const [knobsVisible, setKnobsVisible] = useState<boolean>(() =>
+    loadStoredVisibility(SPLASH_KNOBS_VISIBLE_STORAGE_KEY, true),
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -55,6 +91,10 @@ export function HeroSplashLayer() {
     root.style.setProperty("--hero-splash-x", `${config.x}px`);
     root.style.setProperty("--hero-splash-opacity", String(config.opacity));
   }, [config]);
+
+  useEffect(() => {
+    saveStoredVisibility(SPLASH_KNOBS_VISIBLE_STORAGE_KEY, knobsVisible);
+  }, [knobsVisible]);
 
   return (
     <>
@@ -73,7 +113,7 @@ export function HeroSplashLayer() {
         <div className="h-full w-full rounded-full bg-[radial-gradient(circle,rgba(255,14,255,0.38)_0%,rgba(255,14,255,0.2)_34%,rgba(255,14,255,0.08)_62%,rgba(255,14,255,0)_84%)] blur-[76px]" />
       </div>
 
-      {showTuner && (
+      {showTuner && knobsVisible && (
         <div className="font-figtree fixed bottom-4 right-4 z-50 w-[290px] rounded-xl border border-white/20 bg-[#0a0a0a]/95 p-4 text-white shadow-[0_16px_45px_rgba(0,0,0,0.45)] backdrop-blur-sm">
           <p className="text-sm font-semibold tracking-[0.04em]">Splash Tuner</p>
           <p className="mt-1 text-xs text-white/70">Visible in local dev mode.</p>
@@ -162,6 +202,15 @@ export function HeroSplashLayer() {
             Reset To Figma Defaults
           </button>
         </div>
+      )}
+      {showTuner && (
+        <button
+          className="font-figtree fixed right-4 top-4 z-[60] rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95"
+          onClick={() => setKnobsVisible((current) => !current)}
+          type="button"
+        >
+          {knobsVisible ? "Hide knobs" : "Show knobs"}
+        </button>
       )}
     </>
   );
