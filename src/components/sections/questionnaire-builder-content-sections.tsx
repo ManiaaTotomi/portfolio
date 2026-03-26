@@ -40,8 +40,8 @@ interface NarrativeBlockProps {
 function NarrativeBlock({ label, children }: NarrativeBlockProps) {
   return (
     <div className="grid gap-5 md:grid-cols-[133px_1fr] md:gap-[85px]">
-      <p className="font-figtree text-[22px] font-bold leading-[1.25] text-inherit">{label}</p>
-      <div className="space-y-4 font-figtree text-[20px] leading-[32px] text-inherit">
+      <p className="font-figtree text-[20px] font-bold leading-[1.25] text-inherit">{label}</p>
+      <div className="space-y-4 font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
         {children}
       </div>
     </div>
@@ -262,7 +262,7 @@ export function QuestionnaireBuilderContentSections() {
                 <h2 className="font-aeonik text-[44px] font-semibold leading-[1.08] text-[#ececec] sm:text-[48px]">
                   The system
                 </h2>
-                <p className="mt-6 font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
+                <p className="mt-6 font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
                   This system gradually evolved into three interconnected layers. Each
                   layer expanded over time as Pollfish introduced more sophisticated
                   research workflows.
@@ -283,7 +283,7 @@ export function QuestionnaireBuilderContentSections() {
                     <h3 className="font-figtree text-[20px] font-bold leading-[28px] text-white">
                       {layer.title}
                     </h3>
-                    <p className="font-figtree text-[18px] leading-[26px] text-white">
+                    <p className="font-figtree text-[18px] leading-[26px] text-[#d0d0d0]">
                       {layer.description}
                     </p>
                   </div>

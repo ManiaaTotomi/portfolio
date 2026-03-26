@@ -65,7 +65,7 @@ function PollfishIntro() {
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {POLLFISH_INTRO_TITLE}
         </p>
-        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
           {POLLFISH_INTRO_DESCRIPTION}
         </p>
       </div>

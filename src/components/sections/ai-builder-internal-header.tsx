@@ -33,10 +33,10 @@ export function AiBuilderInternalHeaderSection({
             {TITLE}
           </h1>
 
-          <p className="mx-auto mt-7 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#e7e3eb]">
+          <p className="mx-auto mt-7 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
             {INTRO}
           </p>
-          <p className="mx-auto mt-5 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#dfdae4]">
+          <p className="mx-auto mt-5 max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
             {DETAILS}
           </p>
 

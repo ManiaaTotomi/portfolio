@@ -57,7 +57,7 @@ function TildIntro() {
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {TILD_INTRO_TITLE}
         </p>
-        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d6]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
           {TILD_INTRO_DESCRIPTION}
         </p>
       </div>
@@ -132,9 +132,7 @@ function TildFeatureCard({
               <div className="mt-8 space-y-4">
                 {description.map((paragraph) => (
                   <p
-                    className={`font-figtree text-[20px] leading-[32px] ${
-                      isAiInsights ? "text-[#d6dbe4]" : "text-white"
-                    }`}
+                    className="font-figtree text-[20px] leading-[32px] text-[#d0d0d0]"
                     key={paragraph}
                   >
                     {paragraph}

@@ -111,7 +111,7 @@ function CtrlEatIntro() {
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {CTRLEAT_INTRO_TITLE}
         </p>
-        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d6]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
           {CTRLEAT_INTRO_DESCRIPTION}
         </p>
       </div>
