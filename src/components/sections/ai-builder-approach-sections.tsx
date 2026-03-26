@@ -127,11 +127,11 @@ const IMPACT_ROWS = [
 ] as const;
 
 const PAIN_GLOW_DEFAULTS = {
-  intensity: 1,
-  spread: 1,
-  opacity: 0.36,
-  x: 11,
-  y: 12,
+  intensity: 1.35,
+  spread: 1.28,
+  opacity: 0.46,
+  x: 16,
+  y: 18,
 } as const;
 
 const EXECUTION_GLOW_DEFAULTS = {
@@ -145,8 +145,8 @@ const EXECUTION_GLOW_DEFAULTS = {
   glow2Y: 0,
 } as const;
 
-const PAIN_GLOW_STORAGE_KEY = "ai-builder:pain-glow";
-const EXECUTION_GLOW_STORAGE_KEY = "ai-builder:execution-glow";
+const PAIN_GLOW_STORAGE_KEY = "ai-builder:pain-glow:v2";
+const EXECUTION_GLOW_STORAGE_KEY = "ai-builder:execution-glow:v2";
 const KNOBS_VISIBLE_STORAGE_KEY = "ai-builder:knobs-visible";
 
 type PainGlowState = {
