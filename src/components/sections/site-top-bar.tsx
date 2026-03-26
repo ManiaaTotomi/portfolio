@@ -142,7 +142,7 @@ export function SiteTopBar({
       )}
     >
       <a
-        className="font-figtree text-[16px] font-bold tracking-[0.64px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
+        className="font-figtree text-[18px] font-bold tracking-[0.64px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
         href={anchorBasePath ? "/#top" : "#top"}
       >
         {content.name}
@@ -237,7 +237,7 @@ export function SiteTopBar({
 
       <div className="flex h-[14px] items-center justify-end gap-[clamp(18px,2.2vw,32px)]">
         <a
-          className="font-figtree text-[16px] font-bold tracking-[0.32px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+          className="font-figtree text-[18px] font-bold tracking-[0.32px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
           href={content.cvUrl}
         >
           CV

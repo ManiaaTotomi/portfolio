@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Figtree, Roboto } from "next/font/google";
+import { Archivo, Figtree, Roboto } from "next/font/google";
+import { GlobalKeyboardShortcuts } from "@/components/global-keyboard-shortcuts";
 import { siteContent } from "@/content/site";
 import "./globals.css";
 
@@ -14,6 +15,11 @@ const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+});
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -34,20 +40,11 @@ export const metadata: Metadata = {
     siteName: siteContent.seo.siteName,
     locale: "en_GB",
     type: "website",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: siteContent.seo.ogAlt,
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: siteTitle,
     description: siteContent.seo.description,
-    images: ["/og-image.svg"],
   },
 };
 
@@ -60,9 +57,10 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${figtree.variable} ${roboto.variable} h-full antialiased`}
+      className={`${figtree.variable} ${roboto.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <GlobalKeyboardShortcuts />
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>

@@ -353,7 +353,7 @@ export function AiBuilderApproachSections() {
 
   return (
     <>
-      <section className="bg-[#181818]">
+      <section className="bg-[#141314]">
         <div className="mx-auto w-full max-w-[1600px] px-5 pb-[132px] pt-[132px] sm:px-8 lg:px-[84px]">
           <div className="mx-auto grid w-full max-w-[1100px] gap-14 lg:grid-cols-[minmax(280px,360px)_1fr] lg:gap-10 xl:grid-cols-[400px_1fr] xl:gap-[112px]">
             <div className="w-full max-w-[400px] space-y-8 pt-12 text-left sm:pt-16 lg:pt-20 xl:pt-[148px]">
@@ -373,7 +373,7 @@ export function AiBuilderApproachSections() {
             >
               <Image
                 alt="Early AI survey generation entry on Pollfish homepage"
-                className="block h-auto w-full rounded-[8px]"
+                className="block h-auto w-full rounded-[16px]"
                 height={2000}
                 sizes="(min-width: 1024px) 562px, 100vw"
                 src="/images/AI-builder/images/old-1-clean.png"
@@ -381,7 +381,7 @@ export function AiBuilderApproachSections() {
               />
               <Image
                 alt="2022 My Surveys AI builder workflow"
-                className="block h-auto w-full rounded-[8px]"
+                className="block h-auto w-full rounded-[16px]"
                 height={2000}
                 sizes="(min-width: 1024px) 562px, 100vw"
                 src="/images/AI-builder/images/old-2-clean.png"
@@ -392,10 +392,10 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="relative bg-[#181818] pb-0">
+      <section className="relative bg-[#141314] pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div
-            className="relative overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.05] bg-white/[0.02] px-6 py-12 shadow-[0_4px_84px_rgba(82,62,35,0.1)] sm:px-10 lg:px-[88px] lg:py-[88px]"
+            className="relative overflow-hidden rounded-[20px] border border-white/[0.05] bg-white/[0.02] px-6 py-12 shadow-[0_4px_84px_rgba(82,62,35,0.1)] sm:px-10 lg:px-[88px] lg:py-[88px]"
             ref={painCardRef}
           >
             <div
@@ -416,7 +416,7 @@ export function AiBuilderApproachSections() {
                 </p>
               </div>
 
-              <div className="overflow-hidden rounded-[10px] border border-white/[0.07]">
+              <div className="overflow-hidden rounded-[16px] border border-white/[0.07]">
                 <div className="grid grid-cols-1 sm:grid-cols-2">
                   {PAIN_POINT_ITEMS.map((item) => (
                     <div
@@ -517,7 +517,7 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-0 pt-[120px]">
+      <section className="bg-[#141314] pb-0 pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[1100px] text-white">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
@@ -563,7 +563,7 @@ export function AiBuilderApproachSections() {
             <p className="font-ibm text-[11px] font-medium uppercase tracking-[0.05em] text-[#959595] sm:text-[14px]">
               {WORKSHOP_CAPTION}
             </p>
-            <div className="mt-4 overflow-hidden rounded-[10px] border border-white/[0.08]">
+            <div className="mt-4 overflow-hidden rounded-[16px] border border-white/[0.08]">
               <Image
                 alt="Workshop board used to define constraints, pain points, and opportunities"
                 className="block h-auto w-full"
@@ -577,10 +577,10 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="relative bg-[#181818] pb-0">
+      <section className="relative bg-[#141314] pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[75px]">
           <div
-            className="relative isolate overflow-hidden rounded-tl-[20px] rounded-tr-[20px] border-x border-t border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
+            className="relative isolate overflow-hidden rounded-[20px] border border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
             ref={executionCardRef}
           >
             <div
@@ -615,7 +615,7 @@ export function AiBuilderApproachSections() {
                 </p>
               </div>
 
-              <div className="mt-10 w-full overflow-hidden rounded-[20px] border border-white/[0.07] bg-[#0e1113]/40">
+              <div className="mt-10 w-full overflow-hidden rounded-[16px] border border-white/[0.07] bg-[#0e1113]/40">
                 <div className="grid grid-cols-1 lg:mx-auto lg:w-[min(100%,981px)] lg:grid-cols-3">
                   {EXECUTION_STEPS.map((step) => (
                     <ExecutionStepCell
@@ -789,7 +789,7 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[120px] pt-[120px]">
+      <section className="bg-[#141314] pb-[120px] pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[1100px]">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
@@ -807,7 +807,7 @@ export function AiBuilderApproachSections() {
             </div>
 
             <div className="mx-auto mt-20 w-full max-w-[842px] space-y-6">
-              <div className="overflow-hidden rounded-[13px] border border-white/[0.08]">
+              <div className="overflow-hidden rounded-[16px] border border-white/[0.08]">
                 <Image
                   alt="AI button visual exploration states"
                   className="block h-auto w-full"
@@ -818,7 +818,7 @@ export function AiBuilderApproachSections() {
                   width={1684}
                 />
               </div>
-              <div className="overflow-hidden rounded-[13px] border border-white/[0.08]">
+              <div className="overflow-hidden rounded-[16px] border border-white/[0.08]">
                 <Image
                   alt="AI iconography visual exploration states"
                   className="block h-auto w-full"
@@ -845,7 +845,7 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[120px]">
+      <section className="bg-[#141314] pb-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[75px]">
           <div className="mx-auto w-full max-w-[1449px] overflow-hidden rounded-[20px] border border-white/[0.08]">
             <Image
@@ -880,7 +880,7 @@ export function AiBuilderApproachSections() {
               <div className="relative mx-auto w-full max-w-[508px]">
                 <Image
                   alt="Refined AI Builder interface with branded actions and capability cards"
-                  className="block h-auto w-full rounded-[10px]"
+                  className="block h-auto w-full rounded-[16px]"
                   height={1047}
                   quality={60}
                   sizes="(min-width: 1024px) 508px, 100vw"
@@ -893,7 +893,7 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[120px] pt-[40px]">
+      <section className="bg-[#141314] pb-[48px] pt-[32px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[1100px]">
             <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
@@ -967,11 +967,11 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[80px] pt-[80px]">
+      <section className="bg-[#141314] pb-[48px] pt-[24px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[1100px]">
             <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
-              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-[#dcdcdc]">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-[#dcdcdc]">
                 {MAKING_GUIDED_TITLE}
               </p>
               <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#dcdcdc]">
@@ -982,21 +982,21 @@ export function AiBuilderApproachSections() {
             </div>
           </div>
 
-          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[8px] border border-white/[0.08]">
+          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[16px] border border-white/[0.08]">
             <Image
               alt="AI Builder panel with guided survey creation options"
-              className="block h-auto w-full"
-              height={1573}
+              className="mx-auto block h-auto w-full object-contain"
+              height={1774}
               quality={60}
               sizes="(min-width: 1536px) 1298px, (min-width: 1024px) calc(100vw - 168px), 100vw"
-              src="/images/AI-builder/images/Questionnaire-ai.png"
-              width={2519}
+              src="/images/AI-builder/images/chat-empty-screen.png"
+              width={2756}
             />
           </div>
 
           <div className="mx-auto mt-20 w-full max-w-[1100px]">
             <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
-              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {ADAPTING_TITLE}
               </p>
               <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-white">
@@ -1010,10 +1010,10 @@ export function AiBuilderApproachSections() {
             </div>
           </div>
 
-          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[8px] border border-white/[0.08]">
+          <div className="mx-auto mt-20 w-full max-w-[1298px] overflow-hidden rounded-[16px] border border-white/[0.08]">
             <Image
               alt="AI Builder adapting options to an existing questionnaire context"
-              className="block h-auto w-full"
+              className="mx-auto block h-auto w-full object-contain"
               height={2079}
               quality={60}
               sizes="(min-width: 1536px) 1298px, (min-width: 1024px) calc(100vw - 168px), 100vw"
@@ -1024,11 +1024,11 @@ export function AiBuilderApproachSections() {
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[120px] pt-[80px]">
+      <section className="bg-[#141314] pb-[120px] pt-[32px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[1100px]">
             <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
-              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {PROGRESSIVE_DISCLOSURE_TITLE}
               </p>
               <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
@@ -1039,7 +1039,7 @@ export function AiBuilderApproachSections() {
             </div>
           </div>
 
-          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[14px] border border-white/[0.06] bg-[#222222] p-5 sm:p-8">
+          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[16px] border border-white/[0.06] bg-[#222222] p-5 sm:p-8">
             <Image
               alt="Progressive disclosure states for AI actions"
               className="block h-auto w-full"
@@ -1051,9 +1051,9 @@ export function AiBuilderApproachSections() {
             />
           </div>
 
-          <div className="mx-auto mt-[120px] w-full max-w-[1100px]">
+          <div className="mx-auto mt-[72px] w-full max-w-[1100px]">
             <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]">
-              <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+              <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                 {QUESTION_ASSISTANCE_TITLE}
               </p>
               <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">
@@ -1064,21 +1064,23 @@ export function AiBuilderApproachSections() {
             </div>
           </div>
 
-          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[20px] border border-white/[0.06] bg-[#222222] p-5 sm:p-10">
-            <Image
-              alt="Question and answer level AI assistance options"
-              className="mx-auto block h-auto w-full max-w-[702px]"
-              height={1299}
-              quality={60}
-              sizes="(min-width: 1280px) 702px, 100vw"
-              src="/images/AI-builder/images/quick-actions-q.png"
-              width={2212}
-            />
+          <div className="mx-auto mt-16 w-full max-w-[1142px] overflow-hidden rounded-[16px] border border-white/[0.06] bg-[#222222] p-5 sm:p-10">
+            <div className="relative flex justify-center overflow-hidden">
+              <Image
+                alt="Question and answer level AI assistance options"
+                className="relative left-1/2 block h-auto w-[112%] max-w-none -translate-x-1/2"
+                height={1299}
+                quality={60}
+                sizes="(min-width: 1280px) 1122px, 112vw"
+                src="/images/AI-builder/images/ai-question-answer.png"
+                width={1573}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#181818] pb-[160px] pt-[120px]">
+      <section className="bg-[#141314] pb-[160px] pt-0">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="relative left-1/2 mb-[120px] w-dvw -translate-x-1/2">
             <div className="h-px w-full bg-white/[0.1]" />
@@ -1091,7 +1093,7 @@ export function AiBuilderApproachSections() {
             <div className="mt-20 space-y-10">
               {IMPACT_ROWS.map((row) => (
                 <div className="grid gap-5 sm:gap-8 md:grid-cols-[134px_1fr] md:gap-10 lg:gap-[125px]" key={row.title}>
-                  <p className="font-figtree text-[24px] font-bold leading-[1.2] text-white">
+                  <p className="font-figtree text-[20px] font-bold leading-[1.2] text-white">
                     {row.title}
                   </p>
                   <div className="space-y-3 font-figtree text-[20px] leading-[32px] text-[#f5f5f5]">

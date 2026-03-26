@@ -43,7 +43,7 @@ export function HeroRotatingQuestion({
 
   return (
     <h1
-      className={`font-aeonik max-w-[899px] text-white transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${compact ? "text-[30px] leading-[1.18] sm:text-[38px] lg:text-[46px] lg:leading-[1.15]" : "text-[40px] leading-[1.1] sm:text-[52px] lg:text-[64px] lg:leading-[73px]"}`}
+      className={`font-aeonik max-w-[980px] text-white transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${compact ? "text-[30px] leading-[1.18] sm:text-[38px] lg:text-[46px] lg:leading-[1.15]" : "text-[64px] font-normal leading-[73px]"}`}
     >
       How does Mania{" "}
       <span

@@ -88,7 +88,8 @@ h4,
 h5,
 h6 {
   font-family:
-    "Aeonik TRIAL", "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+    var(--font-archivo), "Archivo", "Avenir Next", "Trebuchet MS", "Segoe UI",
+    sans-serif;
 }
 
 .font-figtree {
@@ -99,7 +100,8 @@ h6 {
 
 .font-aeonik {
   font-family:
-    "Aeonik TRIAL", "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+    var(--font-archivo), "Archivo", "Avenir Next", "Trebuchet MS", "Segoe UI",
+    sans-serif;
 }
 
 .font-dm {

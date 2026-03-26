@@ -8,12 +8,13 @@ interface CtrlEatCaseStudySectionProps {
 
 const CTRLEAT_INTRO_TITLE = "Nutrition - Aware Food Delivery";
 const CTRLEAT_INTRO_DESCRIPTION =
-  "CtrlEat is a food delivery app that tailors restaurant suggestions based on users’ dietary preferences, making nutrition information easier to understand and act on. I joined as the sole designer to define and deliver the MVP, structuring how dietary preferences are captured, categorized, and used across the experience. The focus was on turning complex user needs into a clear, usable system.";
+  "Designing an MVP for a food discovery app that tailors recommendations based on users’ dietary preferences. I worked as the sole designer, structuring how preferences are captured and translated into meaningful suggestions. The focus was on turning diverse user needs into a clear and usable system.";
 const CTRLEAT_INTRO_DETAILS = [
-  "Founding Designer",
-  "Core workflows",
+  "Sole Designer",
   "System Structure",
-  "Product Foundations",
+  "Mobile Experience",
+  "Illustrations & Icons design",
+  "2020",
 ] as const;
 
 const ICONS = [
@@ -115,9 +116,9 @@ function CtrlEatIntro() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:gap-x-8">
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
         {CTRLEAT_INTRO_DETAILS.map((item, index) => (
-          <div className="flex items-center gap-6 sm:gap-8" key={item}>
+          <div className="flex items-center gap-4 sm:gap-5" key={item}>
             <p className="font-figtree text-[15px] font-medium text-[#737373] sm:text-[16px]">
               {item}
             </p>
