@@ -259,8 +259,10 @@ export function HeroAssistantPanel({
 
   return (
     <>
-      <div className="relative z-10 mx-auto flex h-[663px] w-full max-w-[899px] flex-col items-center px-5 pb-[250px] pt-[160px] text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
-        <HeroRotatingQuestion />
+      <div className="relative z-10 mx-auto flex h-[663px] w-full max-w-[980px] flex-col items-center px-5 pb-[250px] pt-[160px] text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
+        <div className="flex min-h-[219px] w-full items-center justify-center">
+          <HeroRotatingQuestion />
+        </div>
 
         <div className="relative mt-[32px] flex w-full max-w-[772px] flex-col items-center gap-[32px]">
           <HeroSplashLayer />

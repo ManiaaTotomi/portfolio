@@ -40,17 +40,17 @@ export function AiBuilderInternalHeaderSection({
             {DETAILS}
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
             {AI_BUILDER_CHIPS.map((chip, index) => (
-              <div className="flex items-center gap-3" key={chip}>
-                <span className="rounded-[30px] border border-[#2b2b2b] bg-[rgba(47,47,47,0.24)] px-4 py-2 font-figtree text-[16px] text-[#c2c2c2]">
+              <div className="flex items-center gap-4 sm:gap-5" key={chip}>
+                <p className="font-figtree text-[15px] font-medium text-[#6d6c6c] sm:text-[16px]">
                   {chip}
-                </span>
+                </p>
                 {index < AI_BUILDER_CHIPS.length - 1 && (
-                  <span className="relative inline-flex h-[3px] w-[3px] rounded-full bg-[#c2c2c2]">
+                  <span className="relative inline-flex h-[2px] w-[2px] rounded-full bg-[#6d6c6c]">
                     <span
                       aria-hidden="true"
-                      className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(194,194,194,0.42)_0%,rgba(194,194,194,0)_72%)]"
+                      className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(109,108,108,0.45)_0%,rgba(109,108,108,0)_72%)]"
                     />
                   </span>
                 )}

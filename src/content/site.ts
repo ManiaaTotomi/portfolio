@@ -110,7 +110,7 @@ export interface SiteContent {
 
 export const siteContent: SiteContent = {
   name: "Mania Totomi",
-  cvUrl: "#",
+  cvUrl: "/cv",
   role: "Lead Product Designer",
   heroKicker: "Hey, I’m Mania!",
   headline: "Product Designer building scalable B2B SaaS & AI experiences",
@@ -120,7 +120,7 @@ export const siteContent: SiteContent = {
     "Currently Lead Designer at Pollfish, while collaborating on selected freelance product initiatives.",
   ],
   assistantDisclaimer:
-    "This assistant is a personal experiment. It can answer questions about my experience, process and work but it can make mistakes.",
+    "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.",
   assistantPrompts: [
     "Find balance between empathy and constraints",
     "How do use AI in your work?",
@@ -131,7 +131,7 @@ export const siteContent: SiteContent = {
   assistantButtonLabel: "Ask me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
-  email: "hello@ilanlevy.dev",
+  email: "mania.totomi@gmail.com",
   nav: [
     { label: "Pollfish", href: "#pollfish" },
     { label: "TILD", href: "#tild" },
@@ -327,8 +327,8 @@ export const siteContent: SiteContent = {
           tag: "Pollfish",
           title: "Multiple Audiences",
           paragraphs: [
-            "The Questionnaire Builder is the core of Pollfish’s survey creation workflow, allowing users to design, structure, and manage surveys with support for complex logic and advanced configuration.",
-            "I lead the design of the experience, structuring how questions, logic, and settings are created and managed within the builder. The focus is on making complex functionality easier to use, without limiting flexibility for advanced research needs.",
+            "Designing a system that allows researchers to run surveys across multiple audiences, each with different targeting, quotas, and constraints.",
+            "I led the design of the experience, structuring how audiences are created, compared, and managed within a single project. The focus was on maintaining flexibility while ensuring feasibility and clarity at scale",
           ],
           details: [
             {

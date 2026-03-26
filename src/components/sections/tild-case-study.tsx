@@ -12,6 +12,7 @@ const TILD_INTRO_DETAILS = [
   "Founding Designer",
   "System Structure",
   "Product Foundations",
+  "2025 - Today",
 ] as const;
 
 const AS_BUILT_DESCRIPTION = [
@@ -49,7 +50,7 @@ function TildIntro() {
   return (
     <div className="mx-auto flex w-full max-w-[710px] flex-col items-center gap-8 text-center">
       <p className="font-figtree text-[18px] italic leading-[22px] text-[rgba(194,194,194,0.4)]">
-        In progress
+        Coming soon
       </p>
 
       <div className="space-y-6">
@@ -61,9 +62,9 @@ function TildIntro() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:gap-x-8">
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
         {TILD_INTRO_DETAILS.map((item, index) => (
-          <div className="flex items-center gap-6 sm:gap-8" key={item}>
+          <div className="flex items-center gap-4 sm:gap-5" key={item}>
             <p className="font-figtree text-[15px] font-medium text-[#6d6c6c] sm:text-[16px]">
               {item}
             </p>
@@ -124,7 +125,7 @@ function TildFeatureCard({
       <div className="relative px-6 sm:px-10 lg:px-[53px]">
         <div className="grid items-center gap-12 py-[82px] lg:grid-cols-[1fr_1.25fr]">
           <div className="flex flex-col justify-center lg:pl-[43px]">
-            <div className="w-full lg:max-w-[400px]">
+            <div className="w-full lg:max-w-[440px]">
               <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
                 {title}
               </h3>

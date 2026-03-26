@@ -7,6 +7,7 @@ interface QuestionnaireBuilderInternalHeaderSectionProps {
 }
 
 const TITLE = "Questionnaire Builder";
+const STATUS_NOTE = "CASE STUDY IN PROGRESS";
 const INTRO =
   "I led the evolution of Pollfish’s core survey creation system, from quick validation surveys to complex research studies. I introduced advanced methods, logic, and dynamic structures while keeping the builder intuitive for both new and expert researchers.";
 const CHIPS = [
@@ -27,6 +28,10 @@ export function QuestionnaireBuilderInternalHeaderSection({
 
       <div className="relative z-10 mx-auto flex min-h-[420px] w-full max-w-[1600px] items-center justify-center px-5 sm:min-h-[460px] lg:min-h-[500px]">
         <div className="relative top-[32px] w-full max-w-[710px] text-center sm:top-[36px]">
+          <p className="font-figtree mb-3 text-[12px] font-medium uppercase tracking-[0.08em] text-white/45 sm:mb-4 sm:text-[13px]">
+            {STATUS_NOTE}
+          </p>
+
           <h1 className="font-aeonik text-[44px] font-semibold leading-[1.05] text-white sm:text-[56px]">
             {TITLE}
           </h1>
@@ -35,17 +40,17 @@ export function QuestionnaireBuilderInternalHeaderSection({
             {INTRO}
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
             {CHIPS.map((chip, index) => (
-              <div className="flex items-center gap-3" key={chip}>
-                <span className="rounded-[30px] border border-[#2b2b2b] bg-[rgba(47,47,47,0.24)] px-4 py-2 font-figtree text-[16px] text-[#c2c2c2]">
+              <div className="flex items-center gap-4 sm:gap-5" key={chip}>
+                <p className="font-figtree text-[15px] font-medium text-[#6d6c6c] sm:text-[16px]">
                   {chip}
-                </span>
+                </p>
                 {index < CHIPS.length - 1 && (
-                  <span className="relative inline-flex h-[3px] w-[3px] rounded-full bg-[#c2c2c2]">
+                  <span className="relative inline-flex h-[2px] w-[2px] rounded-full bg-[#6d6c6c]">
                     <span
                       aria-hidden="true"
-                      className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(194,194,194,0.42)_0%,rgba(194,194,194,0)_72%)]"
+                      className="absolute -inset-[4px] rounded-full bg-[radial-gradient(circle,rgba(109,108,108,0.45)_0%,rgba(109,108,108,0)_72%)]"
                     />
                   </span>
                 )}

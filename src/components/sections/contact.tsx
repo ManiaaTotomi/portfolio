@@ -1,5 +1,6 @@
 import type { ContactContent } from "@/content/site";
 import { ContactForm } from "@/components/contact-form";
+import { CopyEmailButton } from "@/components/copy-email-button";
 import { Section } from "@/components/primitives/section";
 import { Reveal } from "@/components/reveal";
 
@@ -43,6 +44,10 @@ export function ContactSection({
                 >
                   {email}
                 </a>
+                <CopyEmailButton
+                  className="ml-2 h-5 w-5 border-accent/40 text-accent/85 focus-visible:ring-accent/40"
+                  email={email}
+                />
               </p>
               <p>
                 <span className="font-semibold text-text">Location:</span>{" "}

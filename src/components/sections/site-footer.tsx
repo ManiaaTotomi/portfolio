@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { CopyEmailButton } from "@/components/copy-email-button";
 import type { SiteContent } from "@/content/site";
 
 interface SiteFooterProps {
@@ -25,13 +25,19 @@ export function SiteFooter({ content, showTopBorder = true }: SiteFooterProps) {
               {FOOTER_CLOSURE_TEXT}
             </p>
 
-            <a
-              aria-label={`Email ${content.name}`}
-              className="font-aeonik text-center text-[16px] leading-6 tracking-[1.28px] !text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-              href={`mailto:${FOOTER_EMAIL}`}
-            >
-              {FOOTER_EMAIL}
-            </a>
+            <div className="inline-flex items-center gap-3">
+              <a
+                aria-label={`Email ${content.name}`}
+                className="font-aeonik text-center text-[16px] leading-6 tracking-[1.28px] !text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                href={`mailto:${FOOTER_EMAIL}`}
+              >
+                {FOOTER_EMAIL}
+              </a>
+              <CopyEmailButton
+                className="h-6 w-6"
+                email={FOOTER_EMAIL}
+              />
+            </div>
 
             <div className="relative h-[33.95px] w-[33.123px]">
               <Image
@@ -52,12 +58,33 @@ export function SiteFooter({ content, showTopBorder = true }: SiteFooterProps) {
             </div>
           </div>
 
-          <Link
-            className="font-aeonik text-center text-[12px] tracking-[0.6px] text-[#666666] transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-            href="#top"
-          >
-            back to the top
-          </Link>
+          <div className="flex flex-col items-center gap-8">
+            <a
+              aria-label="Back to top"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-[#666666] transition-opacity hover:opacity-80 focus-visible:rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 13V3M8 3L4.5 6.5M8 3L11.5 6.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </a>
+            <p className="font-aeonik text-center text-[14px] tracking-[0.7px] text-white/50">
+              Designed in Figma. Built in Cursor. Shaped with AI.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
