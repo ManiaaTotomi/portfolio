@@ -7,7 +7,7 @@ interface TildCaseStudySectionProps {
 
 const TILD_INTRO_TITLE = "Construction collaboration platform";
 const TILD_INTRO_DESCRIPTION =
-  "Project Alpha (placeholder name) is a construction collaboration platform that helps teams manage tasks, properties, and contractors. I’m designing the product from an early stage, structuring core workflows and how key entities interact. The focus is on bringing clarity to fragmented processes while maintaining flexibility.";
+  "Project Alpha (confidential codename) is a construction collaboration platform that helps teams manage tasks, properties, and contractors. I’m designing the product from an early stage, structuring core workflows and how key entities interact. The focus is on bringing clarity to fragmented processes while maintaining flexibility.";
 const TILD_INTRO_DETAILS = [
   "Founding Designer",
   "System Structure",
@@ -37,8 +37,8 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(12,255,49,0.42)_0%,rgba(12,255,49,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#0CFF31]">
-          Project Alpha
+        <p className="font-aeonik text-[18px] tracking-[1.28px] text-[#0CFF31]">
+          Project alpha
         </p>
       </div>
       <div className="h-px flex-1 bg-white/10" />

@@ -49,7 +49,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(247,14,255,0.48)_0%,rgba(247,14,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#f70eff]">
+        <p className="font-aeonik text-[18px] tracking-[1.28px] text-[#f70eff]">
           Pollfish
         </p>
       </div>

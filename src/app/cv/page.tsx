@@ -61,7 +61,7 @@ const EXPERIENCE_ENTRIES: ExperienceEntry[] = [
     summary:
       "Working across early-stage products and client projects, focusing on structuring workflows, personalization, and operational tools.",
     bullets: [
-      "TILD: Construction collaboration platform",
+      "Project Alpha (confidential codename): Construction collaboration platform",
       "CtrlEat: Food discovery app based on nutrition preferences",
       "Cassiopeia: Hospitality management tool",
       "Digital Maturity Self Assessment Tool (DMSAT) / Eurobank: Web design and product design",

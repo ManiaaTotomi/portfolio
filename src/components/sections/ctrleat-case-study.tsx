@@ -97,7 +97,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(49,247,255,0.42)_0%,rgba(49,247,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
+        <p className="font-aeonik text-[18px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
       </div>
       <div className="h-px flex-1 bg-white/10" />
     </div>
