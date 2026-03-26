@@ -256,7 +256,7 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
                   </p>
                 </div>
 
-                {questionCard.answers && (
+                {"answers" in questionCard && (
                   <div className="mt-4 space-y-2.5">
                     {questionCard.answers.map((answer, answerIndex) => (
                       <div className="flex items-start gap-2" key={answer}>
