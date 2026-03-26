@@ -68,9 +68,9 @@ function ScreenshotPair({
       >
         {caption}
       </p>
-      <div className={`overflow-hidden rounded-[10px] border ${frameClassName} p-3 sm:p-4`}>
+      <div className={`overflow-hidden rounded-[16px] border ${frameClassName} p-3 sm:p-4`}>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="overflow-hidden rounded-[8px] border border-black/10 bg-white">
+          <div className="overflow-hidden rounded-[16px] border border-black/10 bg-white">
             <Image
               alt="Questionnaire Builder workflow screenshot"
               className="h-auto w-full object-cover"
@@ -80,7 +80,7 @@ function ScreenshotPair({
               width={2772}
             />
           </div>
-          <div className="overflow-hidden rounded-[8px] border border-black/10 bg-white">
+          <div className="overflow-hidden rounded-[16px] border border-black/10 bg-white">
             <Image
               alt="Questionnaire Builder interface screenshot"
               className="h-auto w-full object-cover"
@@ -120,8 +120,8 @@ function AnimatedImageBlock({
       >
         {caption}
       </p>
-      <div className={`overflow-hidden rounded-[10px] border ${frameClassName} p-3 sm:p-4`}>
-        <div className="overflow-hidden rounded-[8px] border border-black/10 bg-white shadow-[0_18px_36px_rgba(13,17,25,0.1)]">
+      <div className={`overflow-hidden rounded-[16px] border ${frameClassName} p-3 sm:p-4`}>
+        <div className="overflow-hidden rounded-[16px] border border-black/10 bg-white shadow-[0_18px_36px_rgba(13,17,25,0.1)]">
           <Image
             alt={alt}
             className="block h-auto w-full"
@@ -204,7 +204,7 @@ function SystemLayerIcon({ kind }: { kind: (typeof SYSTEM_LAYERS)[number]["icon"
 export function QuestionnaireBuilderContentSections() {
   return (
     <>
-      <section className="bg-[#131313] pb-[80px] pt-[120px]">
+      <section className="bg-[#141314] pb-[80px] pt-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 text-white sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px]">
             <h2 className="font-aeonik text-[44px] font-semibold leading-[1.08] text-[#ececec] sm:text-[48px]">
@@ -237,7 +237,7 @@ export function QuestionnaireBuilderContentSections() {
               Three primary user archetypes shaped how the builder balanced speed,
               clarity, and advanced capabilities.
             </p>
-            <div className="mt-4 overflow-hidden rounded-[10px] bg-[#f2f2f2]">
+            <div className="mt-4 overflow-hidden rounded-[16px] bg-[#f2f2f2]">
               <Image
                 alt="Three primary user archetypes for Questionnaire Builder"
                 className="h-auto w-full object-cover"
@@ -251,7 +251,7 @@ export function QuestionnaireBuilderContentSections() {
         </div>
       </section>
 
-      <section className="bg-[#131313] pb-[120px]">
+      <section className="bg-[#141314] pb-[120px]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[75px]">
           <div className="relative overflow-hidden rounded-[20px] border border-white/[0.1] bg-[#111111] px-5 py-[70px] text-white sm:px-8 lg:px-[120px] lg:py-[120px]">
             <div className="pointer-events-none absolute -left-[180px] -top-[170px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(0,207,139,0.2)_0%,rgba(0,207,139,0)_72%)] blur-[18px]" />
@@ -269,7 +269,7 @@ export function QuestionnaireBuilderContentSections() {
                 </p>
               </div>
 
-              <div className="mt-10 grid overflow-hidden rounded-t-[20px] border border-white/[0.07] md:grid-cols-3">
+              <div className="mt-10 grid overflow-hidden rounded-[16px] border border-white/[0.07] md:grid-cols-3">
                 {SYSTEM_LAYERS.map((layer, index) => (
                   <div
                     className={`flex min-h-[226px] flex-col gap-4 p-8 ${
@@ -294,7 +294,7 @@ export function QuestionnaireBuilderContentSections() {
         </div>
       </section>
 
-      <section className="border-t border-white/[0.08] bg-[#181818] py-[120px] text-[#f1f1f1]">
+      <section className="border-t border-white/[0.08] bg-[#141314] py-[120px] text-[#f1f1f1]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px]">
             <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[44px]">

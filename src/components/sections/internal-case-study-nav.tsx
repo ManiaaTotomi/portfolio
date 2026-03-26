@@ -44,7 +44,6 @@ export function InternalCaseStudyNav({
   next,
 }: InternalCaseStudyNavProps) {
   const rightLink = next ?? previous;
-  const rightLinkDirection = next ? "right" : "left";
 
   return (
     <section className="border-b border-white/[0.15] bg-[#141314]">
@@ -63,9 +62,8 @@ export function InternalCaseStudyNav({
               className="font-figtree inline-flex items-center gap-3 text-[14px] text-white/60 transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
               href={rightLink.href}
             >
-              {rightLinkDirection === "left" ? <ArrowIcon direction="left" /> : null}
               <span>{stripDirectionPrefix(rightLink.label)}</span>
-              {rightLinkDirection === "right" ? <ArrowIcon direction="right" /> : null}
+              <ArrowIcon direction="right" />
             </Link>
           ) : (
             <span className="font-figtree text-[16px] text-white/35">End of case study</span>

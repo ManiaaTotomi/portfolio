@@ -176,7 +176,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(4,75,255,0.45)_0%,rgba(4,75,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#044bff]">Minddy</p>
+        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#044bff]">MINDDY</p>
       </div>
       <div className="h-px flex-1 bg-white/10" />
     </div>
