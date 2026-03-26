@@ -17,7 +17,7 @@ export default function AiBuilderCaseStudyPage() {
           }}
         />
       </main>
-      <SiteFooter content={siteContent} />
+      <SiteFooter content={siteContent} showTopBorder={false} />
     </>
   );
 }

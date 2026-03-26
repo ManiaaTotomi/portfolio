@@ -96,6 +96,47 @@ function ScreenshotPair({
   );
 }
 
+function AnimatedImageBlock({
+  caption,
+  src,
+  alt,
+  light = true,
+}: {
+  caption: string;
+  src: string;
+  alt: string;
+  light?: boolean;
+}) {
+  const frameClassName = light
+    ? "border-[#e2e2e2] bg-[#f4f4f4]"
+    : "border-white/[0.1] bg-[#232323]";
+
+  return (
+    <div className="space-y-4">
+      <p
+        className={`font-figtree text-[16px] ${
+          light ? "text-black/60" : "text-white/60"
+        }`}
+      >
+        {caption}
+      </p>
+      <div className={`overflow-hidden rounded-[10px] border ${frameClassName} p-3 sm:p-4`}>
+        <div className="overflow-hidden rounded-[8px] border border-black/10 bg-white shadow-[0_18px_36px_rgba(13,17,25,0.1)]">
+          <Image
+            alt={alt}
+            className="block h-auto w-full"
+            src={src}
+            unoptimized
+            width={1440}
+            height={775}
+            sizes="(min-width: 1440px) 986px, 100vw"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SystemLayerIcon({ kind }: { kind: (typeof SYSTEM_LAYERS)[number]["icon"] }) {
   if (kind === "structure") {
     return (
@@ -216,45 +257,47 @@ export function QuestionnaireBuilderContentSections() {
             <div className="pointer-events-none absolute -left-[180px] -top-[170px] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(0,207,139,0.2)_0%,rgba(0,207,139,0)_72%)] blur-[18px]" />
             <div className="pointer-events-none absolute -bottom-[260px] right-[-140px] h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(0,207,139,0.16)_0%,rgba(0,207,139,0)_72%)] blur-[22px]" />
 
-            <div className="relative max-w-[779px]">
-              <h2 className="font-aeonik text-[44px] font-semibold leading-[1.08] text-[#ececec] sm:text-[48px]">
-                The system
-              </h2>
-              <p className="mt-6 font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
-                This system gradually evolved into three interconnected layers. Each
-                layer expanded over time as Pollfish introduced more sophisticated
-                research workflows.
-              </p>
-            </div>
+            <div className="relative mx-auto w-full max-w-[986px]">
+              <div className="max-w-[779px]">
+                <h2 className="font-aeonik text-[44px] font-semibold leading-[1.08] text-[#ececec] sm:text-[48px]">
+                  The system
+                </h2>
+                <p className="mt-6 font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
+                  This system gradually evolved into three interconnected layers. Each
+                  layer expanded over time as Pollfish introduced more sophisticated
+                  research workflows.
+                </p>
+              </div>
 
-            <div className="relative mt-10 grid overflow-hidden rounded-t-[20px] border border-white/[0.07] md:grid-cols-3">
-              {SYSTEM_LAYERS.map((layer, index) => (
-                <div
-                  className={`flex min-h-[226px] flex-col gap-4 p-8 ${
-                    index < SYSTEM_LAYERS.length - 1
-                      ? "border-b border-white/[0.07] md:border-b-0 md:border-r"
-                      : ""
-                  } border-white/[0.07]`}
-                  key={layer.title}
-                >
-                  <SystemLayerIcon kind={layer.icon} />
-                  <h3 className="font-figtree text-[20px] font-bold leading-[28px] text-white">
-                    {layer.title}
-                  </h3>
-                  <p className="font-figtree text-[18px] leading-[26px] text-white">
-                    {layer.description}
-                  </p>
-                </div>
-              ))}
+              <div className="mt-10 grid overflow-hidden rounded-t-[20px] border border-white/[0.07] md:grid-cols-3">
+                {SYSTEM_LAYERS.map((layer, index) => (
+                  <div
+                    className={`flex min-h-[226px] flex-col gap-4 p-8 ${
+                      index < SYSTEM_LAYERS.length - 1
+                        ? "border-b border-white/[0.07] md:border-b-0 md:border-r"
+                        : ""
+                    } border-white/[0.07]`}
+                    key={layer.title}
+                  >
+                    <SystemLayerIcon kind={layer.icon} />
+                    <h3 className="font-figtree text-[20px] font-bold leading-[28px] text-white">
+                      {layer.title}
+                    </h3>
+                    <p className="font-figtree text-[18px] leading-[26px] text-white">
+                      {layer.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#e2e2e2] bg-white py-[120px] text-[#202020]">
+      <section className="border-t border-white/[0.08] bg-[#181818] py-[120px] text-[#f1f1f1]">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px]">
-            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] sm:text-[44px]">
+            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[44px]">
               Survey Structure
             </h2>
 
@@ -280,9 +323,7 @@ export function QuestionnaireBuilderContentSections() {
                 </p>
               </NarrativeBlock>
 
-              <QuestionnaireBuilderFlowAnimation />
-
-              <ScreenshotPair caption="Questions are built directly on the canvas, with inline editing and quick actions available at both question and answer level." />
+              <QuestionnaireBuilderFlowAnimation light={false} />
 
               <NarrativeBlock label="Navigation & Editing">
                 <p>
@@ -300,12 +341,17 @@ export function QuestionnaireBuilderContentSections() {
                 </p>
               </NarrativeBlock>
 
-              <ScreenshotPair caption="Questions can be reordered, duplicated, converted, or inserted between existing ones without breaking the editing flow." />
+              <AnimatedImageBlock
+                alt="Animated demonstration of reordering and editing questions in the Questionnaire Builder"
+                caption="Questions can be reordered, duplicated, converted, or inserted between existing ones without breaking the editing flow."
+                light={false}
+                src="/images/Questionnaire-Builder/animations/first-flow/questions-reordering-animated.webp"
+              />
             </div>
           </div>
 
           <div className="mx-auto mt-[120px] w-full max-w-[986px]">
-            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] sm:text-[44px]">
+            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[44px]">
               Survey flow
             </h2>
 
@@ -331,7 +377,10 @@ export function QuestionnaireBuilderContentSections() {
                 </p>
               </NarrativeBlock>
 
-              <ScreenshotPair caption="Logic and structure stay connected in one workspace so teams can edit and verify flow without context switching." />
+              <ScreenshotPair
+                caption="Logic and structure stay connected in one workspace so teams can edit and verify flow without context switching."
+                light={false}
+              />
 
               <NarrativeBlock label="Logic validation">
                 <p>
@@ -364,7 +413,7 @@ export function QuestionnaireBuilderContentSections() {
           </div>
 
           <div className="mx-auto mt-[120px] w-full max-w-[986px]">
-            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] sm:text-[44px]">
+            <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] text-[#e7e7e7] sm:text-[44px]">
               Research Capabilities
             </h2>
 
@@ -386,7 +435,10 @@ export function QuestionnaireBuilderContentSections() {
                 </p>
               </NarrativeBlock>
 
-              <ScreenshotPair caption="The builder supports both standard question types and complete research frameworks within the same system." />
+              <ScreenshotPair
+                caption="The builder supports both standard question types and complete research frameworks within the same system."
+                light={false}
+              />
 
               <NarrativeBlock label="Loop & Merge">
                 <p>
@@ -420,7 +472,7 @@ export function QuestionnaireBuilderContentSections() {
         </div>
       </section>
 
-      <section className="border-b border-[#e2e2e2]/15 bg-[#141314] py-[120px] text-white">
+      <section className="bg-[#141314] py-[120px] text-white">
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div className="mx-auto w-full max-w-[986px]">
             <h2 className="font-aeonik text-[40px] font-semibold leading-[1.1] sm:text-[44px]">

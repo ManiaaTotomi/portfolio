@@ -47,10 +47,10 @@ export function InternalCaseStudyNav({
   const rightLinkDirection = next ? "right" : "left";
 
   return (
-    <section className="border-y border-white/[0.15] bg-[#181818]">
+    <section className="border-b border-white/[0.15] bg-[#141314]">
       <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center justify-between gap-4 px-5 py-6 sm:px-8 lg:px-[84px]">
         <Link
-          className="font-figtree inline-flex items-center gap-3 text-[16px] text-white/92 transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+          className="font-figtree inline-flex items-center gap-3 text-[14px] text-white/60 transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
           href="/#pollfish"
         >
           <ArrowIcon direction="left" />
@@ -60,7 +60,7 @@ export function InternalCaseStudyNav({
         <div className="flex min-w-[220px] justify-end">
           {rightLink ? (
             <Link
-              className="font-figtree inline-flex items-center gap-3 text-[16px] text-white/92 transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              className="font-figtree inline-flex items-center gap-3 text-[14px] text-white/60 transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
               href={rightLink.href}
             >
               {rightLinkDirection === "left" ? <ArrowIcon direction="left" /> : null}

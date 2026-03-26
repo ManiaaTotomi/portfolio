@@ -17,7 +17,7 @@ export default function QuestionnaireBuilderCaseStudyPage() {
           }}
         />
       </main>
-      <SiteFooter content={siteContent} />
+      <SiteFooter content={siteContent} showTopBorder={false} />
     </>
   );
 }

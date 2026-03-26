@@ -68,7 +68,7 @@ const FLOW_STEPS: FlowStep[] = [
   },
 ];
 
-export function QuestionnaireBuilderFlowAnimation() {
+export function QuestionnaireBuilderFlowAnimation({ light = true }: { light?: boolean }) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [showClickRipple, setShowClickRipple] = useState(false);
@@ -119,12 +119,18 @@ export function QuestionnaireBuilderFlowAnimation() {
 
   return (
     <div className="space-y-4">
-      <p className="font-figtree text-[16px] text-black/60">
+      <p
+        className={`font-figtree text-[16px] ${light ? "text-black/60" : "text-white/60"}`}
+      >
         In-page flow animation: empty state to first two questions (add question,
         pick type, write, and continue building).
       </p>
 
-      <div className="overflow-hidden rounded-[10px] border border-[#e2e2e2] bg-[#f4f4f4] p-3 sm:p-4">
+      <div
+        className={`overflow-hidden rounded-[10px] border p-3 sm:p-4 ${
+          light ? "border-[#e2e2e2] bg-[#f4f4f4]" : "border-white/[0.1] bg-[#232323]"
+        }`}
+      >
         <div className="relative overflow-hidden rounded-[8px] border border-black/10 bg-white shadow-[0_18px_36px_rgba(13,17,25,0.1)]">
           <div className="relative aspect-[1024/636] w-full">
             {FLOW_STEPS.map((step, stepIndex) => (
@@ -182,7 +188,11 @@ export function QuestionnaireBuilderFlowAnimation() {
         </div>
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-1">
-          <p className="font-figtree text-[14px] font-medium text-black/70">
+          <p
+            className={`font-figtree text-[14px] font-medium ${
+              light ? "text-black/70" : "text-white/70"
+            }`}
+          >
             Step {activeStepIndex + 1} of {FLOW_STEPS.length}: {activeStep.title}
           </p>
           <div className="flex items-center gap-2">
@@ -190,7 +200,13 @@ export function QuestionnaireBuilderFlowAnimation() {
               <button
                 aria-label={`Show flow step ${stepIndex + 1}`}
                 className={`h-[6px] w-[28px] rounded-full transition-colors duration-300 ${
-                  stepIndex === activeStepIndex ? "bg-[#0e68f9]" : "bg-black/15"
+                  stepIndex === activeStepIndex
+                    ? light
+                      ? "bg-[#0e68f9]"
+                      : "bg-white/85"
+                    : light
+                      ? "bg-black/15"
+                      : "bg-white/20"
                 }`}
                 key={step.id}
                 onClick={() => {
