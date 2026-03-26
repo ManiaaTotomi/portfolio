@@ -17,14 +17,15 @@ interface MinddyIconCard {
 }
 
 const MINDDY_DETAILS = [
-  "Founding Designer",
-  "Core workflows",
-  "System Structure",
-  "Product Foundations",
+  "Thesis Project",
+  "Habit Formation",
+  "Behavioral Design",
+  "Mobile Experience",
+  "Icons & Illustrations Design",
 ] as const;
 const MINDDY_INTRO_TITLE = "Habit Building App";
 const MINDDY_INTRO_DESCRIPTION =
-  "CtrlEat is a food delivery app that tailors restaurant suggestions based on users’ dietary preferences, making nutrition information easier to understand and act on. I joined as the sole designer to define and deliver the MVP, structuring how dietary preferences are captured, categorized, and used across the experience. The focus was on turning complex user needs into a clear, usable system.";
+  "Designing a habit and wellbeing app exploring how users build routines and track progress over time. As part of my thesis, I defined the core experience, structuring how habits are created, tracked, and supported through guided sessions and reminders- translating behavior-driven concepts into a clear and usable system.";
 
 const ICONS: readonly MinddyIconCard[] = [
   {
@@ -175,7 +176,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(4,75,255,0.45)_0%,rgba(4,75,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#044bff]">Minddy</p>
+        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#044bff]">MINDDY</p>
       </div>
       <div className="h-px flex-1 bg-white/10" />
     </div>
@@ -194,9 +195,9 @@ function MinddyIntro() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 sm:gap-x-8">
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5">
         {MINDDY_DETAILS.map((item, index) => (
-          <div className="flex items-center gap-6 sm:gap-8" key={item}>
+          <div className="flex items-center gap-4 sm:gap-5" key={item}>
             <p className="font-figtree text-[15px] font-medium text-[#787390] sm:text-[16px]">
               {item}
             </p>

@@ -110,7 +110,7 @@ export interface SiteContent {
 
 export const siteContent: SiteContent = {
   name: "Mania Totomi",
-  cvUrl: "#",
+  cvUrl: "/cv",
   role: "Lead Product Designer",
   heroKicker: "Hey, I’m Mania!",
   headline: "Product Designer building scalable B2B SaaS & AI experiences",
@@ -120,7 +120,7 @@ export const siteContent: SiteContent = {
     "Currently Lead Designer at Pollfish, while collaborating on selected freelance product initiatives.",
   ],
   assistantDisclaimer:
-    "This assistant is a personal experiment. It can answer questions about my experience, process and work but it can make mistakes.",
+    "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.",
   assistantPrompts: [
     "Find balance between empathy and constraints",
     "How do use AI in your work?",
@@ -131,12 +131,12 @@ export const siteContent: SiteContent = {
   assistantButtonLabel: "Ask me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
-  email: "hello@ilanlevy.dev",
+  email: "mania.totomi@gmail.com",
   nav: [
     { label: "Pollfish", href: "#pollfish" },
-    { label: "TILD", href: "#tild" },
+    { label: "Project Alpha", href: "#tild" },
     { label: "CtrlEat", href: "#ctrleat" },
-    { label: "Minddy", href: "#minddy" },
+    { label: "MINDDY", href: "#minddy" },
   ],
   socialLinks: [
     { label: "GitHub", href: "https://github.com" },
@@ -327,8 +327,8 @@ export const siteContent: SiteContent = {
           tag: "Pollfish",
           title: "Multiple Audiences",
           paragraphs: [
-            "The Questionnaire Builder is the core of Pollfish’s survey creation workflow, allowing users to design, structure, and manage surveys with support for complex logic and advanced configuration.",
-            "I lead the design of the experience, structuring how questions, logic, and settings are created and managed within the builder. The focus is on making complex functionality easier to use, without limiting flexibility for advanced research needs.",
+            "Designing a system that allows researchers to run surveys across multiple audiences, each with different targeting, quotas, and constraints.",
+            "I led the design of the experience, structuring how audiences are created, compared, and managed within a single project. The focus was on maintaining flexibility while ensuring feasibility and clarity at scale",
           ],
           details: [
             {
@@ -373,14 +373,14 @@ export const siteContent: SiteContent = {
     },
     {
       id: "tild",
-      navLabel: "TILD",
+      navLabel: "Project Alpha",
       entries: [
         {
           id: "tild-overview",
-          title: "TILD",
+          title: "Project Alpha",
           subtitle: "Construction planning / collaboration platform",
           paragraphs: [
-            "Tild is a construction collaboration platform designed to help teams manage tasks, properties, and contractors in one place, improving coordination across complex projects.",
+            "Project Alpha (placeholder name) is a construction collaboration platform designed to help teams manage tasks, properties, and contractors in one place, improving coordination across complex projects.",
             "I joined as a product designer to help define the product from an early stage, shaping core workflows and structuring how different entities—tasks, properties, and stakeholders—connect and interact within the system.",
             "The challenge was designing a flexible yet clear system in a fragmented industry, where workflows are often inconsistent and difficult to standardize, while ensuring the product remains intuitive for everyday use.",
           ],
@@ -483,14 +483,14 @@ export const siteContent: SiteContent = {
     },
     {
       id: "minddy",
-      navLabel: "Minddy",
+      navLabel: "MINDDY",
       entries: [
         {
           id: "minddy-overview",
-          title: "Minddy",
+          title: "MINDDY",
           subtitle: "Habit building app",
           paragraphs: [
-            "The product: Minddy is a wellness app designed to help users build sustainable habits through daily challenges and personalized goal-setting. It focuses on key areas like better sleep, fitness, focus, motivation, and healthy eating, encouraging small, consistent actions that lead to lasting behavior change.",
+            "The product: MINDDY is a wellness app designed to help users build sustainable habits through daily challenges and personalized goal-setting. It focuses on key areas like better sleep, fitness, focus, motivation, and healthy eating, encouraging small, consistent actions that lead to lasting behavior change.",
             "My role: This was my thesis project in 2018, where I designed the complete product from concept to final screens. I created the brand identity, custom illustrations, visual system, and user flows, exploring consumer-facing design, gamification, and onboarding psychology in ways I don't typically work on in my B2B role.",
           ],
           details: [

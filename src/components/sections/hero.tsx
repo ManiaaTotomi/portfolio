@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ content }: HeroSectionProps) {
   const assistantDisclaimer =
-    "This assistant is a personal experiment. Ask questions about my experience, process and work. It can make mistakes.";
+    "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.";
 
   return (
     <header className="relative overflow-visible bg-[#040404]" id="top">
