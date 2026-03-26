@@ -226,7 +226,7 @@ function ExecutionStepCell({
   text: string;
 }) {
   return (
-    <div className={`flex min-h-[194px] flex-col gap-4 bg-[#0e1113] p-8 ${className ?? ""}`}>
+    <div className={`flex min-h-[194px] flex-col gap-4 p-8 text-left ${className ?? ""}`}>
       <Image
         alt=""
         aria-hidden="true"
@@ -238,6 +238,39 @@ function ExecutionStepCell({
       <p className="font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">{text}</p>
     </div>
   );
+}
+
+function getExecutionStepDividerClasses(index: number) {
+  const classes = ["border-white/[0.07]"];
+
+  // Mobile: one column stack.
+  if (index > 0) {
+    classes.push("border-t");
+  }
+
+  // Large screens: two columns.
+  if (index >= 2) {
+    classes.push("lg:border-t");
+  } else {
+    classes.push("lg:border-t-0");
+  }
+  if (index % 2 === 1) {
+    classes.push("lg:border-l");
+  }
+
+  // Extra-large screens: three columns.
+  if (index >= 3) {
+    classes.push("xl:border-t");
+  } else {
+    classes.push("xl:border-t-0");
+  }
+  if (index % 3 !== 0) {
+    classes.push("xl:border-l");
+  } else {
+    classes.push("xl:border-l-0");
+  }
+
+  return classes.join(" ");
 }
 
 export function AiBuilderApproachSections() {
@@ -578,9 +611,9 @@ export function AiBuilderApproachSections() {
       </section>
 
       <section className="relative bg-[#141314] pb-0">
-        <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[75px]">
+        <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-[84px]">
           <div
-            className="relative isolate overflow-hidden rounded-[20px] border border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[120px] lg:py-[120px] xl:px-[233px]"
+            className="relative isolate overflow-hidden rounded-[20px] border border-white/[0.1] bg-[#111111] px-6 py-[64px] sm:px-10 lg:px-[84px] lg:py-[120px]"
             ref={executionCardRef}
           >
             <div
@@ -590,6 +623,7 @@ export function AiBuilderApproachSections() {
                   "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.24)) 28%, rgba(0,170,112,var(--execution-glow-a3,0.12)) 48%, rgba(0,170,112,0.04) 64%, rgba(0,170,112,0) 82%)",
                 transform:
                   "translate(var(--execution-glow-1-x,0px), var(--execution-glow-1-y,0px)) scale(var(--execution-glow-scale,1))",
+                filter: "blur(var(--execution-glow-blur,28px))",
                 opacity: 0.96,
               }}
             />
@@ -600,12 +634,13 @@ export function AiBuilderApproachSections() {
                   "radial-gradient(circle, rgba(0,170,112,var(--execution-glow-a1,0.44)) 0%, rgba(0,170,112,var(--execution-glow-a2,0.24)) 28%, rgba(0,170,112,var(--execution-glow-a3,0.12)) 48%, rgba(0,170,112,0.04) 64%, rgba(0,170,112,0) 82%)",
                 transform:
                   "translate(var(--execution-glow-2-x,0px), var(--execution-glow-2-y,0px)) scale(var(--execution-glow-scale,1))",
+                filter: "blur(var(--execution-glow-blur,28px))",
                 opacity: 0.96,
               }}
             />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(17,17,17,0.55)_62%,rgba(17,17,17,1)_100%)]" />
 
-            <div className="relative z-10">
+            <div className="relative z-10 mx-auto w-full max-w-[1100px] text-left">
               <div className="w-full max-w-[681px] space-y-6">
                 <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#e7e7e7]">
                   {EXECUTION_TITLE}
@@ -615,11 +650,12 @@ export function AiBuilderApproachSections() {
                 </p>
               </div>
 
-              <div className="mt-10 w-full overflow-hidden rounded-[16px] border border-white/[0.07] bg-[#0e1113]/40">
-                <div className="grid grid-cols-1 lg:mx-auto lg:w-[min(100%,981px)] lg:grid-cols-3">
-                  {EXECUTION_STEPS.map((step) => (
+              <div className="mt-10 w-full overflow-hidden rounded-[16px] border border-white/[0.07]">
+                <div className="grid grid-cols-1 text-left lg:grid-cols-2 xl:grid-cols-3">
+                  {EXECUTION_STEPS.map((step, index) => (
                     <ExecutionStepCell
                       key={step}
+                      className={getExecutionStepDividerClasses(index)}
                       text={step}
                     />
                   ))}
