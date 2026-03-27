@@ -309,7 +309,7 @@ export function HeroAssistantPanel({
               <textarea
                 aria-label="Ask a question"
                 autoFocus
-                className={`font-figtree min-h-[124px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
                 id={topTextareaId}
                 onChange={(event) => setInputValue(event.currentTarget.value)}
                 placeholder=""
@@ -440,7 +440,7 @@ export function HeroAssistantPanel({
                     <textarea
                       aria-label="Ask another question"
                       autoFocus
-                      className={`font-figtree min-h-[124px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
                       id={overlayTextareaId}
                       onChange={(event) => setInputValue(event.currentTarget.value)}
                       placeholder=""
