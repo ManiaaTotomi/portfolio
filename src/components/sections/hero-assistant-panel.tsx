@@ -165,7 +165,9 @@ export function HeroAssistantPanel({
 }: HeroAssistantPanelProps) {
   const placeholderText = "Ask your question about my work or experience...";
   const topInputId = useId();
+  const topTextareaId = useId();
   const overlayInputId = useId();
+  const overlayTextareaId = useId();
   const [inputValue, setInputValue] = useState("");
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -176,10 +178,21 @@ export function HeroAssistantPanel({
     loadStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, true),
   );
   const topInputRef = useRef<HTMLInputElement>(null);
+  const topTextareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    if (isMobile) {
+      topTextareaRef.current?.focus();
+      return;
+    }
+
     topInputRef.current?.focus();
   }, []);
 
@@ -269,12 +282,12 @@ export function HeroAssistantPanel({
 
   return (
     <>
-      <div className="relative z-10 mx-auto flex h-[calc(100svh-79px)] min-h-[663px] w-full max-w-[980px] flex-col items-center px-5 text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
-        <div className="absolute inset-x-5 top-1/2 flex -translate-y-1/2 items-center justify-center sm:inset-x-8 lg:relative lg:inset-auto lg:top-auto lg:translate-y-0 lg:min-h-[219px]">
+      <div className="relative z-10 mx-auto flex h-[calc(100dvh-79px)] min-h-[663px] w-full max-w-[980px] flex-col px-5 text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
+        <div className="flex flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
           <HeroRotatingQuestion />
         </div>
 
-        <div className="absolute inset-x-5 bottom-[max(18px,env(safe-area-inset-bottom))] mx-auto flex w-auto max-w-[772px] flex-col items-center gap-[18px] sm:inset-x-8 lg:relative lg:inset-auto lg:bottom-auto lg:mt-[32px] lg:w-full lg:gap-[32px]">
+        <div className="mx-auto flex w-full max-w-[772px] flex-col items-center gap-[18px] pb-[max(18px,env(safe-area-inset-bottom))] lg:relative lg:mt-[32px] lg:w-full lg:gap-[32px] lg:pb-0">
           <HeroSplashLayer />
 
           <form
@@ -284,7 +297,28 @@ export function HeroAssistantPanel({
             <div className="relative w-full sm:h-full">
               {!inputValue && (
                 <label
-                  className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:right-[170px] sm:top-1/2 sm:-translate-y-1/2 sm:text-[18px]"
+                  className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
+                  htmlFor={topTextareaId}
+                >
+                  <span aria-hidden className="hero-input-caret">
+                    |
+                  </span>
+                  {placeholderText}
+                </label>
+              )}
+              <textarea
+                aria-label="Ask a question"
+                autoFocus
+                className={`font-figtree min-h-[124px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                id={topTextareaId}
+                onChange={(event) => setInputValue(event.currentTarget.value)}
+                placeholder=""
+                ref={topTextareaRef}
+                value={inputValue}
+              />
+              {!inputValue && (
+                <label
+                  className="font-figtree absolute left-[35px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
                   htmlFor={topInputId}
                 >
                   <span aria-hidden className="hero-input-caret">
@@ -296,7 +330,7 @@ export function HeroAssistantPanel({
               <input
                 aria-label="Ask a question"
                 autoFocus
-                className={`font-figtree h-6 w-full appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:h-full sm:rounded-[9999px] sm:pl-[35px] sm:pr-[170px] sm:text-[18px] sm:leading-[1.2] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[35px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
                 id={topInputId}
                 onChange={(event) => setInputValue(event.currentTarget.value)}
                 placeholder=""
@@ -394,7 +428,27 @@ export function HeroAssistantPanel({
                   <div className="relative w-full sm:h-full">
                     {!inputValue && (
                       <label
-                        className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[25px] sm:right-[170px] sm:top-1/2 sm:-translate-y-1/2 sm:text-[18px]"
+                        className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
+                        htmlFor={overlayTextareaId}
+                      >
+                        <span aria-hidden className="hero-input-caret">
+                          |
+                        </span>
+                        {placeholderText}
+                      </label>
+                    )}
+                    <textarea
+                      aria-label="Ask another question"
+                      autoFocus
+                      className={`font-figtree min-h-[124px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      id={overlayTextareaId}
+                      onChange={(event) => setInputValue(event.currentTarget.value)}
+                      placeholder=""
+                      value={inputValue}
+                    />
+                    {!inputValue && (
+                      <label
+                        className="font-figtree absolute left-[25px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
                         htmlFor={overlayInputId}
                       >
                         <span aria-hidden className="hero-input-caret">
@@ -406,7 +460,7 @@ export function HeroAssistantPanel({
                     <input
                       aria-label="Ask another question"
                       autoFocus
-                      className={`font-figtree h-6 w-full appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:h-full sm:rounded-[9999px] sm:pl-[25px] sm:pr-[170px] sm:text-[18px] sm:leading-[1.2] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
                       id={overlayInputId}
                       onChange={(event) => setInputValue(event.currentTarget.value)}
                       placeholder=""
