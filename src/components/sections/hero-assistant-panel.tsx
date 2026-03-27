@@ -92,12 +92,22 @@ function buildAssistantReply(question: string) {
   return "Mania has a user-centered design philosophy, values collaboration and clear communication.";
 }
 
-function AskMeBorderButton({ label }: { label: string }) {
+function AskMeBorderButton({
+  label,
+  stackOnMobile = false,
+}: {
+  label: string;
+  stackOnMobile?: boolean;
+}) {
   const gradientId = useId().replace(/:/g, "");
 
   return (
     <button
-      className="font-figtree !absolute right-[14px] top-1/2 inline-flex h-[43px] w-[116px] shrink-0 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] sm:right-[25px] sm:w-fit"
+      className={`font-figtree inline-flex h-[43px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
+        stackOnMobile
+          ? "relative w-fit sm:absolute sm:right-[25px] sm:top-1/2 sm:w-fit sm:-translate-y-1/2"
+          : "absolute right-[14px] top-1/2 w-fit -translate-y-1/2 sm:right-[25px]"
+      }`}
       type="submit"
     >
       <svg
@@ -268,35 +278,35 @@ export function HeroAssistantPanel({
           <HeroSplashLayer />
 
           <form
-            className="relative h-[70px] w-full max-w-[763px] rounded-[9999px] border border-[rgba(255,255,255,0.2)] bg-transparent"
+            className="relative flex w-full max-w-[763px] flex-col items-end gap-6 rounded-[20px] border border-[rgba(255,255,255,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
             onSubmit={handleSubmit}
           >
-            {!inputValue && (
-              <label
-                className="font-figtree absolute left-[22px] right-[154px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:right-[170px] sm:text-[18px]"
-                htmlFor={topInputId}
-              >
-                <span
-                  aria-hidden
-                  className="hero-input-caret pointer-events-none absolute -left-[8px] top-1/2 -translate-y-[56%] leading-none"
+            <div className="relative w-full sm:h-full">
+              {!inputValue && (
+                <label
+                  className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:right-[170px] sm:top-1/2 sm:-translate-y-1/2 sm:text-[18px]"
+                  htmlFor={topInputId}
                 >
-                  |
-                </span>
-                {placeholderText}
-              </label>
-            )}
-            <input
-              aria-label="Ask a question"
-              autoFocus
-              className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[22px] pr-[154px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:pl-[35px] sm:pr-[170px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
-              id={topInputId}
-              onChange={(event) => setInputValue(event.currentTarget.value)}
-              placeholder=""
-              ref={topInputRef}
-              type="text"
-              value={inputValue}
-            />
-            <AskMeBorderButton label={assistantButtonLabel} />
+                  <span aria-hidden className="hero-input-caret">
+                    |
+                  </span>
+                  {placeholderText}
+                </label>
+              )}
+              <input
+                aria-label="Ask a question"
+                autoFocus
+                className={`font-figtree h-6 w-full appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:h-full sm:rounded-[9999px] sm:pl-[35px] sm:pr-[170px] sm:text-[18px] sm:leading-[1.2] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                id={topInputId}
+                onChange={(event) => setInputValue(event.currentTarget.value)}
+                placeholder=""
+                ref={topInputRef}
+                type="text"
+                value={inputValue}
+              />
+            </div>
+
+            <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
           </form>
 
           <p className="font-figtree w-full max-w-[554px] text-[13px] leading-[1.5] text-[rgba(181,181,181,0.8)] sm:text-[14px] sm:leading-[23px]">
@@ -378,34 +388,34 @@ export function HeroAssistantPanel({
 
               <div className="mt-8 flex w-full flex-col items-center gap-6">
                 <form
-                  className="relative h-[70px] w-full rounded-[9999px] border border-[rgba(231,231,231,0.2)] bg-transparent"
+                  className="relative flex w-full flex-col items-end gap-6 rounded-[20px] border border-[rgba(231,231,231,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
                   onSubmit={handleSubmit}
                 >
-                  {!inputValue && (
-                    <label
-                      className="font-figtree absolute left-[25px] right-[154px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:right-[170px] sm:text-[18px]"
-                      htmlFor={overlayInputId}
-                    >
-                      <span
-                        aria-hidden
-                        className="hero-input-caret pointer-events-none absolute -left-[8px] top-1/2 -translate-y-[56%] leading-none"
+                  <div className="relative w-full sm:h-full">
+                    {!inputValue && (
+                      <label
+                        className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[25px] sm:right-[170px] sm:top-1/2 sm:-translate-y-1/2 sm:text-[18px]"
+                        htmlFor={overlayInputId}
                       >
-                        |
-                      </span>
-                      {placeholderText}
-                    </label>
-                  )}
-                  <input
-                    aria-label="Ask another question"
-                    autoFocus
-                    className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[154px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:pr-[170px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
-                    id={overlayInputId}
-                    onChange={(event) => setInputValue(event.currentTarget.value)}
-                    placeholder=""
-                    type="text"
-                    value={inputValue}
-                  />
-                  <AskMeBorderButton label={assistantButtonLabel} />
+                        <span aria-hidden className="hero-input-caret">
+                          |
+                        </span>
+                        {placeholderText}
+                      </label>
+                    )}
+                    <input
+                      aria-label="Ask another question"
+                      autoFocus
+                      className={`font-figtree h-6 w-full appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:h-full sm:rounded-[9999px] sm:pl-[25px] sm:pr-[170px] sm:text-[18px] sm:leading-[1.2] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      id={overlayInputId}
+                      onChange={(event) => setInputValue(event.currentTarget.value)}
+                      placeholder=""
+                      type="text"
+                      value={inputValue}
+                    />
+                  </div>
+
+                  <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
                 </form>
 
                 <p className="font-figtree w-full max-w-[554px] text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)]">
