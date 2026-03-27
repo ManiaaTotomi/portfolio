@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Figtree, Roboto } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { GlobalKeyboardShortcuts } from "@/components/global-keyboard-shortcuts";
 import { siteContent } from "@/content/site";
 import "./globals.css";
@@ -65,6 +66,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
