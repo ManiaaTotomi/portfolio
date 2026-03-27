@@ -97,7 +97,7 @@ function AskMeBorderButton({ label }: { label: string }) {
 
   return (
     <button
-      className="font-figtree !absolute right-[14px] top-1/2 inline-flex h-[43px] w-fit shrink-0 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] sm:right-[25px]"
+      className="font-figtree !absolute right-[14px] top-1/2 inline-flex h-[43px] w-[116px] shrink-0 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] sm:right-[25px] sm:w-fit"
       type="submit"
     >
       <svg
@@ -273,7 +273,7 @@ export function HeroAssistantPanel({
           >
             {!inputValue && (
               <label
-                className="font-figtree absolute left-[22px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:text-[18px]"
+                className="font-figtree absolute left-[22px] right-[154px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:right-[170px] sm:text-[18px]"
                 htmlFor={topInputId}
               >
                 <span
@@ -288,7 +288,7 @@ export function HeroAssistantPanel({
             <input
               aria-label="Ask a question"
               autoFocus
-              className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[22px] pr-[170px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:pl-[35px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
+              className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[22px] pr-[154px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:pl-[35px] sm:pr-[170px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
               id={topInputId}
               onChange={(event) => setInputValue(event.currentTarget.value)}
               placeholder=""
@@ -383,7 +383,7 @@ export function HeroAssistantPanel({
                 >
                   {!inputValue && (
                     <label
-                      className="font-figtree absolute left-[25px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:text-[18px]"
+                      className="font-figtree absolute left-[25px] right-[154px] top-1/2 -translate-y-1/2 cursor-text text-left text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:right-[170px] sm:text-[18px]"
                       htmlFor={overlayInputId}
                     >
                       <span
@@ -398,7 +398,7 @@ export function HeroAssistantPanel({
                   <input
                     aria-label="Ask another question"
                     autoFocus
-                    className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
+                    className={`font-figtree h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[154px] text-[16px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:pr-[170px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
                     id={overlayInputId}
                     onChange={(event) => setInputValue(event.currentTarget.value)}
                     placeholder=""
