@@ -187,7 +187,7 @@ h6 {
 }
 
 .hero-input-caret {
-  margin-right: 4px;
+  margin-right: 0;
   color: rgb(214 208 208 / 68%);
   animation: hero-input-caret-blink 1s steps(1, end) infinite;
 }
