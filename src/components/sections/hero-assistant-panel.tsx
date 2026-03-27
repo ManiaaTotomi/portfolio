@@ -92,12 +92,22 @@ function buildAssistantReply(question: string) {
   return "Mania has a user-centered design philosophy, values collaboration and clear communication.";
 }
 
-function AskMeBorderButton({ label }: { label: string }) {
+function AskMeBorderButton({
+  label,
+  stackOnMobile = false,
+}: {
+  label: string;
+  stackOnMobile?: boolean;
+}) {
   const gradientId = useId().replace(/:/g, "");
 
   return (
     <button
-      className="font-figtree !absolute right-[14px] top-1/2 inline-flex h-[43px] w-fit shrink-0 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] sm:right-[25px]"
+      className={`font-figtree inline-flex h-[43px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
+        stackOnMobile
+          ? "relative w-fit sm:absolute sm:right-[25px] sm:top-1/2 sm:w-fit sm:-translate-y-1/2"
+          : "absolute right-[14px] top-1/2 w-fit -translate-y-1/2 sm:right-[25px]"
+      }`}
       type="submit"
     >
       <svg
@@ -155,7 +165,9 @@ export function HeroAssistantPanel({
 }: HeroAssistantPanelProps) {
   const placeholderText = "Ask your question about my work or experience...";
   const topInputId = useId();
+  const topTextareaId = useId();
   const overlayInputId = useId();
+  const overlayTextareaId = useId();
   const [inputValue, setInputValue] = useState("");
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -166,10 +178,21 @@ export function HeroAssistantPanel({
     loadStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, true),
   );
   const topInputRef = useRef<HTMLInputElement>(null);
+  const topTextareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    if (isMobile) {
+      topTextareaRef.current?.focus();
+      return;
+    }
+
     topInputRef.current?.focus();
   }, []);
 
@@ -259,40 +282,65 @@ export function HeroAssistantPanel({
 
   return (
     <>
-      <div className="relative z-10 mx-auto flex h-[663px] w-full max-w-[980px] flex-col items-center px-5 pb-[250px] pt-[160px] text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
-        <div className="flex min-h-[219px] w-full items-center justify-center">
+      <div className="relative z-10 mx-auto flex h-[calc(100dvh-79px)] min-h-[663px] w-full max-w-[980px] flex-col px-5 text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
+        <div className="flex flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
           <HeroRotatingQuestion />
         </div>
 
-        <div className="relative mt-[32px] flex w-full max-w-[772px] flex-col items-center gap-[32px]">
+        <div className="mx-auto flex w-full max-w-[772px] flex-col items-center gap-[18px] pb-[max(18px,env(safe-area-inset-bottom))] lg:relative lg:mt-[32px] lg:w-full lg:gap-[32px] lg:pb-0">
           <HeroSplashLayer />
 
           <form
-            className="relative h-[70px] w-full max-w-[763px] rounded-[9999px] border border-[rgba(255,255,255,0.2)] bg-transparent"
+            className="relative flex w-full max-w-[763px] flex-col items-end gap-6 rounded-[20px] border border-[rgba(255,255,255,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
             onSubmit={handleSubmit}
           >
-            {!inputValue && (
-              <label
-                className="font-figtree absolute left-[22px] top-1/2 -translate-y-1/2 cursor-text text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:left-[35px] sm:text-[18px]"
-                htmlFor={topInputId}
-              >
-                <span aria-hidden className="hero-input-caret">
-                  |
-                </span>
-                {placeholderText}
-              </label>
-            )}
-            <input
-              aria-label="Ask a question"
-              className={`font-figtree h-full w-full rounded-[9999px] bg-transparent pl-[22px] pr-[170px] text-[14px] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:pl-[35px] sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
-              id={topInputId}
-              onChange={(event) => setInputValue(event.currentTarget.value)}
-              placeholder=""
-              ref={topInputRef}
-              type="text"
-              value={inputValue}
-            />
-            <AskMeBorderButton label={assistantButtonLabel} />
+            <div className="relative w-full sm:h-full">
+              {!inputValue && (
+                <label
+                  className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
+                  htmlFor={topTextareaId}
+                >
+                  <span aria-hidden className="hero-input-caret">
+                    |
+                  </span>
+                  {placeholderText}
+                </label>
+              )}
+              <textarea
+                aria-label="Ask a question"
+                autoFocus
+                className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                id={topTextareaId}
+                onChange={(event) => setInputValue(event.currentTarget.value)}
+                placeholder=""
+                ref={topTextareaRef}
+                value={inputValue}
+              />
+              {!inputValue && (
+                <label
+                  className="font-figtree absolute left-[35px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
+                  htmlFor={topInputId}
+                >
+                  <span aria-hidden className="hero-input-caret">
+                    |
+                  </span>
+                  {placeholderText}
+                </label>
+              )}
+              <input
+                aria-label="Ask a question"
+                autoFocus
+                className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[35px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
+                id={topInputId}
+                onChange={(event) => setInputValue(event.currentTarget.value)}
+                placeholder=""
+                ref={topInputRef}
+                type="text"
+                value={inputValue}
+              />
+            </div>
+
+            <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
           </form>
 
           <p className="font-figtree w-full max-w-[554px] text-[13px] leading-[1.5] text-[rgba(181,181,181,0.8)] sm:text-[14px] sm:leading-[23px]">
@@ -374,31 +422,54 @@ export function HeroAssistantPanel({
 
               <div className="mt-8 flex w-full flex-col items-center gap-6">
                 <form
-                  className="relative h-[70px] w-full rounded-[9999px] border border-[rgba(231,231,231,0.2)] bg-transparent"
+                  className="relative flex w-full flex-col items-end gap-6 rounded-[20px] border border-[rgba(231,231,231,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
                   onSubmit={handleSubmit}
                 >
-                  {!inputValue && (
-                    <label
-                      className="font-figtree absolute left-[25px] top-1/2 -translate-y-1/2 cursor-text text-left text-[14px] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:text-[18px]"
-                      htmlFor={overlayInputId}
-                    >
-                      <span aria-hidden className="hero-input-caret">
-                        |
-                      </span>
-                      {placeholderText}
-                    </label>
-                  )}
-                  <input
-                    aria-label="Ask another question"
-                    autoFocus
-                    className={`font-figtree h-full w-full rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[14px] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:text-[18px] ${inputValue ? "caret-white" : "caret-transparent"}`}
-                    id={overlayInputId}
-                    onChange={(event) => setInputValue(event.currentTarget.value)}
-                    placeholder=""
-                    type="text"
-                    value={inputValue}
-                  />
-                  <AskMeBorderButton label={assistantButtonLabel} />
+                  <div className="relative w-full sm:h-full">
+                    {!inputValue && (
+                      <label
+                        className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
+                        htmlFor={overlayTextareaId}
+                      >
+                        <span aria-hidden className="hero-input-caret">
+                          |
+                        </span>
+                        {placeholderText}
+                      </label>
+                    )}
+                    <textarea
+                      aria-label="Ask another question"
+                      autoFocus
+                      className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      id={overlayTextareaId}
+                      onChange={(event) => setInputValue(event.currentTarget.value)}
+                      placeholder=""
+                      value={inputValue}
+                    />
+                    {!inputValue && (
+                      <label
+                        className="font-figtree absolute left-[25px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
+                        htmlFor={overlayInputId}
+                      >
+                        <span aria-hidden className="hero-input-caret">
+                          |
+                        </span>
+                        {placeholderText}
+                      </label>
+                    )}
+                    <input
+                      aria-label="Ask another question"
+                      autoFocus
+                      className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
+                      id={overlayInputId}
+                      onChange={(event) => setInputValue(event.currentTarget.value)}
+                      placeholder=""
+                      type="text"
+                      value={inputValue}
+                    />
+                  </div>
+
+                  <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
                 </form>
 
                 <p className="font-figtree w-full max-w-[554px] text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)]">
