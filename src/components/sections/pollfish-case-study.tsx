@@ -214,8 +214,8 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
       <div className="pointer-events-none absolute -left-[260px] bottom-[-330px] h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(58,36,146,0.72)_0%,rgba(58,36,146,0.28)_44%,rgba(58,36,146,0)_78%)] blur-[72px]" />
       <div className="pointer-events-none absolute right-[-220px] top-[-220px] h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(173,30,175,0.58)_0%,rgba(173,30,175,0.22)_46%,rgba(173,30,175,0)_80%)] blur-[76px]" />
 
-      <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[470px_1fr] lg:gap-[80px] lg:px-[96px]">
-        <div className="self-center space-y-8 lg:w-[440px]">
+      <div className="relative z-10 grid gap-10 px-6 sm:px-10 lg:px-[96px] xl:grid-cols-[470px_1fr] xl:gap-[80px]">
+        <div className="self-center space-y-8 xl:w-[440px]">
           <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-white">
             AI Builder
           </h3>
@@ -240,8 +240,8 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
           </Link>
         </div>
 
-        <div className="relative min-h-[420px] lg:min-h-[730px]">
-          <div className="absolute left-0 top-[70px] w-[66%] space-y-3 lg:w-[440px] lg:space-y-[17px]">
+        <div className="relative min-h-[760px] min-[834px]:min-h-[900px] xl:min-h-[730px]">
+          <div className="absolute left-0 top-[70px] hidden w-[58%] max-w-[440px] space-y-3 xl:block lg:space-y-[17px]">
             {aiQuestionCards.map((questionCard) => (
               <div
                 className="rounded-[11px] border border-white/15 bg-[rgba(255,255,255,0.08)] px-4 py-3 text-white/95 backdrop-blur-[1px] lg:px-[22px] lg:py-[16px]"
@@ -274,13 +274,13 @@ function AiBuilderFeature({ entry }: { entry: CaseStudyEntry }) {
             ))}
           </div>
 
-          <div className="absolute right-0 top-0 w-[52%] overflow-hidden rounded-[13px] bg-white shadow-[0_4px_22px_rgba(59,35,111,0.2)] lg:w-[404px]">
+          <div className="absolute left-1/2 top-1/2 w-[72%] max-w-[404px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[13px] bg-white shadow-[0_4px_22px_rgba(59,35,111,0.2)] xl:left-auto xl:right-0 xl:top-0 xl:w-[404px] xl:max-w-[404px] xl:translate-x-0 xl:translate-y-0">
             <Image
               alt="AI Builder chat interface"
               className="h-auto w-full object-cover"
               height={1648}
               quality={60}
-              sizes="(min-width: 1024px) 404px, 52vw"
+              sizes="(min-width: 1280px) 404px, (min-width: 834px) 62vw, 72vw"
               src="/images/AI-builder/mobile-screen/AI-chat.png"
               width={908}
             />
