@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 
 type StripSize = "wide" | "portrait" | "phone" | "phoneLarge";
@@ -17,9 +18,9 @@ interface StripItem {
 const STRIP_ITEMS: StripItem[] = [
   {
     id: "owiwi-redesign",
-    thumbSrc: "/images/owiwi-redesign.png",
-    fullSrc: "/images/owiwi-redesign.png",
-    alt: "OWIWI dashboard redesign",
+    thumbSrc: "/images/Homepage/slider/cassiopeia.png",
+    fullSrc: "/images/Homepage/slider/cassiopeia.png",
+    alt: "Hotel dashboard overview",
     size: "wide",
   },
   {
@@ -52,9 +53,9 @@ const STRIP_ITEMS: StripItem[] = [
   },
   {
     id: "playtime-mobile-b",
-    thumbSrc: "/images/playtime-perksb.png",
-    fullSrc: "/images/playtime-perksb.png",
-    alt: "Playtime perks event screen",
+    thumbSrc: "/images/Homepage/slider/loyalty-game.png",
+    fullSrc: "/images/Homepage/slider/loyalty-game.png",
+    alt: "Loyalty game progress screen",
     size: "phoneLarge",
   },
   {
@@ -72,18 +73,18 @@ const STRIP_ITEMS: StripItem[] = [
     size: "portrait",
   },
   {
-    id: "premium-demand-b",
-    thumbSrc: "/images/prodege-perks.png",
-    fullSrc: "/images/prodege-perks.png",
-    alt: "Premium demand product showcase, alternate view",
-    size: "wide",
-  },
-  {
     id: "playtime-mobile-c",
     thumbSrc: "/images/playtime-perks-small.png",
     fullSrc: "/images/playtime-perks-big.png",
     alt: "Playtime perks mobile app dashboard, alternate view",
     size: "phone",
+  },
+  {
+    id: "premium-demand-b",
+    thumbSrc: "/images/prodege-perks.png",
+    fullSrc: "/images/prodege-perks.png",
+    alt: "Premium demand product showcase, alternate view",
+    size: "wide",
   },
 ];
 
@@ -282,39 +283,42 @@ export function HeroImageStrip() {
         </div>
       </section>
 
-      {activeItem && (
-        <div
-          aria-modal="true"
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-4"
-          onClick={() => setActiveIndex(null)}
-          role="dialog"
-        >
-          <button
-            aria-label="Close preview"
-            className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-black/45 text-[28px] leading-none text-white transition-colors hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-            onClick={() => setActiveIndex(null)}
-            type="button"
-          >
-            ×
-          </button>
-
+      {activeItem &&
+        typeof document !== "undefined" &&
+        createPortal(
           <div
-            className="relative w-full max-w-[1200px]"
-            onClick={(event) => event.stopPropagation()}
+            aria-modal="true"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 p-4"
+            onClick={() => setActiveIndex(null)}
+            role="dialog"
           >
-            <div className="relative max-h-[86vh] overflow-hidden rounded-[18px] border border-white/15 bg-black/45 shadow-[0_30px_90px_rgba(0,0,0,0.55)]">
-              <Image
-                alt={activeItem.alt}
-                className="h-auto max-h-[86vh] w-full object-contain"
-                height={1300}
-                priority
-                src={activeItem.fullSrc}
-                width={1700}
-              />
+            <button
+              aria-label="Close preview"
+              className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-black/45 text-[28px] leading-none text-white transition-colors hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              onClick={() => setActiveIndex(null)}
+              type="button"
+            >
+              ×
+            </button>
+
+            <div
+              className="relative w-full max-w-[1200px]"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="relative max-h-[86vh] overflow-hidden rounded-[18px] border border-white/15 bg-black/45 shadow-[0_30px_90px_rgba(0,0,0,0.55)]">
+                <Image
+                  alt={activeItem.alt}
+                  className="h-auto max-h-[86vh] w-full object-contain"
+                  height={1300}
+                  priority
+                  src={activeItem.fullSrc}
+                  width={1700}
+                />
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
