@@ -49,7 +49,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(247,14,255,0.48)_0%,rgba(247,14,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] uppercase tracking-[1.28px] text-[#f70eff]">
+        <p className="font-aeonik text-[18px] tracking-[1.28px] text-[#f70eff]">
           Pollfish
         </p>
       </div>
@@ -65,7 +65,7 @@ function PollfishIntro() {
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {POLLFISH_INTRO_TITLE}
         </p>
-        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#f1f1f1]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
           {POLLFISH_INTRO_DESCRIPTION}
         </p>
       </div>
@@ -100,6 +100,7 @@ function PollfishFeatureCard({
   imageClassName = "object-contain",
   removeImageWrapper = false,
   isComingSoon = false,
+  contentAlign = "end",
 }: {
   entry: CaseStudyEntry;
   href?: string;
@@ -109,13 +110,19 @@ function PollfishFeatureCard({
   imageClassName?: string;
   removeImageWrapper?: boolean;
   isComingSoon?: boolean;
+  contentAlign?: "end" | "center";
 }) {
+  const contentPositionClass =
+    contentAlign === "center"
+      ? "justify-end lg:justify-center lg:py-14"
+      : "justify-end lg:pb-[56px] lg:pt-14";
+
   return (
     <article
       className="grid overflow-hidden rounded-[20px] bg-white lg:grid-cols-[1fr_1.25fr]"
       id={id}
     >
-      <div className="flex flex-col justify-end gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pb-[56px] lg:pl-[96px] lg:pr-0 lg:pt-14">
+      <div className={`flex flex-col gap-8 px-6 pb-10 pt-10 sm:px-10 lg:pl-[96px] lg:pr-0 ${contentPositionClass}`}>
         <div className="w-full lg:w-[440px]">
           <h3 className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#222]">
             {entry.title}
@@ -345,14 +352,17 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
 
           <AiBuilderFeature entry={aiEntry} />
 
-          <PollfishFeatureCard
-            entry={audiencesEntry}
-            gradient="bg-[linear-gradient(138deg,#93c3dd_22%,#9dcbb9_66%,#dbede5_88%)]"
-            id="pollfish-ai-report"
-            isComingSoon
-            removeImageWrapper
-            imageSrc="/images/Homepage/images/audiences-new.png"
-          />
+          <div className="relative z-10">
+            <PollfishFeatureCard
+              entry={audiencesEntry}
+              gradient="bg-[linear-gradient(138deg,#93c3dd_22%,#9dcbb9_66%,#dbede5_88%)]"
+              id="pollfish-ai-report"
+              isComingSoon
+              removeImageWrapper
+              imageSrc="/images/Homepage/images/audiences-new.png"
+              contentAlign="center"
+            />
+          </div>
         </div>
       </div>
     </section>

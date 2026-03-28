@@ -97,7 +97,7 @@ function ProjectDivider() {
             className="absolute -inset-[5px] rounded-full bg-[radial-gradient(circle,rgba(49,247,255,0.42)_0%,rgba(49,247,255,0)_72%)]"
           />
         </span>
-        <p className="font-aeonik text-[16px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
+        <p className="font-aeonik text-[18px] tracking-[1.28px] text-[#31f7ff]">CtrlEat</p>
       </div>
       <div className="h-px flex-1 bg-white/10" />
     </div>
@@ -111,7 +111,7 @@ function CtrlEatIntro() {
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {CTRLEAT_INTRO_TITLE}
         </p>
-        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d6]">
+        <p className="mx-auto max-w-[68ch] font-figtree text-[20px] leading-[32px] text-[#d0d0d0]">
           {CTRLEAT_INTRO_DESCRIPTION}
         </p>
       </div>

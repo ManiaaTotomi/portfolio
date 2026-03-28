@@ -134,9 +134,9 @@ export const siteContent: SiteContent = {
   email: "mania.totomi@gmail.com",
   nav: [
     { label: "Pollfish", href: "#pollfish" },
-    { label: "Project Alpha", href: "#tild" },
+    { label: "Project alpha", href: "#tild" },
     { label: "CtrlEat", href: "#ctrleat" },
-    { label: "MINDDY", href: "#minddy" },
+    { label: "Minddy", href: "#minddy" },
   ],
   socialLinks: [
     { label: "GitHub", href: "https://github.com" },
@@ -373,11 +373,11 @@ export const siteContent: SiteContent = {
     },
     {
       id: "tild",
-      navLabel: "Project Alpha",
+      navLabel: "Project alpha",
       entries: [
         {
           id: "tild-overview",
-          title: "Project Alpha",
+          title: "Project alpha",
           subtitle: "Construction planning / collaboration platform",
           paragraphs: [
             "Project Alpha (placeholder name) is a construction collaboration platform designed to help teams manage tasks, properties, and contractors in one place, improving coordination across complex projects.",
@@ -464,7 +464,7 @@ export const siteContent: SiteContent = {
           ],
           showcase: {
             type: "ctrleat",
-            title: "ctrlEat.",
+            title: "CtrlEat.",
             subtitle:
               "Let’s personalize your meals. Are you vegan, vegetarian, or diabetic?",
             chips: ["Vegetarian", "Ξεκίνα!", "Featured-Restaurants"],
@@ -483,14 +483,14 @@ export const siteContent: SiteContent = {
     },
     {
       id: "minddy",
-      navLabel: "MINDDY",
+      navLabel: "Minddy",
       entries: [
         {
           id: "minddy-overview",
-          title: "MINDDY",
+          title: "Minddy",
           subtitle: "Habit building app",
           paragraphs: [
-            "The product: MINDDY is a wellness app designed to help users build sustainable habits through daily challenges and personalized goal-setting. It focuses on key areas like better sleep, fitness, focus, motivation, and healthy eating, encouraging small, consistent actions that lead to lasting behavior change.",
+            "The product: Minddy is a wellness app designed to help users build sustainable habits through daily challenges and personalized goal-setting. It focuses on key areas like better sleep, fitness, focus, motivation, and healthy eating, encouraging small, consistent actions that lead to lasting behavior change.",
             "My role: This was my thesis project in 2018, where I designed the complete product from concept to final screens. I created the brand identity, custom illustrations, visual system, and user flows, exploring consumer-facing design, gamification, and onboarding psychology in ways I don't typically work on in my B2B role.",
           ],
           details: [
