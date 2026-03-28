@@ -35,28 +35,6 @@ type ChatMessage = {
   text: string;
 };
 
-function loadStoredVisibility(key: string, fallback: boolean) {
-  if (typeof window === "undefined") {
-    return fallback;
-  }
-
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (!raw) {
-      return fallback;
-    }
-
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object" || typeof parsed.value !== "boolean") {
-      return fallback;
-    }
-
-    return parsed.value;
-  } catch {
-    return fallback;
-  }
-}
-
 function saveStoredVisibility(key: string, value: boolean) {
   if (typeof window === "undefined") {
     return;
@@ -174,9 +152,7 @@ export function HeroAssistantPanel({
   const [overlayGlow, setOverlayGlow] = useState<OverlayGlowConfig>(
     DEFAULT_OVERLAY_GLOW,
   );
-  const [overlayKnobsVisible, setOverlayKnobsVisible] = useState<boolean>(() =>
-    loadStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, true),
-  );
+  const [overlayKnobsVisible, setOverlayKnobsVisible] = useState(true);
   const topInputRef = useRef<HTMLInputElement>(null);
   const topTextareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);

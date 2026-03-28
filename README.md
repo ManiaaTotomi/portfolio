@@ -64,3 +64,26 @@ Use this loop section-by-section:
 npm run lint
 npm run build
 ```
+
+## Vercel Analytics (saved setup)
+
+1. In Vercel Dashboard, open your project and enable `Web Analytics`.
+2. Install the package:
+
+```bash
+npm install @vercel/analytics
+```
+
+3. In `src/app/layout.tsx`, add:
+
+```tsx
+import { Analytics } from "@vercel/analytics/next";
+```
+
+And render it before `</body>`:
+
+```tsx
+<Analytics />
+```
+
+4. Commit and push to deploy. Analytics data appears from deployed traffic (not local dev).
