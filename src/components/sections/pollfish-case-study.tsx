@@ -346,6 +346,7 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
             gradient="bg-[linear-gradient(128deg,#eff4f9_12%,#e7ebf4_49%,#e9d4f3_100%)]"
             href="/pollfish/questionnaire-builder"
             id="pollfish-questionnaire-builder"
+            imageClassName="object-contain scale-[1.04]"
             removeImageWrapper
             imageSrc="/images/Homepage/images/questionnaire-builder.png"
           />
@@ -357,9 +358,10 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
               entry={audiencesEntry}
               gradient="bg-[linear-gradient(138deg,#93c3dd_22%,#9dcbb9_66%,#dbede5_88%)]"
               id="pollfish-ai-report"
+              imageClassName="object-contain scale-[1.04]"
               isComingSoon
               removeImageWrapper
-              imageSrc="/images/Homepage/images/audiences-new.png"
+              imageSrc="/images/Homepage/images/multiple-audiences.png"
               contentAlign="center"
             />
           </div>

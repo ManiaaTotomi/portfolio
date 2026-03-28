@@ -185,7 +185,7 @@ function ProjectDivider() {
 
 function MinddyIntro() {
   return (
-    <div className="mx-auto flex w-full max-w-[848px] flex-col items-center gap-8 text-center">
+    <div className="mx-auto flex w-full max-w-[710px] flex-col items-center gap-8 text-center">
       <div className="space-y-6">
         <p className="font-aeonik text-[48px] font-semibold leading-[55px] text-[#5F5F5F]">
           {MINDDY_INTRO_TITLE}

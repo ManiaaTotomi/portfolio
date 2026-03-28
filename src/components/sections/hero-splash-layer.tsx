@@ -18,28 +18,6 @@ const DEFAULT_SPLASH: SplashConfig = {
 };
 const SPLASH_KNOBS_VISIBLE_STORAGE_KEY = "home:hero-splash:knobs-visible";
 
-function loadStoredVisibility(key: string, fallback: boolean) {
-  if (typeof window === "undefined") {
-    return fallback;
-  }
-
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (!raw) {
-      return fallback;
-    }
-
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object" || typeof parsed.value !== "boolean") {
-      return fallback;
-    }
-
-    return parsed.value;
-  } catch {
-    return fallback;
-  }
-}
-
 function saveStoredVisibility(key: string, value: boolean) {
   if (typeof window === "undefined") {
     return;
@@ -80,9 +58,7 @@ const StaticFigmaSplash = memo(function StaticFigmaSplash() {
 export function HeroSplashLayer() {
   const [config, setConfig] = useState<SplashConfig>(DEFAULT_SPLASH);
   const showTuner = process.env.NODE_ENV !== "production";
-  const [knobsVisible, setKnobsVisible] = useState<boolean>(() =>
-    loadStoredVisibility(SPLASH_KNOBS_VISIBLE_STORAGE_KEY, true),
-  );
+  const [knobsVisible, setKnobsVisible] = useState(true);
 
   useEffect(() => {
     const root = document.documentElement;
