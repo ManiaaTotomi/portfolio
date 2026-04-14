@@ -45,30 +45,7 @@ function saveStoredVisibility(key: string, value: boolean) {
   } catch {}
 }
 
-function buildAssistantReply(question: string) {
-  const lowerQuestion = question.toLowerCase();
 
-  if (lowerQuestion.includes("process") || lowerQuestion.includes("workflow")) {
-    return "Mania typically starts by clarifying product goals and constraints, then maps user flows, aligns stakeholders, and iterates quickly with testable UI decisions.";
-  }
-
-  if (
-    lowerQuestion.includes("team") ||
-    lowerQuestion.includes("collaborat") ||
-    lowerQuestion.includes("engineer")
-  ) {
-    return "Mania works cross-functionally with PMs and engineers from early concept through delivery, keeping communication clear and decisions tied to measurable product outcomes.";
-  }
-
-  if (
-    lowerQuestion.includes("design system") ||
-    lowerQuestion.includes("scale")
-  ) {
-    return "Mania focuses on scalable systems by defining reusable foundations, consistent patterns, and practical documentation that supports both design quality and development speed.";
-  }
-
-  return "Mania has a user-centered design philosophy, values collaboration and clear communication.";
-}
 
 function AskMeBorderButton({
   label,
@@ -222,27 +199,49 @@ export function HeroAssistantPanel({
     saveStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, overlayKnobsVisible);
   }, [overlayKnobsVisible]);
 
-  function submitQuestion(question: string) {
+  async function submitQuestion(question: string) {
     const trimmedQuestion = question.trim();
     if (!trimmedQuestion) {
       return;
     }
-
+  
     const questionMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       role: "user",
       text: trimmedQuestion,
     };
-
-    const assistantMessage: ChatMessage = {
-      id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      role: "assistant",
-      text: buildAssistantReply(trimmedQuestion),
-    };
-
-    setMessages((prev) => [...prev, questionMessage, assistantMessage]);
+  
+    setMessages((prev) => [...prev, questionMessage]);
     setInputValue("");
     setIsOverlayOpen(true);
+  
+    try {
+      const response = await fetch("/api/clone-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: trimmedQuestion }),
+      });
+  
+      const result = await response.json();
+  
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: result.reply ?? "Sorry, something went wrong.",
+      };
+  
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch {
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: "Sorry, something went wrong.",
+      };
+  
+      setMessages((prev) => [...prev, assistantMessage]);
+    }
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
