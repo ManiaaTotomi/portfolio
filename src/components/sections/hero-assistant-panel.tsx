@@ -303,6 +303,9 @@ export function HeroAssistantPanel({
         <div className="flex w-full flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
           <div className="flex w-full flex-col items-center">
             <HeroRotatingQuestion />
+            <p className="font-aeonik mt-6 max-w-[980px] text-balance text-center text-[20px] font-normal leading-[1.45] text-white/72">
+              8+ years designing end-to-end B2B products, with recent focus on AI-powered features
+            </p>
             <div className="mt-20 flex w-full items-center justify-center">
               <button
                 aria-label="Open assistant chat"
