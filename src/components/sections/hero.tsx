@@ -20,7 +20,7 @@ export function HeroSection({ content }: HeroSectionProps) {
         assistantDisclaimer={assistantDisclaimer}
       />
 
-      <div className="relative z-10 mx-auto mt-[40px] w-full max-w-[1720px] px-0 pb-[124px] sm:mt-[48px] sm:pb-[140px]">
+      <div className="relative z-10 mx-auto mt-[96px] w-full max-w-[1720px] px-0 pb-[124px] sm:mt-[108px] sm:pb-[140px]">
         <HeroImageStrip />
       </div>
     </header>

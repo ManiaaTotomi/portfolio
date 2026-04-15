@@ -155,7 +155,7 @@ export function SiteTopBar({
         {mode === "case-study" &&
           INTERNAL_CASE_STUDY_NAV_ITEMS.map((item) => (
             <a
-              className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              className="font-figtree inline-flex items-center gap-[10px] text-[16px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
               href={item.href}
               key={`${item.label}-${item.href}`}
             >
@@ -184,7 +184,7 @@ export function SiteTopBar({
                 ref={pollfishMenuRef}
               >
                 <a
-                  className="font-figtree inline-flex items-center gap-[10px] text-[18px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+                  className="font-figtree inline-flex items-center gap-[10px] text-[16px] font-normal text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
                   href={resolveNavHref(item.href, anchorBasePath)}
                 >
                   {item.label}
