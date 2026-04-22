@@ -47,7 +47,7 @@ function saveStoredVisibility(key: string, value: boolean) {
   } catch {}
 }
 
-function buildAssistantReply(question: string) {
+function buildAssistantReplyFallback(question: string) {
   const lowerQuestion = question.toLowerCase();
 
   if (lowerQuestion.includes("process") || lowerQuestion.includes("workflow")) {
@@ -284,7 +284,7 @@ export function HeroAssistantPanel({
     textarea.style.height = `${Math.max(20, textarea.scrollHeight)}px`;
   }, [hasMessages, inputValue, isOverlayOpen]);
 
-  function submitQuestion(question: string) {
+  async function submitQuestion(question: string) {
     const trimmedQuestion = question.trim();
     if (!trimmedQuestion) {
       return;
@@ -296,15 +296,41 @@ export function HeroAssistantPanel({
       text: trimmedQuestion,
     };
 
-    const assistantMessage: ChatMessage = {
-      id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      role: "assistant",
-      text: buildAssistantReply(trimmedQuestion),
-    };
-
-    setMessages((prev) => [...prev, questionMessage, assistantMessage]);
+    setMessages((prev) => [...prev, questionMessage]);
     setInputValue("");
     setIsOverlayOpen(true);
+
+    try {
+      const response = await fetch("/api/clone-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: trimmedQuestion }),
+      });
+
+      const result = await response.json();
+      const assistantText =
+        response.ok && typeof result.reply === "string"
+          ? result.reply
+          : buildAssistantReplyFallback(trimmedQuestion);
+
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: assistantText,
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch {
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: buildAssistantReplyFallback(trimmedQuestion),
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    }
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
