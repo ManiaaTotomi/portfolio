@@ -8,16 +8,15 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ content }: HeroSectionProps) {
-  const assistantDisclaimer =
-    "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.";
-
   return (
     <header className="relative overflow-visible bg-[#040404]" id="top">
       <SiteTopBar content={content} />
 
       <HeroAssistantPanel
         assistantButtonLabel={content.assistantButtonLabel}
-        assistantDisclaimer={assistantDisclaimer}
+        assistantDisclaimer={content.assistantDisclaimer}
+        assistantPlaceholder={content.assistantPlaceholder}
+        assistantPrompts={content.assistantPrompts}
       />
 
       <div className="relative z-10 mx-auto mt-[96px] w-full max-w-[1720px] px-0 pb-[124px] sm:mt-[108px] sm:pb-[140px]">

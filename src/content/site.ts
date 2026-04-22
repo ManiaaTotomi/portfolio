@@ -122,8 +122,8 @@ export const siteContent: SiteContent = {
   assistantDisclaimer:
     "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.",
   assistantPrompts: [
-    "Find balance between empathy and constraints",
-    "How do use AI in your work?",
+    "How do you use AI in your day to day design workload?",
+    "What is your current responsibilities in Pollfish?",
     "How do you work with engineers and PMs?",
   ],
   assistantPlaceholder:
