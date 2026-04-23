@@ -60,31 +60,6 @@ function normalizeQuestionForMania(question: string) {
     .replace(/\byou\b/gi, "Mania");
 }
 
-function buildAssistantReplyFallback(question: string) {
-  const lowerQuestion = question.toLowerCase();
-
-  if (lowerQuestion.includes("process") || lowerQuestion.includes("workflow")) {
-    return "Mania typically starts by clarifying product goals and constraints, then maps user flows, aligns stakeholders, and iterates quickly with testable UI decisions.";
-  }
-
-  if (
-    lowerQuestion.includes("team") ||
-    lowerQuestion.includes("collaborat") ||
-    lowerQuestion.includes("engineer")
-  ) {
-    return "Mania works cross-functionally with PMs and engineers from early concept through delivery, keeping communication clear and decisions tied to measurable product outcomes.";
-  }
-
-  if (
-    lowerQuestion.includes("design system") ||
-    lowerQuestion.includes("scale")
-  ) {
-    return "Mania focuses on scalable systems by defining reusable foundations, consistent patterns, and practical documentation that supports both design quality and development speed.";
-  }
-
-  return "Mania has a user-centered design philosophy and values collaboration, clarity, and thoughtful product decisions.";
-}
-
 function AskMeBorderButton({
   label,
   stackOnMobile = false,
@@ -357,7 +332,7 @@ export function HeroAssistantPanel({
       const assistantText =
         response.ok && typeof result.reply === "string"
           ? result.reply
-          : buildAssistantReplyFallback(normalizedQuestion);
+          : "The AI assistant is unavailable right now. Please try again in a moment.";
 
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
@@ -370,7 +345,7 @@ export function HeroAssistantPanel({
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         role: "assistant",
-        text: buildAssistantReplyFallback(normalizedQuestion),
+        text: "The AI assistant is unavailable right now. Please try again in a moment.",
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
