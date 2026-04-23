@@ -283,7 +283,7 @@ export function HeroAssistantPanel({
     }
 
     container.scrollTop = container.scrollHeight;
-  }, [isOverlayOpen, messages]);
+  }, [footerHeight, isOverlayOpen, messages]);
 
   useEffect(() => {
     saveStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, overlayKnobsVisible);
