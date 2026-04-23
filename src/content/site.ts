@@ -122,13 +122,13 @@ export const siteContent: SiteContent = {
   assistantDisclaimer:
     "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.",
   assistantPrompts: [
-    "How do you use AI in your day to day design workload?",
-    "What is your current responsibilities in Pollfish?",
-    "How do you work with engineers and PMs?",
+    "How does Mania use AI in her day to day design workload?",
+    "What are Mania's current responsibilities in Pollfish?",
+    "How does Mania collaborate with engineers and PMs?",
   ],
   assistantPlaceholder:
-    "Type a question about my design approach or experience…",
-  assistantButtonLabel: "Ask me",
+    "Type a question about Mania's design approach or experience…",
+  assistantButtonLabel: "Ask AI",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
   email: "mania.totomi@gmail.com",

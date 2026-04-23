@@ -47,6 +47,19 @@ function saveStoredVisibility(key: string, value: boolean) {
   } catch {}
 }
 
+function normalizeQuestionForMania(question: string) {
+  return question
+    .trim()
+    .replace(/^how do you\b/i, "How does Mania")
+    .replace(/^what are your\b/i, "What are Mania's")
+    .replace(/^what is your\b/i, "What is Mania's")
+    .replace(/^what do you\b/i, "What does Mania")
+    .replace(/^can you\b/i, "Can Mania")
+    .replace(/^would you\b/i, "Would Mania")
+    .replace(/\byour\b/gi, "her")
+    .replace(/\byou\b/gi, "Mania");
+}
+
 function buildAssistantReplyFallback(question: string) {
   const lowerQuestion = question.toLowerCase();
 
@@ -69,7 +82,7 @@ function buildAssistantReplyFallback(question: string) {
     return "Mania focuses on scalable systems by defining reusable foundations, consistent patterns, and practical documentation that supports both design quality and development speed.";
   }
 
-  return "Mania has a user-centered design philosophy, values collaboration and clear communication.";
+  return "Mania has a user-centered design philosophy and values collaboration, clarity, and thoughtful product decisions.";
 }
 
 function AskMeBorderButton({
@@ -84,13 +97,13 @@ function AskMeBorderButton({
   compact?: boolean;
 }) {
   const gradientId = useId().replace(/:/g, "");
-  const buttonHeight = "h-[43px]";
-  const buttonPadding = compact ? "px-[12px]" : "px-[20px]";
+  const buttonHeight = compact ? "h-[40px]" : "h-[40px]";
+  const buttonPadding = compact ? "px-[10px]" : "px-[18px]";
   const buttonWidth = compact ? "min-w-[92px]" : "";
   const textSize = compact ? "text-[14px]" : "text-[16px]";
-  const viewBox = "0 0 100 43";
-  const rectHeight = "41.5";
-  const rectRadius = "20.75";
+  const viewBox = "0 0 100 40";
+  const rectHeight = "38.5";
+  const rectRadius = "19.25";
 
   return (
     <button
@@ -210,17 +223,19 @@ export function HeroAssistantPanel({
   assistantPrompts,
 }: HeroAssistantPanelProps) {
   const placeholderText = assistantPlaceholder;
-  const overlayInputId = useId();
   const overlayTextareaId = useId();
   const [inputValue, setInputValue] = useState("");
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isAwaitingReply, setIsAwaitingReply] = useState(false);
+  const [footerHeight, setFooterHeight] = useState(0);
   const [overlayGlow, setOverlayGlow] = useState<OverlayGlowConfig>(
     DEFAULT_OVERLAY_GLOW,
   );
   const [overlayKnobsVisible, setOverlayKnobsVisible] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const emptyStateTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const footerBlockRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
   const hasMessages = messages.length > 0;
 
@@ -284,19 +299,48 @@ export function HeroAssistantPanel({
     textarea.style.height = `${Math.max(20, textarea.scrollHeight)}px`;
   }, [hasMessages, inputValue, isOverlayOpen]);
 
+  useEffect(() => {
+    if (!isOverlayOpen || !hasMessages) {
+      setFooterHeight(0);
+      return;
+    }
+
+    const footer = footerBlockRef.current;
+    if (!footer) {
+      return;
+    }
+
+    const updateHeight = () => {
+      setFooterHeight(footer.offsetHeight);
+    };
+
+    updateHeight();
+
+    const observer = new ResizeObserver(() => {
+      updateHeight();
+    });
+
+    observer.observe(footer);
+
+    return () => observer.disconnect();
+  }, [hasMessages, inputValue, isOverlayOpen]);
+
   async function submitQuestion(question: string) {
     const trimmedQuestion = question.trim();
     if (!trimmedQuestion) {
       return;
     }
 
+    const normalizedQuestion = normalizeQuestionForMania(trimmedQuestion);
+
     const questionMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       role: "user",
-      text: trimmedQuestion,
+      text: normalizedQuestion,
     };
 
     setMessages((prev) => [...prev, questionMessage]);
+    setIsAwaitingReply(true);
     setInputValue("");
     setIsOverlayOpen(true);
 
@@ -306,14 +350,14 @@ export function HeroAssistantPanel({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: trimmedQuestion }),
+        body: JSON.stringify({ message: normalizedQuestion }),
       });
 
       const result = await response.json();
       const assistantText =
         response.ok && typeof result.reply === "string"
           ? result.reply
-          : buildAssistantReplyFallback(trimmedQuestion);
+          : buildAssistantReplyFallback(normalizedQuestion);
 
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
@@ -326,10 +370,12 @@ export function HeroAssistantPanel({
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         role: "assistant",
-        text: buildAssistantReplyFallback(trimmedQuestion),
+        text: buildAssistantReplyFallback(normalizedQuestion),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+    } finally {
+      setIsAwaitingReply(false);
     }
   }
 
@@ -341,6 +387,7 @@ export function HeroAssistantPanel({
   function closeOverlay() {
     setIsOverlayOpen(false);
     setMessages([]);
+    setIsAwaitingReply(false);
     setInputValue("");
   }
 
@@ -420,50 +467,65 @@ export function HeroAssistantPanel({
               ×
             </button>
 
-            <div className="relative mx-auto flex h-full w-full max-w-[762px] flex-col px-5 pb-10 pt-[100px] sm:px-8">
+            <div className="relative mx-auto flex h-full w-full max-w-[602px] flex-col pb-10 pt-[100px]">
               {hasMessages ? (
                 <>
                   <div className="flex min-h-0 flex-1 flex-col">
                     <div
-                      className="hero-chat-scroll min-h-0 flex-1 overflow-y-auto pb-[190px] pr-2 sm:pb-[150px]"
+                      className="hero-chat-scroll min-h-0 flex-1 overflow-y-auto"
                       ref={scrollContainerRef}
+                      style={{
+                        paddingBottom: footerHeight > 0 ? `${footerHeight + 24}px` : undefined,
+                      }}
                     >
-                      <div className="flex flex-col gap-4 pb-2 pr-5">
+                      <div className="mx-auto flex w-full max-w-[602px] flex-col gap-4 pb-2">
                         {messages.map((message) =>
                           message.role === "user" ? (
                             <div className="flex w-full justify-end" key={message.id}>
-                              <div className="max-w-[68%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[18px] leading-[28px] text-white">
+                              <div className="max-w-[86%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[15px] leading-[23px] text-white">
                                 {message.text}
                               </div>
                             </div>
                           ) : (
-                            <div
-                              className="flex w-full justify-start pr-[100px] sm:pr-[160px]"
-                              key={message.id}
-                            >
-                              <p className="w-full px-1 py-1 text-[18px] leading-[28px] text-white/75">
+                            <div className="flex w-full justify-start" key={message.id}>
+                              <p className="max-w-[86%] py-1 text-[15px] leading-[23px] text-white/75">
                                 {message.text}
                               </p>
                             </div>
                           ),
                         )}
+                        {isAwaitingReply ? (
+                          <div className="flex w-full justify-start">
+                            <div className="inline-flex items-center gap-2 py-1 text-[15px] leading-[23px] text-white/55">
+                              <span>Thinking</span>
+                              <span className="inline-flex gap-1">
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_infinite]" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_0.2s_infinite]" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_0.4s_infinite]" />
+                              </span>
+                            </div>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2">
+                  <div
+                    className="absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2"
+                    ref={footerBlockRef}
+                  >
                     <div className="mx-auto flex w-full flex-col items-center gap-8">
                       <form
-                        className="relative flex w-full max-w-[762px] flex-col items-end gap-6 rounded-[20px] border border-[rgba(231,231,231,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
+                        className="relative flex w-full max-w-[602px] flex-col gap-6 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-6 pt-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
                         onSubmit={handleSubmit}
                       >
-                        <div className="relative w-full sm:h-full">
+                        <div className="relative w-full px-2">
                           {!inputValue && (
                             <label
-                              className="font-figtree absolute left-0 top-[3px] cursor-pointer text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
+                              className="font-figtree pointer-events-none absolute left-2 top-0 right-2 truncate whitespace-nowrap text-left text-[14px] leading-5 font-medium tracking-[0.01px] text-[rgba(255,255,255,0.6)]"
                               htmlFor={overlayTextareaId}
                             >
-                              <span aria-hidden className="hero-input-caret">
+                              <span aria-hidden className="hero-input-caret mr-1">
                                 |
                               </span>
                               {placeholderText}
@@ -472,36 +534,30 @@ export function HeroAssistantPanel({
                           <textarea
                             aria-label="Ask another question"
                             autoFocus
-                            className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
+                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none"
                             id={overlayTextareaId}
-                            onChange={(event) => setInputValue(event.currentTarget.value)}
+                            onChange={(event) => {
+                              setInputValue(event.currentTarget.value);
+                              event.currentTarget.style.height = "0px";
+                              event.currentTarget.style.height = `${Math.max(
+                                20,
+                                event.currentTarget.scrollHeight,
+                              )}px`;
+                            }}
                             placeholder=""
-                            value={inputValue}
-                          />
-                          {!inputValue && (
-                            <label
-                              className="font-figtree absolute left-[25px] right-[170px] top-[53%] hidden -translate-y-1/2 cursor-pointer text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
-                              htmlFor={overlayInputId}
-                            >
-                              <span aria-hidden className="hero-input-caret">
-                                |
-                              </span>
-                              {placeholderText}
-                            </label>
-                          )}
-                          <input
-                            aria-label="Ask another question"
-                            autoFocus
-                            className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
-                            id={overlayInputId}
-                            onChange={(event) => setInputValue(event.currentTarget.value)}
-                            placeholder=""
-                            type="text"
+                            rows={1}
                             value={inputValue}
                           />
                         </div>
 
-                        <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
+                        <div className="flex w-full justify-end pr-2">
+                          <AskMeBorderButton
+                            className="!relative !right-auto !top-auto !translate-y-0"
+                            compact
+                            label={assistantButtonLabel}
+                            stackOnMobile={false}
+                          />
+                        </div>
                       </form>
 
                       <p className="font-figtree w-full text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)] whitespace-nowrap">
