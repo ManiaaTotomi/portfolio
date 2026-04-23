@@ -8,6 +8,8 @@ import { HeroSplashLayer } from "@/components/sections/hero-splash-layer";
 interface HeroAssistantPanelProps {
   assistantButtonLabel: string;
   assistantDisclaimer: string;
+  assistantPlaceholder: string;
+  assistantPrompts: string[];
 }
 
 interface OverlayGlowConfig {
@@ -45,47 +47,46 @@ function saveStoredVisibility(key: string, value: boolean) {
   } catch {}
 }
 
-function buildAssistantReply(question: string) {
-  const lowerQuestion = question.toLowerCase();
-
-  if (lowerQuestion.includes("process") || lowerQuestion.includes("workflow")) {
-    return "Mania typically starts by clarifying product goals and constraints, then maps user flows, aligns stakeholders, and iterates quickly with testable UI decisions.";
-  }
-
-  if (
-    lowerQuestion.includes("team") ||
-    lowerQuestion.includes("collaborat") ||
-    lowerQuestion.includes("engineer")
-  ) {
-    return "Mania works cross-functionally with PMs and engineers from early concept through delivery, keeping communication clear and decisions tied to measurable product outcomes.";
-  }
-
-  if (
-    lowerQuestion.includes("design system") ||
-    lowerQuestion.includes("scale")
-  ) {
-    return "Mania focuses on scalable systems by defining reusable foundations, consistent patterns, and practical documentation that supports both design quality and development speed.";
-  }
-
-  return "Mania has a user-centered design philosophy, values collaboration and clear communication.";
+function normalizeQuestionForMania(question: string) {
+  return question
+    .trim()
+    .replace(/^how do you\b/i, "How does Mania")
+    .replace(/^what are your\b/i, "What are Mania's")
+    .replace(/^what is your\b/i, "What is Mania's")
+    .replace(/^what do you\b/i, "What does Mania")
+    .replace(/^can you\b/i, "Can Mania")
+    .replace(/^would you\b/i, "Would Mania")
+    .replace(/\byour\b/gi, "her")
+    .replace(/\byou\b/gi, "Mania");
 }
 
 function AskMeBorderButton({
   label,
   stackOnMobile = false,
+  className = "",
+  compact = false,
 }: {
   label: string;
   stackOnMobile?: boolean;
+  className?: string;
+  compact?: boolean;
 }) {
   const gradientId = useId().replace(/:/g, "");
+  const buttonHeight = compact ? "h-[40px]" : "h-[40px]";
+  const buttonPadding = compact ? "px-[10px]" : "px-[18px]";
+  const buttonWidth = compact ? "min-w-[92px]" : "";
+  const textSize = compact ? "text-[14px]" : "text-[16px]";
+  const viewBox = "0 0 100 40";
+  const rectHeight = "38.5";
+  const rectRadius = "19.25";
 
   return (
     <button
-      className={`font-figtree inline-flex h-[43px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-transparent px-[20px] whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
+      className={`font-figtree inline-flex ${buttonHeight} ${buttonWidth} shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent ${buttonPadding} whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
         stackOnMobile
           ? "relative w-fit sm:absolute sm:right-[25px] sm:top-1/2 sm:w-fit sm:-translate-y-1/2"
           : "absolute right-[14px] top-1/2 w-fit -translate-y-1/2 sm:right-[25px]"
-      }`}
+      } ${className}`}
       type="submit"
     >
       <svg
@@ -93,7 +94,7 @@ function AskMeBorderButton({
         className="pointer-events-none absolute inset-0 h-full w-full"
         fill="none"
         preserveAspectRatio="none"
-        viewBox="0 0 100 43"
+        viewBox={viewBox}
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -119,8 +120,8 @@ function AskMeBorderButton({
           </linearGradient>
         </defs>
         <rect
-          height="41.5"
-          rx="20.75"
+          height={rectHeight}
+          rx={rectRadius}
           stroke={`url(#${gradientId})`}
           strokeWidth="1.5"
           vectorEffect="non-scaling-stroke"
@@ -130,47 +131,88 @@ function AskMeBorderButton({
         />
       </svg>
 
-      <span className="relative z-[1] inline-flex h-full items-center justify-center rounded-full bg-transparent text-[16px] font-semibold text-white">
+      <span
+        className={`relative z-[1] inline-flex h-full items-center justify-center rounded-full bg-transparent ${textSize} font-semibold text-white`}
+      >
         {label}
       </span>
     </button>
   );
 }
 
+function AiAssistantOrbitText() {
+  const orbitPathId = useId();
+
+  return (
+    <svg
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full overflow-visible"
+      fill="none"
+      viewBox="-10 -10 120 120"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <path
+          d="M50 50m-41 0a41 41 0 1 1 82 0a41 41 0 1 1 -82 0"
+          id={orbitPathId}
+        />
+      </defs>
+      <text
+        fill="currentColor"
+        fontFamily="Figtree, system-ui, sans-serif"
+        fontSize="16.2"
+        fontWeight="400"
+        letterSpacing="0.28"
+      >
+        <textPath href={`#${orbitPathId}`} startOffset="0%" textAnchor="start">
+          Chat • with • my • AI • assistant •
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
+function AiAssistantIcon({ className = "h-full w-full" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex items-center justify-center ${className}`}
+    >
+      <span className="relative h-full w-full overflow-hidden rounded-full">
+        <Image
+          alt=""
+          className="object-cover [mix-blend-mode:luminosity]"
+          fill
+          sizes="48px"
+          src="/images/footer-avatar.png"
+        />
+      </span>
+    </span>
+  );
+}
+
 export function HeroAssistantPanel({
   assistantButtonLabel,
   assistantDisclaimer,
+  assistantPlaceholder,
+  assistantPrompts,
 }: HeroAssistantPanelProps) {
-  const placeholderText = "Ask your question about my work or experience...";
-  const topInputId = useId();
-  const topTextareaId = useId();
-  const overlayInputId = useId();
+  const placeholderText = assistantPlaceholder;
   const overlayTextareaId = useId();
   const [inputValue, setInputValue] = useState("");
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isAwaitingReply, setIsAwaitingReply] = useState(false);
+  const [footerHeight, setFooterHeight] = useState(0);
   const [overlayGlow, setOverlayGlow] = useState<OverlayGlowConfig>(
     DEFAULT_OVERLAY_GLOW,
   );
   const [overlayKnobsVisible, setOverlayKnobsVisible] = useState(true);
-  const topInputRef = useRef<HTMLInputElement>(null);
-  const topTextareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const emptyStateTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const footerBlockRef = useRef<HTMLDivElement>(null);
   const showTuner = process.env.NODE_ENV !== "production";
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const isMobile = window.matchMedia("(max-width: 639px)").matches;
-    if (isMobile) {
-      topTextareaRef.current?.focus();
-      return;
-    }
-
-    topInputRef.current?.focus();
-  }, []);
+  const hasMessages = messages.length > 0;
 
   useEffect(() => {
     if (!isOverlayOpen) {
@@ -216,33 +258,100 @@ export function HeroAssistantPanel({
     }
 
     container.scrollTop = container.scrollHeight;
-  }, [isOverlayOpen, messages]);
+  }, [footerHeight, isOverlayOpen, messages]);
 
   useEffect(() => {
     saveStoredVisibility(OVERLAY_KNOBS_VISIBLE_STORAGE_KEY, overlayKnobsVisible);
   }, [overlayKnobsVisible]);
 
-  function submitQuestion(question: string) {
+  useEffect(() => {
+    const textarea = emptyStateTextareaRef.current;
+    if (!textarea || hasMessages || !isOverlayOpen) {
+      return;
+    }
+
+    textarea.style.height = "0px";
+    textarea.style.height = `${Math.max(20, textarea.scrollHeight)}px`;
+  }, [hasMessages, inputValue, isOverlayOpen]);
+
+  useEffect(() => {
+    if (!isOverlayOpen || !hasMessages) {
+      setFooterHeight(0);
+      return;
+    }
+
+    const footer = footerBlockRef.current;
+    if (!footer) {
+      return;
+    }
+
+    const updateHeight = () => {
+      setFooterHeight(footer.offsetHeight);
+    };
+
+    updateHeight();
+
+    const observer = new ResizeObserver(() => {
+      updateHeight();
+    });
+
+    observer.observe(footer);
+
+    return () => observer.disconnect();
+  }, [hasMessages, inputValue, isOverlayOpen]);
+
+  async function submitQuestion(question: string) {
     const trimmedQuestion = question.trim();
     if (!trimmedQuestion) {
       return;
     }
 
+    const normalizedQuestion = normalizeQuestionForMania(trimmedQuestion);
+
     const questionMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       role: "user",
-      text: trimmedQuestion,
+      text: normalizedQuestion,
     };
 
-    const assistantMessage: ChatMessage = {
-      id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      role: "assistant",
-      text: buildAssistantReply(trimmedQuestion),
-    };
-
-    setMessages((prev) => [...prev, questionMessage, assistantMessage]);
+    setMessages((prev) => [...prev, questionMessage]);
+    setIsAwaitingReply(true);
     setInputValue("");
     setIsOverlayOpen(true);
+
+    try {
+      const response = await fetch("/api/clone-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: normalizedQuestion }),
+      });
+
+      const result = await response.json();
+      const assistantText =
+        response.ok && typeof result.reply === "string"
+          ? result.reply
+          : "The AI assistant is unavailable right now. Please try again in a moment.";
+
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: assistantText,
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch {
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        role: "assistant",
+        text: "The AI assistant is unavailable right now. Please try again in a moment.",
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } finally {
+      setIsAwaitingReply(false);
+    }
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -253,75 +362,41 @@ export function HeroAssistantPanel({
   function closeOverlay() {
     setIsOverlayOpen(false);
     setMessages([]);
+    setIsAwaitingReply(false);
     setInputValue("");
+  }
+
+  function openOverlay() {
+    setIsOverlayOpen(true);
   }
 
   return (
     <>
-      <div className="relative z-10 mx-auto flex h-[calc(100dvh-79px)] min-h-[663px] w-full max-w-[980px] flex-col px-5 text-center sm:px-8 lg:h-[896px] lg:pb-[280px] lg:pt-[290px]">
-        <div className="flex flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
-          <HeroRotatingQuestion />
-        </div>
+      <div className="relative z-10 mx-auto flex h-[calc(100dvh-79px)] min-h-[663px] w-full max-w-[1600px] flex-col px-5 text-center sm:px-8 lg:h-[896px] lg:px-10 lg:pb-[280px] lg:pt-[290px]">
+        <HeroSplashLayer />
 
-        <div className="mx-auto flex w-full max-w-[772px] flex-col items-center gap-[18px] pb-[max(18px,env(safe-area-inset-bottom))] lg:relative lg:mt-[32px] lg:w-full lg:gap-[32px] lg:pb-0">
-          <HeroSplashLayer />
-
-          <form
-            className="relative flex w-full max-w-[763px] flex-col items-end gap-6 rounded-[20px] border border-[rgba(255,255,255,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
-            onSubmit={handleSubmit}
-          >
-            <div className="relative w-full sm:h-full">
-              {!inputValue && (
-                <label
-                  className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
-                  htmlFor={topTextareaId}
-                >
-                  <span aria-hidden className="hero-input-caret">
-                    |
+        <div className="flex w-full flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
+          <div className="flex w-full flex-col items-center">
+            <HeroRotatingQuestion />
+            <p className="font-aeonik mt-6 max-w-[980px] text-balance text-center text-[20px] font-normal leading-[1.45] text-white/72">
+              8+ years designing end-to-end B2B products, with recent focus on AI-powered features
+            </p>
+            <div className="mt-20 flex w-full items-center justify-center">
+              <button
+                aria-label="Open assistant chat"
+                className="group relative z-20 inline-flex h-11 w-11 cursor-pointer items-center justify-center overflow-visible rounded-full text-[#d336ee] transition-opacity hover:opacity-80 focus-visible:rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d336ee]/55"
+                onClick={openOverlay}
+                type="button"
+              >
+                <span className="pointer-events-auto absolute left-1/2 top-1/2 inline-flex h-[110px] w-[110px] -translate-x-1/2 -translate-y-1/2 scale-[0.94] items-center justify-center motion-safe:animate-[spin_11s_linear_infinite] motion-safe:group-hover:[animation-play-state:paused] motion-safe:group-focus-visible:[animation-play-state:paused]">
+                  <AiAssistantOrbitText />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <AiAssistantIcon className="h-12 w-12" />
                   </span>
-                  {placeholderText}
-                </label>
-              )}
-              <textarea
-                aria-label="Ask a question"
-                autoFocus
-                className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
-                id={topTextareaId}
-                onChange={(event) => setInputValue(event.currentTarget.value)}
-                placeholder=""
-                ref={topTextareaRef}
-                value={inputValue}
-              />
-              {!inputValue && (
-                <label
-                  className="font-figtree absolute left-[35px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
-                  htmlFor={topInputId}
-                >
-                  <span aria-hidden className="hero-input-caret">
-                    |
-                  </span>
-                  {placeholderText}
-                </label>
-              )}
-              <input
-                aria-label="Ask a question"
-                autoFocus
-                className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[35px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.88)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
-                id={topInputId}
-                onChange={(event) => setInputValue(event.currentTarget.value)}
-                placeholder=""
-                ref={topInputRef}
-                type="text"
-                value={inputValue}
-              />
+                </span>
+              </button>
             </div>
-
-            <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
-          </form>
-
-          <p className="font-figtree w-full max-w-[554px] text-[13px] leading-[1.5] text-[rgba(181,181,181,0.8)] sm:text-[14px] sm:leading-[23px]">
-            {assistantDisclaimer}
-          </p>
+          </div>
         </div>
       </div>
 
@@ -360,98 +435,184 @@ export function HeroAssistantPanel({
 
             <button
               aria-label="Close chat"
-              className="absolute right-6 top-6 z-10 inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(255,255,255,0.22)] bg-[#352532] text-[24px] leading-none text-white/90 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+              className="absolute right-6 top-6 z-10 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-[rgba(255,255,255,0.1)] text-[24px] leading-none text-white/90 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
               onClick={closeOverlay}
               type="button"
             >
               ×
             </button>
 
-            <div className="relative mx-auto flex h-full w-full max-w-[762px] flex-col px-5 pb-10 pt-[100px] sm:px-8">
-              <div className="flex min-h-0 flex-1 flex-col">
-                <div
-                  className="hero-chat-scroll min-h-0 flex-1 overflow-y-auto pr-2"
-                  ref={scrollContainerRef}
-                >
-                  <div className="flex flex-col gap-4 pb-2 pr-5">
-                    {messages.map((message) =>
-                      message.role === "user" ? (
-                        <div className="flex w-full justify-end" key={message.id}>
-                          <div className="max-w-[68%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[18px] leading-[28px] text-white">
-                            {message.text}
+            <div className="relative mx-auto flex h-full w-full max-w-[602px] flex-col pb-10 pt-[100px]">
+              {hasMessages ? (
+                <>
+                  <div className="flex min-h-0 flex-1 flex-col">
+                    <div
+                      className="hero-chat-scroll min-h-0 flex-1 overflow-y-auto"
+                      ref={scrollContainerRef}
+                      style={{
+                        paddingBottom: footerHeight > 0 ? `${footerHeight + 24}px` : undefined,
+                      }}
+                    >
+                      <div className="mx-auto flex w-full max-w-[602px] flex-col gap-4 pb-2">
+                        {messages.map((message) =>
+                          message.role === "user" ? (
+                            <div className="flex w-full justify-end" key={message.id}>
+                              <div className="max-w-[86%] rounded-[12px] border border-[#9b2692] bg-[rgba(155,38,146,0.2)] px-4 py-3 text-[15px] leading-[23px] text-white">
+                                {message.text}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex w-full justify-start" key={message.id}>
+                              <p className="max-w-[86%] py-1 text-[15px] leading-[23px] text-white/75">
+                                {message.text}
+                              </p>
+                            </div>
+                          ),
+                        )}
+                        {isAwaitingReply ? (
+                          <div className="flex w-full justify-start">
+                            <div className="inline-flex items-center gap-2 py-1 text-[15px] leading-[23px] text-white/55">
+                              <span>Thinking</span>
+                              <span className="inline-flex gap-1">
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_infinite]" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_0.2s_infinite]" />
+                                <span className="h-1.5 w-1.5 rounded-full bg-white/45 motion-safe:animate-[pulse_1.2s_ease-in-out_0.4s_infinite]" />
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <div
-                          className="flex w-full justify-start pr-[100px] sm:pr-[160px]"
-                          key={message.id}
-                        >
-                          <p className="w-full px-1 py-1 text-[18px] leading-[28px] text-white/75">
-                            {message.text}
-                          </p>
-                        </div>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 flex w-full flex-col items-center gap-6">
-                <form
-                  className="relative flex w-full flex-col items-end gap-6 rounded-[20px] border border-[rgba(231,231,231,0.2)] bg-transparent px-6 pb-4 pt-6 sm:block sm:h-[70px] sm:rounded-[9999px] sm:px-0 sm:pb-0 sm:pt-0"
-                  onSubmit={handleSubmit}
-                >
-                  <div className="relative w-full sm:h-full">
-                    {!inputValue && (
-                      <label
-                        className="font-figtree absolute left-0 top-0 cursor-text text-left text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:hidden"
-                        htmlFor={overlayTextareaId}
-                      >
-                        <span aria-hidden className="hero-input-caret">
-                          |
-                        </span>
-                        {placeholderText}
-                      </label>
-                    )}
-                    <textarea
-                      aria-label="Ask another question"
-                      autoFocus
-                      className={`font-figtree min-h-[96px] w-full resize-none appearance-none bg-transparent pl-0 pr-0 text-[16px] leading-6 font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:hidden ${inputValue ? "caret-white" : "caret-transparent"}`}
-                      id={overlayTextareaId}
-                      onChange={(event) => setInputValue(event.currentTarget.value)}
-                      placeholder=""
-                      value={inputValue}
-                    />
-                    {!inputValue && (
-                      <label
-                        className="font-figtree absolute left-[25px] right-[170px] top-1/2 hidden -translate-y-1/2 cursor-text text-left text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(195,189,189,0.62)] sm:block"
-                        htmlFor={overlayInputId}
-                      >
-                        <span aria-hidden className="hero-input-caret">
-                          |
-                        </span>
-                        {placeholderText}
-                      </label>
-                    )}
-                    <input
-                      aria-label="Ask another question"
-                      autoFocus
-                      className={`font-figtree hidden h-full w-full appearance-none rounded-[9999px] bg-transparent pl-[25px] pr-[170px] text-[18px] leading-[1.2] font-light tracking-[0.0105px] text-[rgba(240,240,240,0.9)] outline-none sm:block ${inputValue ? "caret-white" : "caret-transparent"}`}
-                      id={overlayInputId}
-                      onChange={(event) => setInputValue(event.currentTarget.value)}
-                      placeholder=""
-                      type="text"
-                      value={inputValue}
-                    />
+                        ) : null}
+                      </div>
+                    </div>
                   </div>
 
-                  <AskMeBorderButton label={assistantButtonLabel} stackOnMobile />
-                </form>
+                  <div
+                    className="absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2"
+                    ref={footerBlockRef}
+                  >
+                    <div className="mx-auto flex w-full flex-col items-center gap-8">
+                      <form
+                        className="relative flex w-full max-w-[602px] flex-col gap-6 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-6 pt-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        onSubmit={handleSubmit}
+                      >
+                        <div className="relative w-full px-2">
+                          {!inputValue && (
+                            <label
+                              className="font-figtree pointer-events-none absolute left-2 top-0 right-2 truncate whitespace-nowrap text-left text-[14px] leading-5 font-medium tracking-[0.01px] text-[rgba(255,255,255,0.6)]"
+                              htmlFor={overlayTextareaId}
+                            >
+                              <span aria-hidden className="hero-input-caret mr-1">
+                                |
+                              </span>
+                              {placeholderText}
+                            </label>
+                          )}
+                          <textarea
+                            aria-label="Ask another question"
+                            autoFocus
+                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none"
+                            id={overlayTextareaId}
+                            onChange={(event) => {
+                              setInputValue(event.currentTarget.value);
+                              event.currentTarget.style.height = "0px";
+                              event.currentTarget.style.height = `${Math.max(
+                                20,
+                                event.currentTarget.scrollHeight,
+                              )}px`;
+                            }}
+                            placeholder=""
+                            rows={1}
+                            value={inputValue}
+                          />
+                        </div>
 
-                <p className="font-figtree w-full max-w-[554px] text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)]">
-                  {assistantDisclaimer}
-                </p>
-              </div>
+                        <div className="flex w-full justify-end pr-2">
+                          <AskMeBorderButton
+                            className="!relative !right-auto !top-auto !translate-y-0"
+                            compact
+                            label={assistantButtonLabel}
+                            stackOnMobile={false}
+                          />
+                        </div>
+                      </form>
+
+                      <p className="font-figtree w-full text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)] whitespace-nowrap">
+                        {assistantDisclaimer}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex min-h-0 flex-1 items-center justify-center">
+                    <div className="flex w-full max-w-[602px] flex-col items-center gap-6">
+                      <form
+                        className="relative flex w-full flex-col gap-6 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-6 pt-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        onSubmit={handleSubmit}
+                      >
+                        <div className="relative w-full px-2">
+                          {!inputValue && (
+                            <label
+                            className="font-figtree pointer-events-none absolute left-2 top-0 right-2 truncate whitespace-nowrap text-left text-[14px] leading-5 font-medium tracking-[0.01px] text-[rgba(255,255,255,0.6)]"
+                              htmlFor={overlayTextareaId}
+                            >
+                              <span aria-hidden className="hero-input-caret mr-1">
+                                |
+                              </span>
+                              {placeholderText}
+                            </label>
+                          )}
+                          <textarea
+                            aria-label="Ask your first question"
+                            autoFocus
+                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none"
+                            id={overlayTextareaId}
+                            onChange={(event) => {
+                              setInputValue(event.currentTarget.value);
+                              event.currentTarget.style.height = "0px";
+                              event.currentTarget.style.height = `${Math.max(
+                                20,
+                                event.currentTarget.scrollHeight,
+                              )}px`;
+                            }}
+                            placeholder=""
+                            ref={emptyStateTextareaRef}
+                            rows={1}
+                            value={inputValue}
+                          />
+                        </div>
+
+                        <div className="flex w-full justify-end pr-2">
+                          <AskMeBorderButton
+                            className="!relative !right-auto !top-auto !translate-y-0"
+                            compact
+                            label={assistantButtonLabel}
+                            stackOnMobile={false}
+                          />
+                        </div>
+                      </form>
+
+                      <div className="flex w-full gap-2">
+                        {assistantPrompts.map((prompt) => (
+                          <button
+                            className="font-figtree flex min-h-[44px] flex-1 cursor-pointer items-start rounded-[10px] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-left text-[14px] leading-[19px] font-light text-[rgba(255,255,255,0.8)] transition-colors hover:bg-[rgba(255,255,255,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+                            key={prompt}
+                            onClick={() => submitQuestion(prompt)}
+                            type="button"
+                          >
+                            {prompt}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pointer-events-none absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2">
+                    <p className="font-figtree mx-auto w-full text-center text-[14px] leading-[23px] font-normal text-[rgba(255,255,255,0.5)] whitespace-nowrap">
+                      {assistantDisclaimer}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             {showTuner && overlayKnobsVisible && (
@@ -578,7 +739,7 @@ export function HeroAssistantPanel({
                 </label>
 
                 <button
-                  className="mt-4 inline-flex h-8 items-center justify-center rounded-md border border-white/30 px-3 text-xs font-medium transition-colors hover:bg-white/10"
+                  className="mt-4 inline-flex h-8 cursor-pointer items-center justify-center rounded-md border border-white/30 px-3 text-xs font-medium transition-colors hover:bg-white/10"
                   onClick={() => setOverlayGlow(DEFAULT_OVERLAY_GLOW)}
                   type="button"
                 >
@@ -588,7 +749,7 @@ export function HeroAssistantPanel({
             )}
             {showTuner && (
               <button
-                className="font-figtree absolute left-4 top-4 z-[250] rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95"
+                className="font-figtree absolute left-4 top-4 z-[250] cursor-pointer rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95"
                 onClick={() => setOverlayKnobsVisible((current) => !current)}
                 type="button"
               >
