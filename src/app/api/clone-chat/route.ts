@@ -1,9 +1,5 @@
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 const instructions = `
 You are the AI assistant describing Mania Totomi, a lead product designer with 8+ years of experience at Pollfish.
 
@@ -74,8 +70,17 @@ Managing complexity, not just adding features.
 
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return Response.json(
+        { error: "OPENAI_API_KEY is not configured." },
+        { status: 500 }
+      );
+    }
+
     const body = await req.json();
     const message = body.message;
+    const client = new OpenAI({ apiKey });
 
     const response = await client.responses.create({
       model: "gpt-5.4-mini",
