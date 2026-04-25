@@ -47,45 +47,25 @@ function saveStoredVisibility(key: string, value: boolean) {
   } catch {}
 }
 
-function normalizeQuestionForMania(question: string) {
-  return question
-    .trim()
-    .replace(/^how do you\b/i, "How does Mania")
-    .replace(/^what are your\b/i, "What are Mania's")
-    .replace(/^what is your\b/i, "What is Mania's")
-    .replace(/^what do you\b/i, "What does Mania")
-    .replace(/^can you\b/i, "Can Mania")
-    .replace(/^would you\b/i, "Would Mania")
-    .replace(/\byour\b/gi, "her")
-    .replace(/\byou\b/gi, "Mania");
-}
-
 function AskMeBorderButton({
   label,
   stackOnMobile = false,
   className = "",
-  compact = false,
 }: {
   label: string;
   stackOnMobile?: boolean;
   className?: string;
-  compact?: boolean;
 }) {
   const gradientId = useId().replace(/:/g, "");
-  const buttonHeight = compact ? "h-[40px]" : "h-[40px]";
-  const buttonPadding = compact ? "px-[10px]" : "px-[18px]";
-  const buttonWidth = compact ? "min-w-[92px]" : "";
-  const textSize = compact ? "text-[14px]" : "text-[16px]";
-  const viewBox = "0 0 100 40";
-  const rectHeight = "38.5";
-  const rectRadius = "19.25";
+  const buttonSize = "h-[40px] w-[40px]";
 
   return (
     <button
-      className={`font-figtree inline-flex ${buttonHeight} ${buttonWidth} shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent ${buttonPadding} whitespace-nowrap transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
+      aria-label={label}
+      className={`font-figtree inline-flex ${buttonSize} shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent p-0 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8a2ff] ${
         stackOnMobile
-          ? "relative w-fit sm:absolute sm:right-[25px] sm:top-1/2 sm:w-fit sm:-translate-y-1/2"
-          : "absolute right-[14px] top-1/2 w-fit -translate-y-1/2 sm:right-[25px]"
+          ? "relative sm:absolute sm:right-[25px] sm:top-1/2 sm:-translate-y-1/2"
+          : "absolute right-[14px] top-1/2 -translate-y-1/2 sm:right-[25px]"
       } ${className}`}
       type="submit"
     >
@@ -93,18 +73,17 @@ function AskMeBorderButton({
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full"
         fill="none"
-        preserveAspectRatio="none"
-        viewBox={viewBox}
+        viewBox="0 0 40 40"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
           <linearGradient
-            id={gradientId}
+            id={`${gradientId}Circle`}
             gradientUnits="userSpaceOnUse"
             x1="0"
-            x2="100"
-            y1="21.5"
-            y2="21.5"
+            x2="40"
+            y1="20"
+            y2="20"
           >
             <stop offset="0%" stopColor="#8C318A" />
             <stop offset="65%" stopColor="#FFFFFF" />
@@ -112,29 +91,41 @@ function AskMeBorderButton({
             <animateTransform
               attributeName="gradientTransform"
               dur="6s"
-              from="0 50 21.5"
+              from="0 20 20"
               repeatCount="indefinite"
-              to="360 50 21.5"
+              to="360 20 20"
               type="rotate"
             />
           </linearGradient>
         </defs>
-        <rect
-          height={rectHeight}
-          rx={rectRadius}
-          stroke={`url(#${gradientId})`}
+        <circle
+          cx="20"
+          cy="20"
+          r="19.25"
+          stroke={`url(#${gradientId}Circle)`}
           strokeWidth="1.5"
           vectorEffect="non-scaling-stroke"
-          width="98.5"
-          x="0.75"
-          y="0.75"
         />
       </svg>
 
       <span
-        className={`relative z-[1] inline-flex h-full items-center justify-center rounded-full bg-transparent ${textSize} font-semibold text-white`}
+        className="relative z-[1] inline-flex h-full items-center justify-center rounded-full bg-transparent text-white"
       >
-        {label}
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 19V5M12 5L6 11M12 5L18 11"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </svg>
       </span>
     </button>
   );
@@ -306,12 +297,10 @@ export function HeroAssistantPanel({
       return;
     }
 
-    const normalizedQuestion = normalizeQuestionForMania(trimmedQuestion);
-
     const questionMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       role: "user",
-      text: normalizedQuestion,
+      text: trimmedQuestion,
     };
 
     setMessages((prev) => [...prev, questionMessage]);
@@ -325,7 +314,7 @@ export function HeroAssistantPanel({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: normalizedQuestion }),
+        body: JSON.stringify({ message: trimmedQuestion }),
       });
 
       const result = await response.json();
@@ -402,7 +391,7 @@ export function HeroAssistantPanel({
 
       {isOverlayOpen && (
         <div className="fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)]">
-          <div className="absolute inset-y-[32px] inset-x-8 overflow-hidden rounded-[28px] border border-white/10 bg-[#330C33] shadow-[0_30px_80px_rgba(0,0,0,0.45)] lg:inset-x-[88px]">
+          <div className="absolute inset-0 overflow-hidden bg-[#330C33] shadow-[0_30px_80px_rgba(0,0,0,0.45)] lg:inset-x-[88px] lg:inset-y-[32px] lg:rounded-[28px] lg:border lg:border-white/10">
             <div className="pointer-events-none absolute inset-0">
               <div
                 className="absolute left-1/2 top-1/2 h-[793px] w-[838px] -translate-x-1/2 -translate-y-1/2"
@@ -442,7 +431,7 @@ export function HeroAssistantPanel({
               ×
             </button>
 
-            <div className="relative mx-auto flex h-full w-full max-w-[602px] flex-col pb-10 pt-[100px]">
+            <div className="relative mx-auto flex h-full w-full max-w-[650px] flex-col px-6 pb-10 pt-[100px] lg:max-w-[602px] lg:px-0">
               {hasMessages ? (
                 <>
                   <div className="flex min-h-0 flex-1 flex-col">
@@ -485,31 +474,25 @@ export function HeroAssistantPanel({
                     </div>
                   </div>
 
-                  <div
-                    className="absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2"
-                    ref={footerBlockRef}
-                  >
-                    <div className="mx-auto flex w-full flex-col items-center gap-8">
+                  <div className="mt-6 w-full shrink-0" ref={footerBlockRef}>
+                    <div className="mx-auto flex w-full flex-col items-center gap-3 lg:gap-8">
                       <form
-                        className="relative flex w-full max-w-[602px] flex-col gap-6 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-6 pt-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        className="relative flex min-h-[128px] w-full max-w-[602px] flex-col justify-between gap-4 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-4 pt-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] lg:min-h-0 lg:gap-6 lg:pb-6 lg:pt-5"
                         onSubmit={handleSubmit}
                       >
-                        <div className="relative w-full px-2">
+                        <div className="relative w-full">
                           {!inputValue && (
                             <label
-                              className="font-figtree pointer-events-none absolute left-2 top-0 right-2 truncate whitespace-nowrap text-left text-[14px] leading-5 font-medium tracking-[0.01px] text-[rgba(255,255,255,0.6)]"
+                              className="font-figtree pointer-events-none absolute left-[2px] right-0 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:truncate lg:whitespace-nowrap lg:text-[16px] lg:leading-[24px]"
                               htmlFor={overlayTextareaId}
                             >
-                              <span aria-hidden className="hero-input-caret mr-1">
-                                |
-                              </span>
                               {placeholderText}
                             </label>
                           )}
                           <textarea
                             aria-label="Ask another question"
                             autoFocus
-                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none"
+                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none lg:text-[16px] lg:leading-[24px]"
                             id={overlayTextareaId}
                             onChange={(event) => {
                               setInputValue(event.currentTarget.value);
@@ -525,17 +508,16 @@ export function HeroAssistantPanel({
                           />
                         </div>
 
-                        <div className="flex w-full justify-end pr-2">
+                        <div className="flex w-full justify-end">
                           <AskMeBorderButton
                             className="!relative !right-auto !top-auto !translate-y-0"
-                            compact
                             label={assistantButtonLabel}
                             stackOnMobile={false}
                           />
                         </div>
                       </form>
 
-                      <p className="font-figtree w-full text-center text-[14px] leading-[23px] text-[rgba(181,181,181,0.8)] whitespace-nowrap">
+                      <p className="font-figtree w-full text-center text-[12px] leading-[1.55] text-[rgba(181,181,181,0.8)] lg:text-[14px] lg:leading-[23px] lg:whitespace-nowrap">
                         {assistantDisclaimer}
                       </p>
                     </div>
@@ -543,28 +525,25 @@ export function HeroAssistantPanel({
                 </>
               ) : (
                 <>
-                  <div className="flex min-h-0 flex-1 items-center justify-center">
-                    <div className="flex w-full max-w-[602px] flex-col items-center gap-6">
+                  <div className="flex min-h-0 flex-1 items-center justify-center pb-[86px] pt-8">
+                    <div className="flex w-full max-w-[602px] flex-col items-center gap-3 lg:gap-6">
                       <form
-                        className="relative flex w-full flex-col gap-6 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-6 pt-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        className="relative flex min-h-[128px] w-full flex-col justify-between gap-4 rounded-[18px] border border-[rgba(155,38,146,0.35)] bg-[#2e082e] px-4 pb-4 pt-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] lg:min-h-0 lg:gap-6 lg:pb-6 lg:pt-5"
                         onSubmit={handleSubmit}
                       >
-                        <div className="relative w-full px-2">
+                        <div className="relative w-full">
                           {!inputValue && (
                             <label
-                            className="font-figtree pointer-events-none absolute left-2 top-0 right-2 truncate whitespace-nowrap text-left text-[14px] leading-5 font-medium tracking-[0.01px] text-[rgba(255,255,255,0.6)]"
+                              className="font-figtree pointer-events-none absolute left-[2px] right-0 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:truncate lg:whitespace-nowrap lg:text-[16px] lg:leading-[24px]"
                               htmlFor={overlayTextareaId}
                             >
-                              <span aria-hidden className="hero-input-caret mr-1">
-                                |
-                              </span>
                               {placeholderText}
                             </label>
                           )}
                           <textarea
                             aria-label="Ask your first question"
                             autoFocus
-                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none"
+                            className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] font-medium leading-5 tracking-[0.01px] text-white outline-none lg:text-[16px] lg:leading-[24px]"
                             id={overlayTextareaId}
                             onChange={(event) => {
                               setInputValue(event.currentTarget.value);
@@ -581,20 +560,19 @@ export function HeroAssistantPanel({
                           />
                         </div>
 
-                        <div className="flex w-full justify-end pr-2">
+                        <div className="flex w-full justify-end">
                           <AskMeBorderButton
                             className="!relative !right-auto !top-auto !translate-y-0"
-                            compact
                             label={assistantButtonLabel}
                             stackOnMobile={false}
                           />
                         </div>
                       </form>
 
-                      <div className="flex w-full gap-2">
-                        {assistantPrompts.map((prompt) => (
+                      <div className="grid w-full grid-cols-2 gap-3 lg:flex lg:gap-2">
+                        {assistantPrompts.map((prompt, index) => (
                           <button
-                            className="font-figtree flex min-h-[44px] flex-1 cursor-pointer items-start rounded-[10px] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-left text-[14px] leading-[19px] font-light text-[rgba(255,255,255,0.8)] transition-colors hover:bg-[rgba(255,255,255,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+                            className={`font-figtree flex min-h-[88px] cursor-pointer items-start rounded-[10px] bg-[rgba(255,255,255,0.04)] px-4 py-4 text-left text-[12px] font-light leading-[1.55] text-[rgba(255,255,255,0.8)] transition-colors hover:bg-[rgba(255,255,255,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 lg:min-h-[44px] lg:flex-1 lg:px-4 lg:py-3 lg:text-[14px] lg:leading-[19px] ${index === 2 ? "col-span-2" : ""}`}
                             key={prompt}
                             onClick={() => submitQuestion(prompt)}
                             type="button"
@@ -606,8 +584,8 @@ export function HeroAssistantPanel({
                     </div>
                   </div>
 
-                  <div className="pointer-events-none absolute bottom-[20px] left-1/2 w-[min(1400px,calc(100vw-120px))] -translate-x-1/2">
-                    <p className="font-figtree mx-auto w-full text-center text-[14px] leading-[23px] font-normal text-[rgba(255,255,255,0.5)] whitespace-nowrap">
+                  <div className="pointer-events-none absolute bottom-3 left-6 right-6 lg:left-1/2 lg:right-auto lg:w-[min(1400px,calc(100vw-120px))] lg:-translate-x-1/2">
+                    <p className="font-figtree mx-auto w-full text-center text-[12px] font-normal leading-[1.55] text-[rgba(255,255,255,0.5)] lg:text-[14px] lg:leading-[23px] lg:whitespace-nowrap">
                       {assistantDisclaimer}
                     </p>
                   </div>
@@ -616,7 +594,7 @@ export function HeroAssistantPanel({
             </div>
 
             {showTuner && overlayKnobsVisible && (
-              <div className="font-figtree absolute bottom-4 right-4 z-[240] w-[310px] rounded-xl border border-white/20 bg-[#0a0a0a]/95 p-4 text-white shadow-[0_16px_45px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+              <div className="font-figtree absolute bottom-4 right-4 z-[240] hidden w-[310px] rounded-xl border border-white/20 bg-[#0a0a0a]/95 p-4 text-white shadow-[0_16px_45px_rgba(0,0,0,0.45)] backdrop-blur-sm lg:block">
                 <p className="text-sm font-semibold tracking-[0.04em]">
                   Overlay Tuner
                 </p>
@@ -749,7 +727,7 @@ export function HeroAssistantPanel({
             )}
             {showTuner && (
               <button
-                className="font-figtree absolute left-4 top-4 z-[250] cursor-pointer rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95"
+                className="font-figtree absolute left-4 top-4 z-[250] hidden cursor-pointer rounded-full border border-white/25 bg-[#0e0e0e]/95 px-4 py-2 text-[13px] font-medium text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm transition hover:border-white/40 hover:bg-[#151515]/95 lg:inline-flex"
                 onClick={() => setOverlayKnobsVisible((current) => !current)}
                 type="button"
               >
