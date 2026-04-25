@@ -238,7 +238,7 @@ export function SiteTopBar({
 
       <div className="flex h-[14px] items-center justify-end gap-[clamp(18px,2.2vw,32px)]">
         <button
-          className="font-figtree text-[16px] font-bold tracking-[0.32px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
+          className="font-figtree cursor-pointer text-[16px] font-bold tracking-[0.32px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
           onClick={openCvOverlay}
           type="button"
         >
