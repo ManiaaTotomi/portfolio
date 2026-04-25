@@ -120,15 +120,15 @@ export const siteContent: SiteContent = {
     "Currently Lead Designer at Pollfish, while collaborating on selected freelance product initiatives.",
   ],
   assistantDisclaimer:
-    "This assistant is an in-progress AI experiment. At this stage, it’s meant to demonstrate the idea, not a complete working implementation.",
+    "This assistant is a personal experiment. Ask questions about my experience, process and work. It can make mistakes.",
   assistantPrompts: [
-    "How does Mania use AI in her day to day design workload?",
-    "What are Mania's current responsibilities in Pollfish?",
-    "How does Mania collaborate with engineers and PMs?",
+    "How are Mania using AI in her day to day design process?",
+    "What is her current role in Pollfish?",
+    "How does she collaborate with business, engineers and PMs?",
   ],
   assistantPlaceholder:
-    "Type a question about Mania's design approach or experience…",
-  assistantButtonLabel: "Ask AI",
+    "Type a question about my design approach or experience…",
+  assistantButtonLabel: "Ask Me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
   email: "mania.totomi@gmail.com",

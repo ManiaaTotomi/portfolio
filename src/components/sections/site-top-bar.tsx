@@ -2,6 +2,7 @@
 
 import type { SiteContent } from "@/content/site";
 import { useEffect, useId, useRef, useState } from "react";
+import { openCvOverlay } from "@/components/cv/cv-overlay";
 import { cn } from "@/lib/cn";
 
 interface SiteTopBarProps {
@@ -137,7 +138,7 @@ export function SiteTopBar({
   return (
     <div
       className={cn(
-        "relative z-20 mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 pb-[30px] pt-[44px] min-[900px]:px-[50px]",
+        "sticky top-0 z-[210] mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 pb-[30px] pt-[44px] min-[900px]:px-[50px]",
         className,
       )}
     >
@@ -150,7 +151,7 @@ export function SiteTopBar({
 
       <nav
         aria-label={mode === "case-study" ? "Case study pages" : "Featured projects"}
-        className="hidden items-center gap-[clamp(34px,7vw,140px)] min-[900px]:flex"
+        className="hidden items-center gap-[100px] min-[900px]:flex"
       >
         {mode === "case-study" &&
           INTERNAL_CASE_STUDY_NAV_ITEMS.map((item) => (
@@ -236,12 +237,13 @@ export function SiteTopBar({
       </nav>
 
       <div className="flex h-[14px] items-center justify-end gap-[clamp(18px,2.2vw,32px)]">
-        <a
+        <button
           className="font-figtree text-[16px] font-bold tracking-[0.32px] text-white transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
-          href={content.cvUrl}
+          onClick={openCvOverlay}
+          type="button"
         >
           CV
-        </a>
+        </button>
         <a
           aria-label={`Email ${content.name}`}
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(255,255,255,0.2)] text-white transition-opacity hover:opacity-80 focus-visible:rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Figtree, Roboto } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { CvOverlay } from "@/components/cv/cv-overlay";
 import { GlobalKeyboardShortcuts } from "@/components/global-keyboard-shortcuts";
 import { siteContent } from "@/content/site";
 import "./globals.css";
@@ -62,6 +63,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <GlobalKeyboardShortcuts />
+        <CvOverlay />
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
