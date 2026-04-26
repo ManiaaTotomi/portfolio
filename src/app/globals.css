@@ -63,6 +63,7 @@
 html,
 body {
   min-height: 100%;
+  background: #040404;
   scroll-behavior: smooth;
   max-width: 100%;
   overflow-x: hidden;
@@ -79,6 +80,13 @@ body {
     var(--font-figtree), "Avenir Next", "Segoe UI", "Helvetica Neue", Arial,
     sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
 }
 
 h1,

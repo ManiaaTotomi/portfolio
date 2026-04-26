@@ -333,10 +333,10 @@ export function PollfishCaseStudySection({ study }: PollfishCaseStudySectionProp
         <div className="h-full w-full rounded-full bg-[radial-gradient(circle,rgba(255,14,255,0.38)_0%,rgba(255,14,255,0.2)_34%,rgba(255,14,255,0.08)_62%,rgba(255,14,255,0)_84%)] blur-[56px]" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 py-12 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
         <ProjectDivider />
 
-        <div className="py-[120px]">
+        <div className="py-16 sm:py-[120px]">
           <PollfishIntro />
         </div>
 

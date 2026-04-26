@@ -138,7 +138,7 @@ export function SiteTopBar({
   return (
     <div
       className={cn(
-        "sticky top-0 z-[210] mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 pb-[30px] pt-[44px] min-[900px]:px-[50px]",
+        "top-0 z-[210] mx-auto flex h-[79px] w-full max-w-[1600px] items-center justify-between px-5 pb-[30px] pt-[44px] min-[900px]:sticky min-[900px]:px-[50px]",
         className,
       )}
     >

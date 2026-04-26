@@ -18,6 +18,10 @@ export function Reveal({ className, delayMs = 0, children }: RevealProps) {
       return;
     }
 
+    if (window.matchMedia("(max-width: 1023px), (pointer: coarse)").matches) {
+      return;
+    }
+
     const rect = node.getBoundingClientRect();
     const isNearViewport = rect.top <= window.innerHeight * 1.25;
     if (isNearViewport) {

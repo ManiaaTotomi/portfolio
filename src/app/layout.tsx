@@ -61,7 +61,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${figtree.variable} ${roboto.variable} ${archivo.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col bg-[#040404] text-white">
         <GlobalKeyboardShortcuts />
         <CvOverlay />
         <a className="skip-link" href="#main-content">

@@ -19,7 +19,7 @@ export function HeroSection({ content }: HeroSectionProps) {
         assistantPrompts={content.assistantPrompts}
       />
 
-      <div className="relative z-10 mx-auto mt-[96px] w-full max-w-[1720px] px-0 pb-[124px] sm:mt-[108px] sm:pb-[140px]">
+      <div className="relative z-10 mx-auto mt-20 w-full max-w-[1720px] px-0 pb-24 sm:mt-[108px] sm:pb-[140px]">
         <HeroImageStrip />
       </div>
     </header>

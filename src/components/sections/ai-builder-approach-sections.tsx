@@ -282,7 +282,7 @@ export function AiBuilderApproachSections() {
   const [executionGlow, setExecutionGlow] = useState<ExecutionGlowState>(() =>
     loadStoredState(EXECUTION_GLOW_STORAGE_KEY, { ...EXECUTION_GLOW_DEFAULTS }),
   );
-  const showGlowTuner = process.env.NODE_ENV !== "production";
+  const showGlowTuner = false;
   const [knobsVisible, setKnobsVisible] = useState<boolean>(() => {
     const storedVisibility = loadStoredState(KNOBS_VISIBLE_STORAGE_KEY, {
       value: true,

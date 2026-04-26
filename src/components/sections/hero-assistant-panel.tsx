@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { HeroRotatingQuestion } from "@/components/sections/hero-rotating-question";
 import { HeroSplashLayer } from "@/components/sections/hero-splash-layer";
 
@@ -45,6 +46,18 @@ function saveStoredVisibility(key: string, value: boolean) {
   try {
     window.localStorage.setItem(key, JSON.stringify({ value }));
   } catch {}
+}
+
+function waitForNextPaint() {
+  if (typeof window === "undefined") {
+    return Promise.resolve();
+  }
+
+  return new Promise<void>((resolve) => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => resolve());
+    });
+  });
 }
 
 function AskMeBorderButton({
@@ -174,8 +187,10 @@ function AiAssistantIcon({ className = "h-full w-full" }: { className?: string }
           alt=""
           className="object-cover [mix-blend-mode:luminosity]"
           fill
+          loading="eager"
           sizes="48px"
           src="/images/footer-avatar.png"
+          unoptimized
         />
       </span>
     </span>
@@ -202,7 +217,7 @@ export function HeroAssistantPanel({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const emptyStateTextareaRef = useRef<HTMLTextAreaElement>(null);
   const footerBlockRef = useRef<HTMLDivElement>(null);
-  const showTuner = process.env.NODE_ENV !== "production";
+  const showTuner = false;
   const hasMessages = messages.length > 0;
 
   useEffect(() => {
@@ -263,6 +278,9 @@ export function HeroAssistantPanel({
 
     textarea.style.height = "0px";
     textarea.style.height = `${Math.max(20, textarea.scrollHeight)}px`;
+    window.requestAnimationFrame(() => {
+      textarea.focus({ preventScroll: true });
+    });
   }, [hasMessages, inputValue, isOverlayOpen]);
 
   useEffect(() => {
@@ -303,10 +321,13 @@ export function HeroAssistantPanel({
       text: trimmedQuestion,
     };
 
-    setMessages((prev) => [...prev, questionMessage]);
-    setIsAwaitingReply(true);
-    setInputValue("");
-    setIsOverlayOpen(true);
+    flushSync(() => {
+      setMessages((prev) => [...prev, questionMessage]);
+      setIsAwaitingReply(true);
+      setInputValue("");
+      setIsOverlayOpen(true);
+    });
+    await waitForNextPaint();
 
     try {
       const response = await fetch("/api/clone-chat", {
@@ -356,28 +377,31 @@ export function HeroAssistantPanel({
   }
 
   function openOverlay() {
-    setIsOverlayOpen(true);
+    flushSync(() => {
+      setIsOverlayOpen(true);
+    });
   }
 
   return (
     <>
-      <div className="relative z-10 mx-auto flex h-[calc(100dvh-79px)] min-h-[663px] w-full max-w-[1600px] flex-col px-5 text-center sm:px-8 lg:h-[896px] lg:px-10 lg:pb-[280px] lg:pt-[290px]">
+      <div className="relative z-10 mx-auto flex min-h-[660px] w-full max-w-[1600px] flex-col px-5 py-12 text-center sm:min-h-[720px] sm:px-8 lg:h-[896px] lg:min-h-0 lg:px-10 lg:pb-[280px] lg:pt-[290px]">
         <HeroSplashLayer />
 
         <div className="flex w-full flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
           <div className="flex w-full flex-col items-center">
             <HeroRotatingQuestion />
-            <p className="font-aeonik mt-6 max-w-[980px] text-balance text-center text-[20px] font-normal leading-[1.45] text-white/72">
+            <p className="font-aeonik mt-6 max-w-[360px] text-balance text-center text-[18px] font-normal leading-[1.45] text-white/72 sm:max-w-[620px] sm:text-[20px] lg:max-w-[980px]">
               8+ years designing end-to-end B2B products, with recent focus on AI-powered features
             </p>
-            <div className="mt-20 flex w-full items-center justify-center">
+            <div className="mt-16 flex w-full items-center justify-center">
               <button
                 aria-label="Open assistant chat"
-                className="group relative z-20 inline-flex h-11 w-11 cursor-pointer items-center justify-center overflow-visible rounded-full text-[#d336ee] transition-opacity hover:opacity-80 focus-visible:rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d336ee]/55"
+                className="group relative z-20 inline-flex h-[110px] w-[110px] cursor-pointer touch-manipulation items-center justify-center rounded-full text-[#d336ee] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d336ee]/55"
                 onClick={openOverlay}
+                onTouchStart={openOverlay}
                 type="button"
               >
-                <span className="pointer-events-auto absolute left-1/2 top-1/2 inline-flex h-[110px] w-[110px] -translate-x-1/2 -translate-y-1/2 scale-[0.94] items-center justify-center motion-safe:animate-[spin_11s_linear_infinite] motion-safe:group-hover:[animation-play-state:paused] motion-safe:group-focus-visible:[animation-play-state:paused]">
+                <span className="pointer-events-none absolute inset-0 inline-flex scale-[0.94] items-center justify-center motion-safe:animate-[spin_11s_linear_infinite] motion-safe:group-hover:[animation-play-state:paused] motion-safe:group-focus-visible:[animation-play-state:paused]">
                   <AiAssistantOrbitText />
                   <span className="absolute inset-0 flex items-center justify-center">
                     <AiAssistantIcon className="h-12 w-12" />
@@ -389,25 +413,24 @@ export function HeroAssistantPanel({
         </div>
       </div>
 
-      {isOverlayOpen && (
-        <div className="fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)]">
+      <div
+        aria-hidden={!isOverlayOpen}
+        className={`fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)] transition-opacity duration-150 ${
+          isOverlayOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        data-assistant-overlay={isOverlayOpen ? "open" : "closed"}
+      >
           <div className="absolute inset-0 overflow-hidden bg-[#330C33] shadow-[0_30px_80px_rgba(0,0,0,0.45)] lg:inset-x-[88px] lg:inset-y-[32px] lg:rounded-[28px] lg:border lg:border-white/10">
             <div className="pointer-events-none absolute inset-0">
               <div
-                className="absolute left-1/2 top-1/2 h-[793px] w-[838px] -translate-x-1/2 -translate-y-1/2"
+                className="absolute left-1/2 top-1/2 h-[793px] w-[838px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[70px]"
                 style={{
+                  background:
+                    "radial-gradient(circle, rgba(255,14,255,0.34) 0%, rgba(255,14,255,0.16) 42%, rgba(51,12,51,0) 72%)",
+                  opacity: overlayGlow.blurOpacity,
                   transform: `translate(-50%, -50%) scale(${overlayGlow.glowSpread})`,
                 }}
-              >
-                <Image
-                  alt=""
-                  aria-hidden
-                  className="object-fill"
-                  fill
-                  src="/images/hero-blur-color.svg"
-                  style={{ opacity: overlayGlow.blurOpacity }}
-                />
-              </div>
+              />
               <div
                 className="absolute inset-0"
                 style={{
@@ -491,7 +514,6 @@ export function HeroAssistantPanel({
                           )}
                           <textarea
                             aria-label="Ask another question"
-                            autoFocus
                             className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] leading-5 font-medium tracking-[0.01px] text-white outline-none lg:text-[16px] lg:leading-[24px]"
                             id={overlayTextareaId}
                             onChange={(event) => {
@@ -542,7 +564,6 @@ export function HeroAssistantPanel({
                           )}
                           <textarea
                             aria-label="Ask your first question"
-                            autoFocus
                             className="font-figtree min-h-5 w-full resize-none overflow-hidden bg-transparent p-0 text-[14px] font-medium leading-5 tracking-[0.01px] text-white outline-none lg:text-[16px] lg:leading-[24px]"
                             id={overlayTextareaId}
                             onChange={(event) => {
@@ -735,8 +756,7 @@ export function HeroAssistantPanel({
               </button>
             )}
           </div>
-        </div>
-      )}
+      </div>
     </>
   );
 }
