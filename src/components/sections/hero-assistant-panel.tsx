@@ -69,7 +69,6 @@ function AskMeBorderButton({
   stackOnMobile?: boolean;
   className?: string;
 }) {
-  const gradientId = useId().replace(/:/g, "");
   const buttonSize = "h-[40px] w-[40px]";
 
   return (
@@ -82,44 +81,14 @@ function AskMeBorderButton({
       } ${className}`}
       type="submit"
     >
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        fill="none"
-        viewBox="0 0 40 40"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient
-            id={`${gradientId}Circle`}
-            gradientUnits="userSpaceOnUse"
-            x1="0"
-            x2="40"
-            y1="20"
-            y2="20"
-          >
-            <stop offset="0%" stopColor="#8C318A" />
-            <stop offset="65%" stopColor="#FFFFFF" />
-            <stop offset="100%" stopColor="#5E0160" />
-            <animateTransform
-              attributeName="gradientTransform"
-              dur="6s"
-              from="0 20 20"
-              repeatCount="indefinite"
-              to="360 20 20"
-              type="rotate"
-            />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="20"
-          cy="20"
-          r="19.25"
-          stroke={`url(#${gradientId}Circle)`}
-          strokeWidth="1.5"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#8C318A_0deg,#FFFFFF_140deg,#5E0160_250deg,#8C318A_360deg)] animate-[spin_2.4s_linear_infinite]"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-[1.5px] rounded-full bg-[#2e082e]"
+      />
 
       <span
         className="relative z-[1] inline-flex h-full items-center justify-center rounded-full bg-transparent text-white"
@@ -278,6 +247,11 @@ export function HeroAssistantPanel({
 
     textarea.style.height = "0px";
     textarea.style.height = `${Math.max(20, textarea.scrollHeight)}px`;
+
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
     window.requestAnimationFrame(() => {
       textarea.focus({ preventScroll: true });
     });
@@ -382,9 +356,20 @@ export function HeroAssistantPanel({
     });
   }
 
+  function handleAssistantTriggerPointerDown(
+    event: React.PointerEvent<HTMLButtonElement>,
+  ) {
+    if (event.pointerType !== "touch" && event.pointerType !== "pen") {
+      return;
+    }
+
+    event.preventDefault();
+    openOverlay();
+  }
+
   return (
     <>
-      <div className="relative z-10 mx-auto flex min-h-[660px] w-full max-w-[1600px] flex-col px-5 py-12 text-center sm:min-h-[720px] sm:px-8 lg:h-[896px] lg:min-h-0 lg:px-10 lg:pb-[280px] lg:pt-[290px]">
+      <div className="relative z-20 mx-auto flex min-h-[660px] w-full max-w-[1600px] flex-col px-5 py-12 text-center sm:min-h-[720px] sm:px-8 lg:h-[896px] lg:min-h-0 lg:px-10 lg:pb-[280px] lg:pt-[290px]">
         <HeroSplashLayer />
 
         <div className="flex w-full flex-1 items-center justify-center lg:min-h-[219px] lg:flex-none">
@@ -395,9 +380,11 @@ export function HeroAssistantPanel({
             </p>
             <div className="mt-16 flex w-full items-center justify-center">
               <button
+                aria-expanded={isOverlayOpen}
                 aria-label="Open assistant chat"
                 className="group relative z-20 inline-flex h-[110px] w-[110px] cursor-pointer touch-manipulation items-center justify-center rounded-full text-[#d336ee] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d336ee]/55"
                 onClick={openOverlay}
+                onPointerDown={handleAssistantTriggerPointerDown}
                 onTouchStart={openOverlay}
                 type="button"
               >
@@ -415,8 +402,10 @@ export function HeroAssistantPanel({
 
       <div
         aria-hidden={!isOverlayOpen}
-        className={`fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)] transition-opacity duration-150 ${
-          isOverlayOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-[220] overflow-hidden bg-[rgba(0,0,0,0.62)] transition-opacity duration-100 ${
+          isOverlayOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
         data-assistant-overlay={isOverlayOpen ? "open" : "closed"}
       >
@@ -506,7 +495,7 @@ export function HeroAssistantPanel({
                         <div className="relative w-full">
                           {!inputValue && (
                             <label
-                              className="font-figtree pointer-events-none absolute left-[2px] right-0 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:truncate lg:whitespace-nowrap lg:text-[16px] lg:leading-[24px]"
+                              className="font-figtree pointer-events-none absolute left-[2px] right-14 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:right-20 lg:text-[16px] lg:leading-[24px]"
                               htmlFor={overlayTextareaId}
                             >
                               {placeholderText}
@@ -556,7 +545,7 @@ export function HeroAssistantPanel({
                         <div className="relative w-full">
                           {!inputValue && (
                             <label
-                              className="font-figtree pointer-events-none absolute left-[2px] right-0 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:truncate lg:whitespace-nowrap lg:text-[16px] lg:leading-[24px]"
+                              className="font-figtree pointer-events-none absolute left-[2px] right-14 top-0 text-left text-[14px] font-medium leading-5 tracking-[0.01px] text-[rgba(255,255,255,0.6)] lg:right-20 lg:text-[16px] lg:leading-[24px]"
                               htmlFor={overlayTextareaId}
                             >
                               {placeholderText}

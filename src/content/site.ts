@@ -120,14 +120,14 @@ export const siteContent: SiteContent = {
     "Currently Lead Designer at Pollfish, while collaborating on selected freelance product initiatives.",
   ],
   assistantDisclaimer:
-    "This assistant is a personal experiment. Ask questions about my experience, process and work. It can make mistakes.",
+    "This assistant is an experimental guide to Mania’s work. It may occasionally get details wrong.",
   assistantPrompts: [
-    "How are Mania using AI in her day to day design process?",
-    "What is her current role in Pollfish?",
-    "How does she collaborate with business, engineers and PMs?",
+    "How does Mania use AI in her day-to-day design process?",
+    "What kind of product design work has Mania led at Pollfish?",
+    "How does Mania collaborate with product managers, engineers, and business teams?",
   ],
   assistantPlaceholder:
-    "Type a question about my design approach or experience…",
+    "Ask about Mania’s projects, process, experience, or anything related to her work...",
   assistantButtonLabel: "Ask Me",
   location: "London, UK",
   availability: "Open for freelance projects and select full-time roles",
